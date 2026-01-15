@@ -7,7 +7,7 @@ import Projects from './components/Projects';
 import About from './components/About';
 import Contact from './components/Contact';
 
-const logoImg = "/assets/logo-unagency";
+const logoImg = "/assets/logo-unagency.png";
 const imgCasarey = "/assets/img-casarey.png";
 const imgWhatTheFlock = "/assets/img-what-the-flock.png";
 const imgGallus = "/assets/img-gallus.png";
