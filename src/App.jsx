@@ -7,8 +7,12 @@ import Projects from './components/Projects';
 import About from './components/About';
 import Contact from './components/Contact';
 
-const logoImg = "http://localhost:3845/assets/73fc6d9c98f3c8b428987b1b0c9ff057d036651c.png";
-
+const logoImg = "/assets/logo-unagency";
+const imgCasarey = "/assets/img-casarey.png";
+const imgWhatTheFlock = "/assets/img-what-the-flock.png";
+const imgGallus = "/assets/img-gallus.png";
+const imgSuhar = "/assets/img-suhar.png";
+const imgMarielen = "/assets/img-marielen.png";
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState(null);
