@@ -8,11 +8,6 @@ import About from './components/About';
 import Contact from './components/Contact';
 
 const logoImg = "/assets/logo-unagency.png";
-const imgCasarey = "/assets/img-casarey.png";
-const imgWhatTheFlock = "/assets/img-what-the-flock.png";
-const imgGallus = "/assets/img-gallus.png";
-const imgSuhar = "/assets/img-suhar.png";
-const imgMarielen = "/assets/img-marielen.png";
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState(null);
@@ -21,7 +16,9 @@ function App() {
 
   return (
     <div className="app-container-new">
-      <FluidBackground />
+    <div className="bg-fix">
+  <FluidBackground />
+</div>
 
       <AnimatePresence mode="wait">
         {selectedProject ? (
