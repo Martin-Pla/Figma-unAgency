@@ -2,8 +2,7 @@ import React, { useRef } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
 import { ArrowDown } from 'lucide-react';
 
-const logoImg = "http://localhost:3845/assets/73fc6d9c98f3c8b428987b1b0c9ff057d036651c.png";
-
+const logoImg = "/assets/logo-unagency.png";
 export default function Hero() {
   const containerRef = useRef(null);
   
