@@ -6,6 +6,7 @@ import Hero from './components/Hero';
 import Projects from './components/Projects';
 import About from './components/About';
 import Contact from './components/Contact';
+import ProjectDetail from './components/ProjectDetail';
 
 const logoImg = "/assets/logo-unagency.png";
 function App() {
@@ -22,10 +23,11 @@ function App() {
 
       <AnimatePresence mode="wait">
         {selectedProject ? (
-          <div key="detail">
-            {/* Project Detail view - you can implement this later */}
-            <button onClick={() => setSelectedProject(null)}>Back</button>
-          </div>
+          <ProjectDetail 
+            key="detail"
+            project={selectedProject} 
+            onBack={() => setSelectedProject(null)} 
+          />
         ) : (
           <motion.div 
             key="home" 
