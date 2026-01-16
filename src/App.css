@@ -1514,14 +1514,18 @@
 
 .project-detail-immersive-bottom {
   width: 100%;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 21 / 9;
   position: relative;
+  overflow: hidden;
+  background: #000000;
 }
 
 .project-detail-immersive-bottom-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center center;
+  display: block;
 }
 
 .project-detail-immersive-grid {
