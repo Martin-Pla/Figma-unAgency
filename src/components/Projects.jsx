@@ -46,11 +46,15 @@ const projects = [
     category: "Spirits Packaging",
     image: "/assets/img-casarey.png",
     layout: "editorial",
-    description: "Casarey embodies the regal heritage of the highlands of Jalisco. The design focuses on elegance and sophistication, utilizing deep royal blues and gold foil accents.",
+    description: "Casarey embodies the regal heritage of the highlands of Jalisco. The design focuses on elegance and sophistication, utilizing deep royal blues and gold foil accents. The bottle silhouette is tall and commanding, reflecting the premium nature of the spirit within.",
     year: "2024",
     services: ["Packaging Design", "Branding"],
-    gallery: [],
-    bottomImage: null,
+    gallery: [
+      "/assets/casarey/Casa-Rey-Teuila-05.png",
+      "/assets/casarey/Casa-Rey-Teuila-07.png",
+      "/assets/casarey/Casa-Rey-Teuila-08.png"
+    ],
+    bottomImage: "/assets/casarey/Casa-Rey-Teuila-09.png",
   },
   {
     id: "4",
