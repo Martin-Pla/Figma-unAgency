@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 
-// Sample projects data - replace with your actual data
+// Projects data from Figma Make
 const projects = [
   {
     id: "1",
@@ -45,6 +45,48 @@ const projects = [
     subtitle: "Ready to Drink",
     category: "Beverage Packaging",
     image: "/assets/img-what-the-flock.png",
+  },
+  {
+    id: "7",
+    title: "NUWA STONE",
+    subtitle: null,
+    category: "Branding & Visual Identity",
+    image: "/assets/img-nuwa.png",
+  },
+  {
+    id: "8",
+    title: "THREE BROTHERS GOLF",
+    subtitle: null,
+    category: "Branding & Visual Identity",
+    image: "/assets/img-3bg.png",
+  },
+  {
+    id: "9",
+    title: "AKBAL",
+    subtitle: "Tequila Extra Añejo",
+    category: "Spirits Packaging",
+    image: "/assets/img-akbal.png",
+  },
+  {
+    id: "10",
+    title: "BLACK AGNES",
+    subtitle: "Islay Single Malt Scotch Whisky",
+    category: "Spirits Packaging",
+    image: "/assets/img-black-agnes.png",
+  },
+  {
+    id: "11",
+    title: "TRES DIABLOS",
+    subtitle: "Tequila",
+    category: "Spirits Packaging",
+    image: "/assets/img-tres-diablos.png",
+  },
+  {
+    id: "12",
+    title: "AGUA SALADA",
+    subtitle: "Tequila Reposado",
+    category: "Spirits Packaging",
+    image: "/assets/img-agua-salada.png",
   },
 ];
 
@@ -95,8 +137,8 @@ export default function Projects({ onProjectSelect }) {
                 >
                   <div className="projects-image-bg" />
                   <motion.img
-                    style={{ scale: project.id === "6" ? 1.1 : 1 }}
-                    whileHover={{ scale: project.id === "6" ? 1.15 : 1.05 }}
+                    style={{ scale: project.id === "6" || project.id === "12" ? 1.1 : 1 }}
+                    whileHover={{ scale: project.id === "6" || project.id === "12" ? 1.15 : 1.05 }}
                     transition={{ duration: 0.6, ease: [0.33, 1, 0.68, 1] }}
                     src={project.image}
                     alt={project.title}
@@ -135,14 +177,16 @@ export default function Projects({ onProjectSelect }) {
           </AnimatePresence>
         </motion.div>
         
-        <div className="projects-button-container">
-          <button 
-            onClick={() => setShowAll(!showAll)}
-            className="projects-view-all-button"
-          >
-            {showAll ? "Show Less" : "View All Projects"}
-          </button>
-        </div>
+        {projects.length > 5 && (
+          <div className="projects-button-container">
+            <button 
+              onClick={() => setShowAll(!showAll)}
+              className="projects-view-all-button"
+            >
+              {showAll ? "Show Less" : "View All Projects"}
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );
