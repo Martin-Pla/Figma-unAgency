@@ -151,7 +151,7 @@ const ImmersiveLayout = ({ project }) => {
 
       <div className="project-detail-immersive-quote">
         <div className="project-detail-quote-text">
-          "We approached this project with a mindset of stripping away the non-essential, focusing purely on the material and the form."
+          {project.quote ? `"${project.quote}"` : '"We approached this project with a mindset of stripping away the non-essential, focusing purely on the material and the form."'}
         </div>
         <div className="project-detail-quote-info">
           <ProjectInfo project={project} />

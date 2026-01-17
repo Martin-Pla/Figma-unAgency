@@ -42,19 +42,21 @@ const projects = [
   {
     id: "3",
     title: "CASAREY",
-    subtitle: "Tequila Extra Añejo",
+    subtitle: "Tequila Gran Reserva",
     category: "Spirits Packaging",
     image: "/assets/img-casarey.png",
-    layout: "editorial",
-    description: "Casarey embodies the regal heritage of the highlands of Jalisco. The design focuses on elegance and sophistication, utilizing deep royal blues and gold foil accents. The bottle silhouette is tall and commanding, reflecting the premium nature of the spirit within.",
+    layout: "immersive",
+    description: "Casa Rey Tequila Gran Reserva is more than an aged spirit; it is a tribute to a family, its roots, and the tradition that forges character. Each drop carries the strength of those who came before and the promise of those who will continue.\n\nCarefully matured in French oak barrels, this tequila offers deep complexity and a lingering finish—much like the memory of those we honor.",
     year: "2024",
     services: ["Packaging Design", "Branding"],
     gallery: [
       "/assets/casarey/Casa-Rey-Teuila-05.png",
       "/assets/casarey/Casa-Rey-Teuila-07.png",
-      "/assets/casarey/Casa-Rey-Teuila-08.png"
+      "/assets/casarey/Casa-Rey-Teuila-08.png",
+      "/assets/casarey/Casa-Rey-Teuila-09.png"
     ],
-    bottomImage: "/assets/casarey/Casa-Rey-Teuila-09.png",
+    bottomImage: "/assets/casarey/Casa-Rey-Teuila-04.jpg",
+    quote: "Each drop carries the strength of those who came before and the promise of those who will continue.",
   },
   {
     id: "4",
