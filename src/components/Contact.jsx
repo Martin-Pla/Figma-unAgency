@@ -20,7 +20,7 @@ export default function Contact() {
     e.preventDefault();
     const subject = `New Inquiry from ${formData.name}`;
     const body = `Name: ${formData.name}%0D%0AEmail: ${formData.email}%0D%0AMessage: ${formData.message}`;
-    window.location.href = `mailto:hello@theunagencyco.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+    window.location.href = `mailto:ad.theunagency@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
   };
 
   const handleChange = (e) => {
