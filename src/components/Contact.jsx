@@ -112,19 +112,6 @@ export default function Contact() {
               </ul>
             </div>
 
-            <div className="contact-email-section">
-              <h3 className="contact-email-title">
-                Contact
-              </h3>
-              <div className="contact-email-content">
-                <a
-                  href="mailto:hello@theunagencyco.com"
-                  className="contact-email-link"
-                >
-                  hello@theunagencyco.com
-                </a>
-              </div>
-            </div>
           </div>
 
           <div className="contact-footer-updated">
