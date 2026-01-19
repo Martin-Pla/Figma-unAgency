@@ -57,8 +57,9 @@ This creates an optimized production build in the `build` folder.
 
 ## Notes
 
-- Image assets are currently referenced from a localhost server (http://localhost:3845/assets/...). You may need to update these paths to point to your actual image assets.
+- All image assets are stored locally in the `/public/assets/` folder and referenced using relative paths.
 - The design uses custom fonts: Inter, Space Mono, and Playfair Display, which are loaded from Google Fonts.
+- All project data is stored locally in the component files (no external database or API calls).
 
 ## Technologies Used
 
