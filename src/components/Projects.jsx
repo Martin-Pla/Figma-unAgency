@@ -64,12 +64,18 @@ const projects = [
     subtitle: "Rioja Crianza · Tempranillo",
     category: "Spirits Packaging",
     image: "/assets/img-marielen.png",
-    layout: "editorial",
-    description: "A modern take on classic Rioja wine. Marielen's label design tells the story of the vineyard's matriarch through abstract watercolor illustrations mixed with serif typography.",
+    layout: "carousel",
+    description: "Redefining the Rioja classic through the lens of timeless minimalism. Designed for the luxury consumer, this identity prioritizes precision and material integrity, utilizing smooth cotton paper to convey a pure, high-prestige aesthetic.\n\nBreaking away from 'Dark Luxury,' the brand achieves luminous differentiation through a high-contrast palette of ivory and deep black. It commands the shelf with serene authority, stripped of all unnecessary ornamentation. The fusion of tradition and contemporary sobriety is embodied in a single blind-embossed line—a tactile detail for the connoisseur who values discipline over excess.",
     year: "2023",
-    services: ["Label Design", "Storytelling"],
-    gallery: [],
+    services: ["Label Design", "Storytelling", "Art Direction"],
+    gallery: [
+      "/assets/marielen/marielen-1.png",
+      "/assets/marielen/marielen-2.png",
+      "/assets/marielen/marielen-3.png",
+      "/assets/marielen/marielen-4.png"
+    ],
     bottomImage: null,
+    quote: "A sophisticated tribute to subtle perfection, positioning the brand as the new standard of clarity and extreme elegance.",
   },
   {
     id: "5",
@@ -77,12 +83,16 @@ const projects = [
     subtitle: "Rioja Crianza · Tempranillo",
     category: "Spirits Packaging",
     image: "/assets/img-suhar.png",
-    layout: "editorial",
-    description: "Suhar represents the fiery spirit of the Basque country. The branding utilizes charred wood textures and bold red accents to convey the intensity of the wine.",
+    layout: "cinematic",
+    description: "Designed for the new generation of connoisseurs. This is where heritage meets vanguard aesthetics; a fusion of Rioja's soul with a sophisticated, light-driven minimalism. Suhar represents the Contemporary Edge.",
     year: "2023",
     services: ["Packaging Design", "Naming"],
-    gallery: [],
-    bottomImage: null,
+    gallery: [
+      "/assets/suhar/suhar-2.png",
+      "/assets/suhar/suhar-3.png"
+    ],
+    bottomImage: "/assets/suhar/suhar-4.png",
+    quote: "A luminous, high-contrast statement for those who value absolute design clarity and modern sophistication.",
   },
   {
     id: "6",
@@ -94,8 +104,14 @@ const projects = [
     description: "Disruptive, fun, and unapologetic. What The Flock is a new line of canned cocktails targeting a younger demographic. The visual identity relies on vibrant colors, quirky illustrations of birds in human clothing, and a tone of voice that doesn't take itself too seriously.",
     year: "2025",
     services: ["Visual Identity", "Packaging", "Social Media Content"],
-    gallery: [],
-    bottomImage: null,
+    gallery: [
+      "/assets/wtf/WTF-1.png",
+      "/assets/wtf/WTF-2.png",
+      "/assets/wtf/WTF-3.png",
+      "/assets/wtf/WTF-4.png"
+    ],
+    bottomImage: "/assets/wtf/WTF-5.png",
+    quote: "Disruptive, fun, and unapologetic.",
   },
   {
     id: "7",

@@ -272,6 +272,77 @@ const CinematicLayout = ({ project }) => {
   );
 };
 
+const CarouselLayout = ({ project }) => {
+  return (
+    <div>
+      {/* Hero Section - Cinematic Style */}
+      <div className="project-detail-cinematic-hero">
+        <img src={project.image} alt={project.title} className="project-detail-cinematic-bg" />
+        <div className="project-detail-cinematic-overlay" />
+        <div className="project-detail-cinematic-content">
+          <div className="project-detail-cinematic-header">
+            <span className="project-detail-cinematic-meta">
+              {project.category} — {project.year || '2024'}
+            </span>
+            <h1 className="project-detail-cinematic-title">
+              {project.title}
+            </h1>
+            {project.subtitle && (
+              <p className="project-detail-cinematic-subtitle">{project.subtitle}</p>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* Content Section */}
+      <div className="project-detail-cinematic-content-section">
+        <div className="project-detail-cinematic-content-grid">
+          <div className="project-detail-cinematic-quote-wrapper">
+            <div className="project-detail-cinematic-quote-text">
+              {project.quote ? `"${project.quote}"` : '"A story told through texture, color, and form."'}
+            </div>
+          </div>
+          <div className="project-detail-cinematic-info-wrapper">
+            <ProjectInfo project={project} />
+          </div>
+        </div>
+      </div>
+
+      {/* Carousel Section */}
+      <div className="project-detail-carousel-section">
+        <h3 className="project-detail-carousel-label">Project Gallery</h3>
+        <div className="project-detail-carousel-container">
+          {project.gallery && project.gallery.length > 0 ? (
+            project.gallery.map((img, i) => (
+              <div key={i} className="project-detail-carousel-item">
+                <img 
+                  src={img} 
+                  alt={`Gallery ${i + 1}`} 
+                  className="project-detail-carousel-image" 
+                />
+                <div className="project-detail-carousel-overlay">
+                  <span className="project-detail-carousel-number">View 0{i + 1}</span>
+                </div>
+              </div>
+            ))
+          ) : (
+            <div className="project-detail-carousel-item project-detail-carousel-placeholder">
+              <span>No images available</span>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Bottom Full Width */}
+      {project.bottomImage && (
+        <div className="project-detail-cinematic-bottom">
+          <img src={project.bottomImage} alt="Mood" className="project-detail-cinematic-bottom-img" />
+        </div>
+      )}
+    </div>
+  );
+};
+
 export default function ProjectDetail({ project, onBack }) {
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -287,6 +358,8 @@ export default function ProjectDetail({ project, onBack }) {
         return <ImmersiveLayout project={project} />;
       case 'cinematic':
         return <CinematicLayout project={project} />;
+      case 'carousel':
+        return <CarouselLayout project={project} />;
       default:
         return <EditorialLayout project={project} />;
     }
