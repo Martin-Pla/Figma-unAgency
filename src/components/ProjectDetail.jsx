@@ -199,6 +199,79 @@ const ImmersiveLayout = ({ project }) => {
   );
 };
 
+const CinematicLayout = ({ project }) => {
+  return (
+    <div>
+      {/* Hero Section */}
+      <div className="project-detail-cinematic-hero">
+        <img src={project.image} alt={project.title} className="project-detail-cinematic-bg" />
+        <div className="project-detail-cinematic-overlay" />
+        <div className="project-detail-cinematic-content">
+          <div className="project-detail-cinematic-header">
+            <span className="project-detail-cinematic-meta">
+              {project.category} — {project.year || '2024'}
+            </span>
+            <h1 className="project-detail-cinematic-title">
+              {project.title}
+            </h1>
+            {project.subtitle && (
+              <p className="project-detail-cinematic-subtitle">{project.subtitle}</p>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* Content Section */}
+      <div className="project-detail-cinematic-content-section">
+        <div className="project-detail-cinematic-content-grid">
+          <div className="project-detail-cinematic-quote-wrapper">
+            <div className="project-detail-cinematic-quote-text">
+              {project.quote ? `"${project.quote}"` : '"The essence of the spirit captured in glass."'}
+            </div>
+          </div>
+          <div className="project-detail-cinematic-info-wrapper">
+            <ProjectInfo project={project} />
+          </div>
+        </div>
+      </div>
+
+      {/* Large Visuals Grid */}
+      <div className="project-detail-cinematic-gallery-grid">
+        {project.gallery && project.gallery[0] && (
+          <div className="project-detail-cinematic-gallery-item">
+            <img 
+              src={project.gallery[0]} 
+              alt="Gallery 1" 
+              className="project-detail-cinematic-gallery-image" 
+            />
+          </div>
+        )}
+        {project.gallery && project.gallery[1] && (
+          <div className="project-detail-cinematic-gallery-item">
+            <img 
+              src={project.gallery[1]} 
+              alt="Gallery 2" 
+              className="project-detail-cinematic-gallery-image" 
+            />
+          </div>
+        )}
+      </div>
+
+      {/* Bottom Full Width */}
+      {project.bottomImage && (
+        <div className="project-detail-cinematic-bottom">
+          <img src={project.bottomImage} alt="Mood" className="project-detail-cinematic-bottom-img" />
+          <div className="project-detail-cinematic-bottom-overlay">
+            <div className="project-detail-cinematic-bottom-badge">
+              <span className="project-detail-cinematic-bottom-text">Est. {project.year || '2024'}</span>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
 export default function ProjectDetail({ project, onBack }) {
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -212,6 +285,8 @@ export default function ProjectDetail({ project, onBack }) {
         return <GalleryLayout project={project} />;
       case 'immersive':
         return <ImmersiveLayout project={project} />;
+      case 'cinematic':
+        return <CinematicLayout project={project} />;
       default:
         return <EditorialLayout project={project} />;
     }

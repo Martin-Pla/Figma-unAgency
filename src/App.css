@@ -1578,6 +1578,235 @@
   color: #262626;
 }
 
+/* Cinematic Layout */
+.project-detail-cinematic-hero {
+  height: 85vh;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .project-detail-cinematic-hero {
+    height: 100vh;
+  }
+}
+
+.project-detail-cinematic-bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.7;
+}
+
+.project-detail-cinematic-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, #000000, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4));
+}
+
+.project-detail-cinematic-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 24px;
+}
+
+@media (min-width: 768px) {
+  .project-detail-cinematic-content {
+    padding: 80px;
+  }
+}
+
+.project-detail-cinematic-header {
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  padding-top: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+@media (min-width: 768px) {
+  .project-detail-cinematic-header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+}
+
+.project-detail-cinematic-meta {
+  display: block;
+  font-size: 14px;
+  font-family: 'Space Mono', monospace;
+  color: #a3a3a3;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 8px;
+}
+
+.project-detail-cinematic-title {
+  font-size: 3rem;
+  font-family: 'Space Mono', monospace;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+@media (min-width: 768px) {
+  .project-detail-cinematic-title {
+    font-size: 6rem;
+  }
+}
+
+.project-detail-cinematic-subtitle {
+  font-size: 1.125rem;
+  font-family: 'Inter', sans-serif;
+  color: #d4d4d4;
+  max-width: 320px;
+}
+
+@media (min-width: 768px) {
+  .project-detail-cinematic-subtitle {
+    font-size: 1.25rem;
+  }
+}
+
+.project-detail-cinematic-content-section {
+  background-color: #0a0a0a;
+  padding: 80px 24px;
+}
+
+@media (min-width: 768px) {
+  .project-detail-cinematic-content-section {
+    padding: 80px;
+  }
+}
+
+.project-detail-cinematic-content-grid {
+  max-width: 1600px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 64px;
+}
+
+@media (min-width: 768px) {
+  .project-detail-cinematic-content-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 128px;
+  }
+}
+
+.project-detail-cinematic-quote-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.project-detail-cinematic-quote-text {
+  font-size: 1.5rem;
+  line-height: 1.4;
+  font-family: 'Inter', sans-serif;
+  color: #d4d4d4;
+  margin-bottom: 32px;
+}
+
+@media (min-width: 768px) {
+  .project-detail-cinematic-quote-text {
+    font-size: 1.875rem;
+    margin-bottom: 0;
+  }
+}
+
+.project-detail-cinematic-info-wrapper {
+  width: 100%;
+}
+
+.project-detail-cinematic-gallery-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  height: auto;
+}
+
+@media (min-width: 768px) {
+  .project-detail-cinematic-gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+    height: 80vh;
+  }
+}
+
+.project-detail-cinematic-gallery-item {
+  position: relative;
+  height: 60vh;
+  width: 100%;
+  overflow: hidden;
+  background: #000000;
+}
+
+@media (min-width: 768px) {
+  .project-detail-cinematic-gallery-item {
+    height: 100%;
+  }
+}
+
+.project-detail-cinematic-gallery-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(100%);
+  transition: filter 0.7s ease, transform 0.7s ease;
+  transform: scale(1);
+}
+
+.project-detail-cinematic-gallery-item:hover .project-detail-cinematic-gallery-image {
+  filter: grayscale(0%);
+  transform: scale(1.05);
+}
+
+.project-detail-cinematic-bottom {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  position: relative;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .project-detail-cinematic-bottom {
+    aspect-ratio: 16 / 9;
+  }
+}
+
+.project-detail-cinematic-bottom-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.8;
+}
+
+.project-detail-cinematic-bottom-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.project-detail-cinematic-bottom-badge {
+  padding: 32px;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+}
+
+.project-detail-cinematic-bottom-text {
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: #ffffff;
+}
+
 /* Project Detail Footer */
 .project-detail-footer {
   padding: 128px 0;

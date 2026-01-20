@@ -10,16 +10,16 @@ const projects = [
     subtitle: "Tequila Extra Añejo",
     category: "Spirits Packaging",
     image: "/assets/img-ave-de-fuego.png",
-    layout: "editorial",
-    description: "Ave de Fuego is a tequila that embodies rebirth, strength, and tradition, inspired by the mythological firebird—the phoenix. Just as this legendary creature rises from its ashes, the brand represents the enduring spirit of Mexican craftsmanship, forged through fire and time. The design reflects the duality of elegance and power: a premium square bottle that conveys solidity, combined with warm amber tones that evoke flames and volcanic origins.",
+    layout: "cinematic",
+    description: "Ave de Fuego is a tequila that embodies rebirth, strength, and tradition, inspired by the mythological firebird—the phoenix. Just as this legendary creature rises from its ashes, the brand represents the enduring spirit of Mexican craftsmanship, forged through fire and time. The design reflects the duality of elegance and power: a premium square bottle that conveys solidity, combined with warm amber tones that evoke flames and volcanic origins. Ave de Fuego pays tribute to both the ancestral roots of tequila and the sophistication of contemporary luxury, offering a drink that is as timeless as it is bold.",
     year: "2024",
     services: ["Packaging Design", "Bottle Design", "Brand Strategy"],
     gallery: [
       "/assets/ave-fuego/ave-fuego-1.png",
-      "/assets/ave-fuego/ave-fuego-2.png",
-      "/assets/ave-fuego/ave-fuego-3.png"
+      "/assets/ave-fuego/ave-fuego-2.png"
     ],
     bottomImage: "/assets/ave-fuego/ave-fuego-3.png",
+    quote: "The brand represents the enduring spirit of Mexican craftsmanship, forged through fire and time.",
   },
   {
     id: "2",
