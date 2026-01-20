@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import './App.css';
 import FluidBackground from './components/FluidBackground';
@@ -12,8 +12,19 @@ const logoImg = "/assets/logo-unagency.png";
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState(null);
+  const [hasScrolled, setHasScrolled] = useState(false);
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      setHasScrolled(scrollPosition > 100);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <div className="app-container-new">
@@ -42,9 +53,20 @@ function App() {
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               className="nav-bar"
             >
-              <a href="#" className="nav-logo-link" onClick={() => setIsMenuOpen(false)}>
+              <motion.a 
+                href="#" 
+                className="nav-logo-link" 
+                onClick={() => setIsMenuOpen(false)}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ 
+                  opacity: hasScrolled ? 1 : 0,
+                  x: hasScrolled ? 0 : -20
+                }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+                style={{ pointerEvents: hasScrolled ? 'auto' : 'none' }}
+              >
                 <img src={logoImg} alt="The unAgency" className="nav-logo-img" />
-              </a>
+              </motion.a>
               
               <button 
                 onClick={toggleMenu}
