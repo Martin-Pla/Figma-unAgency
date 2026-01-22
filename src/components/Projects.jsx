@@ -29,7 +29,7 @@ const projects = [
     title: "GALLUS",
     subtitle: "Islay Single Malt Scotch Whisky",
     category: "Spirits Packaging",
-    image: "/assets/img-gallus.png",
+    image: "/assets/gallus/gallus-1.png",
     layout: "immersive",
     description: "Gallus is a whisky born from Scotland's cheeky and daring character, inspired by the colloquial word that means bold, mischievous, and full of life. More than a drink, it embodies a playful spirit rooted in Scotland's tradition of magical and fantastic stories. Each bottle captures that irreverent and charming essence, delivering a flavor that dares to be different: bold, mysterious, and full of character. Gallus is not just a whisky, it's an invitation to live with audacity—spiced with humor and a touch of magic in every sip.",
     year: "2023",
@@ -38,7 +38,8 @@ const projects = [
       "/assets/gallus/gallus-1.png",
       "/assets/gallus/gallus-2.png",
       "/assets/gallus/gallus-3.png",
-      "/assets/gallus/gallus-4.png"
+      "/assets/gallus/gallus-4.png",
+      "/assets/gallus/gallus-5.png"
     ],
     bottomImage: "/assets/gallus/gallus-5.png",
   },
