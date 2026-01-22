@@ -924,6 +924,29 @@
   transform: translateX(8px);
 }
 
+.contact-submit-button-updated:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.contact-submit-button-updated:disabled:hover {
+  color: #ffffff;
+}
+
+.contact-error-message {
+  display: block;
+  font-size: 12px;
+  font-family: 'Space Mono', monospace;
+  color: #ef4444;
+  margin-top: 8px;
+  padding-left: 4px;
+}
+
+.contact-input:invalid:not(:placeholder-shown),
+.contact-textarea:invalid:not(:placeholder-shown) {
+  border-bottom-color: #ef4444;
+}
+
 .contact-info-section {
   display: flex;
   flex-direction: column;

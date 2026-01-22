@@ -9,25 +9,113 @@ const locations = [
   { city: "London", country: "UK", time: "GMT" },
 ];
 
+// Función para sanitizar inputs y prevenir XSS
+const sanitizeInput = (input) => {
+  if (typeof input !== 'string') return '';
+  
+  // Eliminar caracteres peligrosos y scripts
+  return input
+    .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
+    .replace(/<[^>]*>/g, '')
+    .replace(/javascript:/gi, '')
+    .replace(/on\w+\s*=/gi, '')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&amp;/g, '&')
+    .trim();
+};
+
+// Validación de email estricta
+const validateEmail = (email) => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email) && email.length <= 254;
+};
+
+// Validación de longitud y caracteres permitidos
+const validateInput = (value, fieldName) => {
+  if (!value || typeof value !== 'string') return false;
+  
+  const sanitized = sanitizeInput(value);
+  
+  // Validaciones por campo
+  switch (fieldName) {
+    case 'name':
+      return sanitized.length >= 2 && sanitized.length <= 100 && /^[a-zA-Z\s\-'áéíóúÁÉÍÓÚñÑüÜ]+$/.test(sanitized);
+    case 'email':
+      return validateEmail(sanitized);
+    case 'message':
+      return sanitized.length >= 10 && sanitized.length <= 2000;
+    default:
+      return false;
+  }
+};
+
 export default function Contact() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: ""
   });
+  const [errors, setErrors] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const subject = `New Inquiry from ${formData.name}`;
-    const body = `Name: ${formData.name}%0D%0AEmail: ${formData.email}%0D%0AMessage: ${formData.message}`;
-    window.location.href = `mailto:ad.theunagency@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+    
+    // Validar todos los campos
+    const newErrors = {};
+    if (!validateInput(formData.name, 'name')) {
+      newErrors.name = 'El nombre debe tener entre 2 y 100 caracteres y solo letras';
+    }
+    if (!validateInput(formData.email, 'email')) {
+      newErrors.email = 'Por favor ingresa un email válido';
+    }
+    if (!validateInput(formData.message, 'message')) {
+      newErrors.message = 'El mensaje debe tener entre 10 y 2000 caracteres';
+    }
+    
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+    
+    setIsSubmitting(true);
+    setErrors({});
+    
+    // Sanitizar todos los valores antes de enviar
+    const sanitizedData = {
+      name: sanitizeInput(formData.name),
+      email: sanitizeInput(formData.email),
+      message: sanitizeInput(formData.message)
+    };
+    
+    const subject = `New Inquiry from ${sanitizedData.name}`;
+    const body = `Name: ${sanitizedData.name}%0D%0AEmail: ${sanitizedData.email}%0D%0AMessage: ${sanitizedData.message}`;
+    
+    // Usar encodeURIComponent para mayor seguridad
+    window.location.href = `mailto:ad.theunagency@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body.replace(/%0D%0A/g, '\n'))}`;
+    
+    setIsSubmitting(false);
   };
 
   const handleChange = (e) => {
+    const { name, value } = e.target;
+    
+    // Sanitizar en tiempo real
+    const sanitized = sanitizeInput(value);
+    
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [name]: sanitized
     });
+    
+    // Limpiar error del campo cuando el usuario empiece a escribir
+    if (errors[name]) {
+      setErrors({
+        ...errors,
+        [name]: null
+      });
+    }
   };
 
   return (
@@ -42,7 +130,7 @@ export default function Contact() {
             LET'S TALK
           </h2>
 
-          <form onSubmit={handleSubmit} className="contact-form-updated">
+          <form onSubmit={handleSubmit} className="contact-form-updated" noValidate>
             <div className="contact-form-field">
               <input
                 type="text"
@@ -51,8 +139,16 @@ export default function Contact() {
                 onChange={handleChange}
                 placeholder="NAME"
                 required
+                maxLength={100}
+                pattern="[a-zA-Z\s\-'áéíóúÁÉÍÓÚñÑüÜ]{2,100}"
                 className="contact-input"
+                aria-label="Nombre"
               />
+              {errors.name && (
+                <span className="contact-error-message" role="alert">
+                  {errors.name}
+                </span>
+              )}
             </div>
             <div className="contact-form-field">
               <input
@@ -62,8 +158,15 @@ export default function Contact() {
                 onChange={handleChange}
                 placeholder="EMAIL"
                 required
+                maxLength={254}
                 className="contact-input"
+                aria-label="Email"
               />
+              {errors.email && (
+                <span className="contact-error-message" role="alert">
+                  {errors.email}
+                </span>
+              )}
             </div>
             <div className="contact-form-field">
               <textarea
@@ -73,15 +176,23 @@ export default function Contact() {
                 placeholder="MESSAGE"
                 rows={1}
                 required
+                maxLength={2000}
                 className="contact-textarea"
+                aria-label="Mensaje"
               />
+              {errors.message && (
+                <span className="contact-error-message" role="alert">
+                  {errors.message}
+                </span>
+              )}
             </div>
 
             <button
               type="submit"
               className="contact-submit-button-updated"
+              disabled={isSubmitting}
             >
-              Send Inquiry
+              {isSubmitting ? 'Sending...' : 'Send Inquiry'}
               <ArrowRight className="contact-submit-icon" />
             </button>
           </form>
