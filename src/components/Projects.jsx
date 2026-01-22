@@ -206,7 +206,7 @@ const projects = [
     subtitle: "Cultural Heritage",
     category: "Visual Identity",
     image: "/assets/guachimontones/Guachimontones-01.png",
-    layout: "immersive",
+    layout: "carousel",
     description: "The Heritage: Guachimontones represents the legacy of an ancient prehistoric settlement in Teuchitlán, located an hour outside Guadalajara. Its ceremonial epicenter is defined by a singular architectural language—a series of distinct, circular staggered structures that stand as a testament to ancestral ingenuity.\n\nThe Creative Challenge: The objective was to engineer a new logotype that served as a direct conduit to this unique architectural style. The mission required a delicate balance: rescuing the core values of the site's historical identity—specifically the iconic circular geometry—while building a modern visual foundation for a broader system.\n\nDesign & Identity Scope: Comprehensive Visual Identity System, including bespoke Stationery, Signage, Marketing Collateral, and Premium Packaging.",
     year: "2025",
     services: ["Visual Identity System", "Signage", "Editorial Design"],
