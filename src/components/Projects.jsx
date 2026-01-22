@@ -171,7 +171,13 @@ const projects = [
     description: "Named after the Mayan sign for 'Night', Akbal is a tequila designed for evening sipping. The bottle is made of dark, smoky glass, and the label features constellation maps printed in phosphorescent ink, glowing faintly in low light.",
     year: "2023",
     services: ["Packaging Innovation", "Concept Development"],
-    gallery: [],
+    gallery: [
+      "/assets/akbal/akbal-01.png",
+      "/assets/akbal/akbal-02.png",
+      "/assets/akbal/akbal-03.png",
+      "/assets/akbal/akbal-04.png",
+      "/assets/akbal/akbal-05.png"
+    ],
     bottomImage: null,
   },
   {
