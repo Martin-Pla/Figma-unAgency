@@ -166,7 +166,7 @@ const projects = [
     title: "AKBAL",
     subtitle: "Tequila Extra Añejo",
     category: "Spirits Packaging",
-    image: "/assets/akbal/akbal-01.png",
+    image: "/assets/img-akbal.png",
     layout: "immersive",
     description: "Named after the Mayan sign for 'Night', Akbal is a tequila designed for evening sipping. The bottle is made of dark, smoky glass, and the label features constellation maps printed in phosphorescent ink, glowing faintly in low light.",
     year: "2023",
