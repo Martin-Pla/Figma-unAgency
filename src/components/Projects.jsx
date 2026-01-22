@@ -11,9 +11,10 @@ const projects = [
     category: "Visual Identity",
     image: "/assets/aaron/aron-maier-04.png",
     layout: "immersive",
-    description: "The Visionary: Aaron Maier. The Roots: Monterrey to Mexico City.\n\nThe Expertise: Mexican Institute of Gastronomy alumnus with a trajectory through the city's most influential kitchens.\n\nThe Project: Comprehensive branding, identity system, and editorial stationery for La Sazón.\n\nCredits\nArt Direction by Luis Esquivel",
+    description: "The Visionary: Aaron Maier. The Roots: Monterrey to Mexico City.\n\nThe Expertise: Mexican Institute of Gastronomy alumnus with a trajectory through the city's most influential kitchens.\n\nThe Project: Comprehensive branding, identity system, and editorial stationery for La Sazón.",
     year: "2025",
     services: ["Brand Identity", "Editorial Stationery", "Identity System"],
+    artDirection: "Luis Esquivel",
     gallery: [
       "/assets/aaron/aron-maier-01.png",
       "/assets/aaron/aron-maier-03.png",

@@ -53,6 +53,14 @@ const ProjectInfo = ({ project }) => (
         </ul>
       </div>
     )}
+    {project.artDirection && (
+      <div className="project-detail-info-section">
+        <h3 className="project-detail-info-label">Credits</h3>
+        <p className="project-detail-description">
+          Art Direction by {project.artDirection}
+        </p>
+      </div>
+    )}
   </div>
 );
 
