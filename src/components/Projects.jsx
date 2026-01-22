@@ -6,20 +6,22 @@ import { ArrowUpRight } from 'lucide-react';
 const projects = [
   {
     id: "1",
-    title: "AVE DE FUEGO",
-    subtitle: "Tequila Extra Añejo",
-    category: "Spirits Packaging",
-    image: "/assets/img-ave-de-fuego.png",
-    layout: "cinematic",
-    description: "Ave de Fuego is a tequila that embodies rebirth, strength, and tradition, inspired by the mythological firebird—the phoenix. Just as this legendary creature rises from its ashes, the brand represents the enduring spirit of Mexican craftsmanship, forged through fire and time. The design reflects the duality of elegance and power: a premium square bottle that conveys solidity, combined with warm amber tones that evoke flames and volcanic origins. Ave de Fuego pays tribute to both the ancestral roots of tequila and the sophistication of contemporary luxury, offering a drink that is as timeless as it is bold.",
-    year: "2024",
-    services: ["Packaging Design", "Bottle Design", "Brand Strategy"],
+    title: "AARON MAIER",
+    subtitle: "Chef",
+    category: "Visual Identity",
+    image: "/assets/aaron/aron-maier-01.png",
+    layout: "immersive",
+    description: "The Visionary: Aaron Maier. The Roots: Monterrey to Mexico City.\n\nThe Expertise: Mexican Institute of Gastronomy alumnus with a trajectory through the city's most influential kitchens.\n\nThe Project: Comprehensive branding, identity system, and editorial stationery for La Sazón.",
+    year: "2025",
+    services: ["Brand Identity", "Editorial Stationery", "Identity System"],
     gallery: [
-      "/assets/ave-fuego/ave-fuego-1.png",
-      "/assets/ave-fuego/ave-fuego-2.png"
+      "/assets/aaron/aron-maier-03.png",
+      "/assets/aaron/aron-maier-04.png",
+      "/assets/aaron/aron-maier-05.png",
+      "/assets/aaron/aron-maier-06.png"
     ],
-    bottomImage: "/assets/ave-fuego/ave-fuego-3.png",
-    quote: "The brand represents the enduring spirit of Mexican craftsmanship, forged through fire and time.",
+    bottomImage: "/assets/aaron/aron-maier-01.png",
+    quote: "A trajectory through the city's most influential kitchens.",
   },
   {
     id: "2",
@@ -115,6 +117,23 @@ const projects = [
   },
   {
     id: "7",
+    title: "AVE DE FUEGO",
+    subtitle: "Tequila Extra Añejo",
+    category: "Spirits Packaging",
+    image: "/assets/img-ave-de-fuego.png",
+    layout: "cinematic",
+    description: "Ave de Fuego is a tequila that embodies rebirth, strength, and tradition, inspired by the mythological firebird—the phoenix. Just as this legendary creature rises from its ashes, the brand represents the enduring spirit of Mexican craftsmanship, forged through fire and time. The design reflects the duality of elegance and power: a premium square bottle that conveys solidity, combined with warm amber tones that evoke flames and volcanic origins. Ave de Fuego pays tribute to both the ancestral roots of tequila and the sophistication of contemporary luxury, offering a drink that is as timeless as it is bold.",
+    year: "2024",
+    services: ["Packaging Design", "Bottle Design", "Brand Strategy"],
+    gallery: [
+      "/assets/ave-fuego/ave-fuego-1.png",
+      "/assets/ave-fuego/ave-fuego-2.png"
+    ],
+    bottomImage: "/assets/ave-fuego/ave-fuego-3.png",
+    quote: "The brand represents the enduring spirit of Mexican craftsmanship, forged through fire and time.",
+  },
+  {
+    id: "13",
     title: "NUWA STONE",
     subtitle: null,
     category: "Branding & Visual Identity",
