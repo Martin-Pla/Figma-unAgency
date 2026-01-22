@@ -29,7 +29,7 @@ const projects = [
     title: "GALLUS",
     subtitle: "Islay Single Malt Scotch Whisky",
     category: "Spirits Packaging",
-    image: "/assets/gallus/gallus-1.png",
+    image: "/assets/img-gallus.png",
     layout: "immersive",
     description: "Gallus is a whisky born from Scotland's cheeky and daring character, inspired by the colloquial word that means bold, mischievous, and full of life. More than a drink, it embodies a playful spirit rooted in Scotland's tradition of magical and fantastic stories. Each bottle captures that irreverent and charming essence, delivering a flavor that dares to be different: bold, mysterious, and full of character. Gallus is not just a whisky, it's an invitation to live with audacity—spiced with humor and a touch of magic in every sip.",
     year: "2023",
@@ -38,8 +38,7 @@ const projects = [
       "/assets/gallus/gallus-1.png",
       "/assets/gallus/gallus-2.png",
       "/assets/gallus/gallus-3.png",
-      "/assets/gallus/gallus-4.png",
-      "/assets/gallus/gallus-5.png"
+      "/assets/gallus/gallus-4.png"
     ],
     bottomImage: "/assets/gallus/gallus-5.png",
   },
@@ -167,8 +166,8 @@ const projects = [
     title: "AKBAL",
     subtitle: "Tequila Extra Añejo",
     category: "Spirits Packaging",
-    image: "/assets/img-akbal.png",
-    layout: "editorial",
+    image: "/assets/akbal/akbal-01.png",
+    layout: "immersive",
     description: "Named after the Mayan sign for 'Night', Akbal is a tequila designed for evening sipping. The bottle is made of dark, smoky glass, and the label features constellation maps printed in phosphorescent ink, glowing faintly in low light.",
     year: "2023",
     services: ["Packaging Innovation", "Concept Development"],
@@ -176,10 +175,10 @@ const projects = [
       "/assets/akbal/akbal-01.png",
       "/assets/akbal/akbal-02.png",
       "/assets/akbal/akbal-03.png",
-      "/assets/akbal/akbal-04.png",
-      "/assets/akbal/akbal-05.png"
+      "/assets/akbal/akbal-04.png"
     ],
-    bottomImage: null,
+    bottomImage: "/assets/akbal/akbal-05.png",
+    quote: "Glowing faintly in low light, like the night sky.",
   },
   {
     id: "10",
