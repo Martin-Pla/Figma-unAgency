@@ -9,18 +9,18 @@ const projects = [
     title: "AARON MAIER",
     subtitle: "Chef",
     category: "Visual Identity",
-    image: "/assets/aaron/aron-maier-01.png",
+    image: "/assets/aaron/aron-maier-04.png",
     layout: "immersive",
     description: "The Visionary: Aaron Maier. The Roots: Monterrey to Mexico City.\n\nThe Expertise: Mexican Institute of Gastronomy alumnus with a trajectory through the city's most influential kitchens.\n\nThe Project: Comprehensive branding, identity system, and editorial stationery for La Sazón.",
     year: "2025",
     services: ["Brand Identity", "Editorial Stationery", "Identity System"],
     gallery: [
+      "/assets/aaron/aron-maier-01.png",
       "/assets/aaron/aron-maier-03.png",
-      "/assets/aaron/aron-maier-04.png",
       "/assets/aaron/aron-maier-05.png",
       "/assets/aaron/aron-maier-06.png"
     ],
-    bottomImage: "/assets/aaron/aron-maier-01.png",
+    bottomImage: "/assets/aaron/aron-maier-04.png",
     quote: "A trajectory through the city's most influential kitchens.",
   },
   {
@@ -144,6 +144,7 @@ const projects = [
     services: ["Rebranding", "Web Design", "Collateral"],
     gallery: [],
     bottomImage: null,
+    hidden: true,
   },
   {
     id: "8",
@@ -157,6 +158,7 @@ const projects = [
     services: ["Brand Identity", "Apparel Design", "Art Direction"],
     gallery: [],
     bottomImage: null,
+    hidden: true,
   },
   {
     id: "9",
@@ -228,7 +230,9 @@ const getAspectRatioClass = (index) => {
 
 export default function Projects({ onProjectSelect }) {
   const [showAll, setShowAll] = useState(false);
-  const visibleProjects = showAll ? projects : projects.slice(0, 5);
+  // Filtrar proyectos ocultos
+  const visibleProjectsList = projects.filter(project => !project.hidden);
+  const visibleProjects = showAll ? visibleProjectsList : visibleProjectsList.slice(0, 5);
 
   return (
     <section id="projects" className="projects-section-updated">
@@ -299,7 +303,7 @@ export default function Projects({ onProjectSelect }) {
           </AnimatePresence>
         </motion.div>
         
-        {projects.length > 5 && (
+        {visibleProjectsList.length > 5 && (
           <div className="projects-button-container">
             <button 
               onClick={() => setShowAll(!showAll)}
