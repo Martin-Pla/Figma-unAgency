@@ -1,3 +1,12 @@
+/* SEO-only content - hidden from users but visible to search engines */
+.seo-only {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
 /* App Container */
 .app-container-new {
   background-color: #000000;

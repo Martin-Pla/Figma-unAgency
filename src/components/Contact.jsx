@@ -239,8 +239,9 @@ export default function Contact() {
           </div>
 
           <div className="contact-footer-updated">
-            <div className="contact-footer-text">
-              <p className="contact-footer-description">
+            {/* SEO-only text - hidden from users but visible to search engines */}
+            <div className="seo-only" aria-hidden="true">
+              <p>
                 Boutique Design & Strategy Hub serving San Diego (California, USA), Tijuana (Baja California, Mexico), and Guadalajara (Jalisco, Mexico).
               </p>
             </div>
