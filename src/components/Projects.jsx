@@ -68,7 +68,7 @@ const projects = [
     category: "Spirits Packaging",
     image: "/assets/img-marielen.png",
     layout: "carousel",
-    description: "Redefining the Rioja classic through the lens of timeless minimalism. Designed for the luxury consumer, this identity prioritizes precision and material integrity, utilizing smooth cotton paper to convey a pure, high-prestige aesthetic.\n\nBreaking away from 'Dark Luxury,' the brand achieves luminous differentiation through a high-contrast palette of ivory and deep black. It commands the shelf with serene authority, stripped of all unnecessary ornamentation. The fusion of tradition and contemporary sobriety is embodied in a single blind-embossed line—a tactile detail for the connoisseur who values discipline over excess.",
+    description: "Redefining the Rioja classic through the lens of timeless minimalism. Designed for the luxury consumer, this identity prioritizes precision and material integrity, utilizing smooth cotton paper to convey a pure, high-prestige aesthetic.\n\nBreaking away from 'Dark Luxury,' the brand achieves luminous differentiation through a high-contrast palette of ivory and deep black. It commands the shelf with serene authority, stripped of all unnecessary ornamentation. The fusion of tradition and contemporary sobriety is embodied in a single blind-embossed line—a tactile detail for the connoisseur who values discipline over excess.\n\nOur wine label and bottle design expertise brings together traditional winemaking heritage with contemporary luxury aesthetics, creating packaging that speaks to discerning wine enthusiasts while maintaining the sophistication expected in premium wine markets.",
     year: "2023",
     services: ["Label Design", "Storytelling", "Art Direction"],
     gallery: [
@@ -87,7 +87,7 @@ const projects = [
     category: "Spirits Packaging",
     image: "/assets/img-suhar.png",
     layout: "cinematic",
-    description: "Designed for the new generation of connoisseurs. This is where heritage meets vanguard aesthetics; a fusion of Rioja's soul with a sophisticated, light-driven minimalism. Suhar represents the Contemporary Edge.",
+    description: "Designed for the new generation of connoisseurs. This is where heritage meets vanguard aesthetics; a fusion of Rioja's soul with a sophisticated, light-driven minimalism. Suhar represents the Contemporary Edge.\n\nOur approach to wine label and bottle design combines innovative visual language with the rich traditions of winemaking, creating distinctive packaging that captures the essence of modern wine culture while honoring the craft's timeless elegance.",
     year: "2023",
     services: ["Packaging Design", "Naming"],
     gallery: [
@@ -260,6 +260,41 @@ const getAspectRatioClass = (index) => {
   return "projects-aspect-normal";
 };
 
+// Función para generar atributos alt descriptivos y bilingües
+const generateAltText = (project) => {
+  const { title, subtitle, category } = project;
+  
+  // Mapeo de categorías a español
+  const categoryMap = {
+    "Visual Identity": "Identidad Visual",
+    "Spirits Packaging": "Embalaje de Bebidas Espirituosas",
+    "Beverage Packaging": "Embalaje de Bebidas",
+    "Branding & Visual Identity": "Branding e Identidad Visual"
+  };
+  
+  const categoryES = categoryMap[category] || category;
+  
+  // Construir el alt text bilingüe con formato descriptivo
+  let altText = `${title}`;
+  
+  if (subtitle) {
+    altText += ` - ${subtitle}`;
+  }
+  
+  // Añadir descripción específica según la categoría
+  if (category.includes("Spirits Packaging")) {
+    altText += ` - Luxury Tequila/Whisky Packaging Design / Diseño de Embalaje de Lujo para Bebidas Espirituosas`;
+  } else if (category.includes("Beverage Packaging")) {
+    altText += ` - Beverage Packaging Design / Diseño de Embalaje de Bebidas`;
+  } else if (category.includes("Visual Identity") || category.includes("Branding")) {
+    altText += ` - ${category} Design / Diseño de ${categoryES}`;
+  } else {
+    altText += ` - ${category} / ${categoryES}`;
+  }
+  
+  return altText;
+};
+
 export default function Projects({ onProjectSelect }) {
   const [showAll, setShowAll] = useState(false);
   // Filtrar proyectos ocultos
@@ -299,7 +334,8 @@ export default function Projects({ onProjectSelect }) {
                     whileHover={{ scale: project.id === "6" || project.id === "12" ? 1.15 : 1.05 }}
                     transition={{ duration: 0.6, ease: [0.33, 1, 0.68, 1] }}
                     src={project.image}
-                    alt={project.title}
+                    alt={generateAltText(project)}
+                    loading="lazy"
                     className="projects-image"
                   />
                   <div className="projects-overlay" />

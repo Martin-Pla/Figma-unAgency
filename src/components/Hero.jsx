@@ -32,15 +32,15 @@ export default function Hero() {
     >
       {/* 1. Background Typography (Ahora con position absolute para que NO empuje nada) */}
       <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', zIndex: 0, pointerEvents: 'none', width: '100%', textAlign: 'center' }}>
-         <motion.h2 
+         <motion.h1 
            initial={{ opacity: 0 }}
            animate={{ opacity: 0.03 }}
            transition={{ duration: 2, delay: 0.5 }}
            className="hero-background-text"
            style={{ margin: 0, fontSize: '20vw', whiteSpace: 'nowrap' }}
          >
-           UNAGENCY
-         </motion.h2>
+           The unAgency | Product Design & Brand Architecture
+         </motion.h1>
       </div>
 
       {/* 2. Contenido Principal */}

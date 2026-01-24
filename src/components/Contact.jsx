@@ -4,9 +4,16 @@ import { ArrowRight } from 'lucide-react';
 
 const locations = [
   { city: "San Diego", country: "USA", time: "PST" },
+  { city: "Los Angeles", country: "USA", time: "PST" },
   { city: "Tijuana", country: "MX", time: "PST" },
+  { city: "Valle de Guadalupe", country: "MX", time: "PST", region: "Ensenada (Baja California Wine Region)" },
   { city: "Guadalajara", country: "MX", time: "CST" },
-  { city: "London", country: "UK", time: "GMT" },
+  { city: "Ciudad de Mexico", country: "MX", time: "CST" },
+  { city: "Louisville", country: "USA", time: "EST", state: "KY" },
+  { city: "Nashville", country: "USA", time: "CST", state: "TN" },
+  { city: "Austin", country: "USA", time: "CST", state: "TX" },
+  { city: "Seattle", country: "USA", time: "PST", state: "WA" },
+  { city: "Chicago", country: "USA", time: "CST", state: "IL" },
 ];
 
 // Función para sanitizar inputs y prevenir XSS
@@ -212,7 +219,7 @@ export default function Contact() {
                     className="contact-location-item"
                   >
                     <span className="contact-location-city">
-                      {loc.city}
+                      {loc.city}{loc.state ? ` (${loc.state})` : ''}
                     </span>
                     <div className="contact-location-details">
                       <span>{loc.country}</span>
@@ -226,22 +233,35 @@ export default function Contact() {
           </div>
 
           <div className="contact-footer-updated">
-            <span className="contact-copyright">
-              © {new Date().getFullYear()} The unAgency
-            </span>
-            <div className="contact-footer-social">
-              <a
-                href="#"
-                className="contact-footer-link"
-              >
-                Instagram
-              </a>
-              <a
-                href="#"
-                className="contact-footer-link"
-              >
-                LinkedIn
-              </a>
+            <div className="contact-footer-text">
+              <p className="contact-footer-description">
+                Boutique Design & Strategy Hub serving key innovation centers: California (San Diego, LA), Las Vegas, Arizona, Mexico (CDMX, Guadalajara, Tijuana, Valle de Guadalupe - Baja California Wine Region), and strategic spirits industry hubs including Louisville (Kentucky), Nashville (Tennessee), Austin (Texas), Seattle (Washington), and Chicago (Illinois).
+              </p>
+            </div>
+            <div className="contact-footer-bottom">
+              <span className="contact-copyright">
+                © {new Date().getFullYear()} The unAgency
+              </span>
+              <div className="contact-footer-social">
+                <a
+                  href="#"
+                  className="contact-footer-link"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  aria-label="Síguenos en Instagram"
+                >
+                  Instagram
+                </a>
+                <a
+                  href="#"
+                  className="contact-footer-link"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  aria-label="Conéctate con nosotros en LinkedIn"
+                >
+                  LinkedIn
+                </a>
+              </div>
             </div>
           </div>
         </div>

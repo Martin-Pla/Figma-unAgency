@@ -5,8 +5,10 @@ import FluidBackground from './components/FluidBackground';
 import Hero from './components/Hero';
 import Projects from './components/Projects';
 import About from './components/About';
+import Services from './components/Services';
 import Contact from './components/Contact';
 import ProjectDetail from './components/ProjectDetail';
+import SchemaMarkup from './components/SchemaMarkup';
 
 const logoImg = "/assets/logo-unagency.png";
 function App() {
@@ -28,9 +30,10 @@ function App() {
 
   return (
     <div className="app-container-new">
-    <div className="bg-fix">
-  <FluidBackground />
-</div>
+      <SchemaMarkup />
+      <div className="bg-fix">
+        <FluidBackground />
+      </div>
 
       <AnimatePresence mode="wait">
         {selectedProject ? (
@@ -87,7 +90,7 @@ function App() {
                   className="menu-overlay"
                 >
                   <div className="menu-items">
-                    {['Projects', 'About', 'Contact'].map((item, index) => (
+                    {['Projects', 'About', 'Services', 'Contact'].map((item, index) => (
                       <motion.a 
                         key={item} 
                         href={`#${item.toLowerCase()}`}
@@ -108,9 +111,33 @@ function App() {
                     transition={{ delay: 0.6 }}
                     className="menu-social"
                   >
-                    <a href="#" className="menu-social-link">Instagram</a>
-                    <a href="#" className="menu-social-link">LinkedIn</a>
-                    <a href="#" className="menu-social-link">Twitter</a>
+                    <a 
+                      href="#" 
+                      className="menu-social-link"
+                      rel="noopener noreferrer"
+                      target="_blank"
+                      aria-label="Síguenos en Instagram"
+                    >
+                      Instagram
+                    </a>
+                    <a 
+                      href="#" 
+                      className="menu-social-link"
+                      rel="noopener noreferrer"
+                      target="_blank"
+                      aria-label="Conéctate con nosotros en LinkedIn"
+                    >
+                      LinkedIn
+                    </a>
+                    <a 
+                      href="#" 
+                      className="menu-social-link"
+                      rel="noopener noreferrer"
+                      target="_blank"
+                      aria-label="Síguenos en Twitter"
+                    >
+                      Twitter
+                    </a>
                   </motion.div>
                 </motion.div>
               )}
@@ -120,6 +147,7 @@ function App() {
               <Hero />
               <Projects onProjectSelect={setSelectedProject} />
               <About />
+              <Services />
               <Contact />
             </main>
           </motion.div>
