@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowLeft } from 'lucide-react';
+import SEO from './SEO';
 
 const ProjectHeader = ({ project }) => (
   <div className="project-detail-header">
@@ -356,6 +357,16 @@ export default function ProjectDetail({ project, onBack }) {
     window.scrollTo(0, 0);
   }, []);
 
+  // Generate SEO meta tags for the project
+  const projectTitle = `${project.title}${project.subtitle ? ` - ${project.subtitle}` : ''} | The unAgency`;
+  const projectDescription = project.description 
+    ? `${project.description.substring(0, 155)}...` 
+    : `Explore ${project.title} project by The unAgency. ${project.category} design and branding.`;
+  const projectImage = project.image.startsWith('http') 
+    ? project.image 
+    : `https://theunagency.com${project.image}`;
+  const projectUrl = `https://theunagency.com/project/${project.id}`;
+
   const renderLayout = () => {
     switch (project.layout) {
       case 'editorial':
@@ -380,6 +391,14 @@ export default function ProjectDetail({ project, onBack }) {
       exit={{ opacity: 0 }}
       className="project-detail-container"
     >
+      <SEO
+        title={projectTitle}
+        description={projectDescription}
+        keywords={`${project.title}, ${project.category}, ${project.services?.join(', ') || ''}, The unAgency, product design, brand architecture`}
+        image={projectImage}
+        url={projectUrl}
+        type="article"
+      />
       <button
         onClick={onBack}
         className="project-detail-back-button"

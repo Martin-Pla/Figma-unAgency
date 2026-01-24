@@ -9,6 +9,7 @@ import Services from './components/Services';
 import Contact from './components/Contact';
 import ProjectDetail from './components/ProjectDetail';
 import SchemaMarkup from './components/SchemaMarkup';
+import SEO from './components/SEO';
 
 const logoImg = "/assets/logo-unagency.png";
 function App() {
@@ -30,6 +31,7 @@ function App() {
 
   return (
     <div className="app-container-new">
+      <SEO />
       <SchemaMarkup />
       <div className="bg-fix">
         <FluidBackground />
