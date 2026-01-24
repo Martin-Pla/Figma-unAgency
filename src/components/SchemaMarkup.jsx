@@ -13,77 +13,22 @@ const SchemaMarkup = () => {
       "image": "https://theunagency.com/assets/logo-unagency.png",
       "areaServed": [
         {
-          "@type": "State",
-          "name": "California",
-          "addressRegion": "CA"
-        },
-        {
-          "@type": "State",
-          "name": "Arizona",
-          "addressRegion": "AZ"
-        },
-        {
-          "@type": "State",
-          "name": "Nevada",
-          "addressRegion": "NV"
-        },
-        {
-          "@type": "State",
-          "name": "Baja California",
-          "addressRegion": "BC"
+          "@type": "City",
+          "name": "San Diego",
+          "addressRegion": "CA",
+          "addressCountry": "US"
         },
         {
           "@type": "City",
-          "name": "Ensenada",
+          "name": "Tijuana",
           "addressRegion": "BC",
           "addressCountry": "MX"
         },
         {
-          "@type": "Place",
-          "name": "Valle de Guadalupe",
-          "addressRegion": "BC",
-          "addressCountry": "MX",
-          "description": "Baja California Wine Region"
-        },
-        {
-          "@type": "State",
-          "name": "Jalisco",
-          "addressRegion": "JAL"
-        },
-        {
           "@type": "City",
-          "name": "Ciudad de Mexico",
-          "addressRegion": "CDMX"
-        },
-        {
-          "@type": "City",
-          "name": "Louisville",
-          "addressRegion": "KY",
-          "addressCountry": "US"
-        },
-        {
-          "@type": "City",
-          "name": "Nashville",
-          "addressRegion": "TN",
-          "addressCountry": "US"
-        },
-        {
-          "@type": "City",
-          "name": "Austin",
-          "addressRegion": "TX",
-          "addressCountry": "US"
-        },
-        {
-          "@type": "City",
-          "name": "Seattle",
-          "addressRegion": "WA",
-          "addressCountry": "US"
-        },
-        {
-          "@type": "City",
-          "name": "Chicago",
-          "addressRegion": "IL",
-          "addressCountry": "US"
+          "name": "Guadalajara",
+          "addressRegion": "JAL",
+          "addressCountry": "MX"
         }
       ],
       "hasOfferCatalog": {

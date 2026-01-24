@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async';
 const SEO = ({ 
   title = "The unAgency | Product Design & Brand Architecture: US - MX",
   description = "Agencia de innovación y diseño de producto (NPD). Creamos marcas de culto y estrategias de mercado desde California hasta CDMX. Strategic design for high-impact brands.",
-  keywords = "product design, brand architecture, NPD, new product development, branding boutique, strategic innovation, diseño de producto, branding, agencia creativa, spirits branding, tequila branding, bourbon branding, wine branding, Valle de Guadalupe, California, Mexico, CDMX, Guadalajara, San Diego, Louisville Kentucky, Nashville Tennessee, Austin Texas, Seattle Washington, Chicago Illinois",
+  keywords = "product design, brand architecture, NPD, new product development, branding boutique, strategic innovation, diseño de producto, branding, agencia creativa, spirits branding, tequila branding, bourbon branding, wine branding, California, Mexico, Guadalajara, San Diego, Tijuana",
   image = "https://theunagency.com/assets/logo-unagency.png",
   url = "https://theunagency.com/",
   type = "website"

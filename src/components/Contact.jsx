@@ -213,20 +213,26 @@ export default function Contact() {
                 Locations
               </h3>
               <ul className="contact-locations-list">
-                {locations.map((loc) => (
-                  <li
-                    key={loc.city}
-                    className="contact-location-item"
-                  >
-                    <span className="contact-location-city">
-                      {loc.city}{loc.state ? ` (${loc.state})` : ''}
-                    </span>
-                    <div className="contact-location-details">
-                      <span>{loc.country}</span>
-                      <span>{loc.time}</span>
-                    </div>
-                  </li>
-                ))}
+                {locations
+                  .filter(loc => ['San Diego', 'Tijuana', 'Guadalajara'].includes(loc.city))
+                  .sort((a, b) => {
+                    const order = ['San Diego', 'Tijuana', 'Guadalajara'];
+                    return order.indexOf(a.city) - order.indexOf(b.city);
+                  })
+                  .map((loc) => (
+                    <li
+                      key={loc.city}
+                      className="contact-location-item"
+                    >
+                      <span className="contact-location-city">
+                        {loc.city}
+                      </span>
+                      <div className="contact-location-details">
+                        <span>{loc.country}</span>
+                        <span>{loc.time}</span>
+                      </div>
+                    </li>
+                  ))}
               </ul>
             </div>
 
@@ -235,7 +241,7 @@ export default function Contact() {
           <div className="contact-footer-updated">
             <div className="contact-footer-text">
               <p className="contact-footer-description">
-                Boutique Design & Strategy Hub serving key innovation centers: California (San Diego, LA), Las Vegas, Arizona, Mexico (CDMX, Guadalajara, Tijuana, Valle de Guadalupe - Baja California Wine Region), and strategic spirits industry hubs including Louisville (Kentucky), Nashville (Tennessee), Austin (Texas), Seattle (Washington), and Chicago (Illinois).
+                Boutique Design & Strategy Hub serving San Diego (California, USA), Tijuana (Baja California, Mexico), and Guadalajara (Jalisco, Mexico).
               </p>
             </div>
             <div className="contact-footer-bottom">

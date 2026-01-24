@@ -140,7 +140,7 @@ function generateStaticHTML() {
         
         <section id="seo-locations">
           <h2>Service Areas</h2>
-          <p>Boutique Design & Strategy Hub serving key innovation centers: California (San Diego, LA), Las Vegas, Arizona, Mexico (CDMX, Guadalajara, Tijuana, Valle de Guadalupe - Baja California Wine Region), and strategic spirits industry hubs including Louisville (Kentucky), Nashville (Tennessee), Austin (Texas), Seattle (Washington), and Chicago (Illinois).</p>
+          <p>Boutique Design & Strategy Hub serving San Diego (California, USA), Tijuana (Baja California, Mexico), and Guadalajara (Jalisco, Mexico).</p>
         </section>
       </div>
     </noscript>
