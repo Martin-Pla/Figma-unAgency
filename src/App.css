@@ -73,9 +73,9 @@ img,
 }
 
 .nav-logo-img {
-  height: 36px;
+  height: 30px;
   width: auto;
-  max-width: 90px;
+  max-width: 75px;
   object-fit: contain;
 }
 
@@ -312,7 +312,7 @@ img,
 
 .hero-logo-image {
   width: 80vw;
-  max-width: 750px;
+  max-width: 563px;
   object-fit: contain;
   user-select: none;
   filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.5));
