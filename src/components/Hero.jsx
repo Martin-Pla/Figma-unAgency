@@ -9,14 +9,20 @@ export default function Hero() {
       className="hero-section-new"
       style={{ position: 'relative', overflow: 'hidden', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
     >
-      {/* Ambient Glow - Fondo profundo con degradados animados */}
-      <div className="hero-ambient-glow-container">
-        <div className="hero-ambient-glow hero-ambient-glow-1" />
-        <div className="hero-ambient-glow hero-ambient-glow-2" />
-        <div className="hero-ambient-glow hero-ambient-glow-3" />
+      {/* Background Typography */}
+      <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', zIndex: 0, pointerEvents: 'none', width: '100%', textAlign: 'center' }}>
+         <motion.h1 
+           initial={{ opacity: 0 }}
+           animate={{ opacity: 0.03 }}
+           transition={{ duration: 2, delay: 0.5 }}
+           className="hero-background-text"
+           style={{ margin: 0, fontSize: '20vw', whiteSpace: 'nowrap' }}
+         >
+           The unAgency | Product Design & Brand Architecture
+         </motion.h1>
       </div>
 
-      {/* Contenido Principal con Glassmorphism */}
+      {/* Contenido Principal */}
       <div className="hero-content-container" style={{ zIndex: 10, position: 'relative', textAlign: 'center' }}>
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
@@ -38,23 +44,13 @@ export default function Hero() {
           transition={{ duration: 1.2, delay: 0.8, ease: "easeOut" }}
           className="hero-text-wrapper"
         >
-          <p className="hero-tagline">
+          <p className="hero-tagline" style={{ marginTop: '20px' }}>
             Where creativity meets strategy. <br className="hero-tagline-break" /> 
             We don't follow the rules—we <span className="hero-tagline-bold">rewrite</span> them.
           </p>
-          
-          {/* Technical Label */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1.2, delay: 1.2, ease: "easeOut" }}
-            className="hero-technical-label"
-          >
-            [ SYSTEM STATUS: ROGUE ]
-          </motion.div>
         </motion.div>
 
-        {/* CTA Button con Glassmorphism */}
+        {/* CTA Button */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -83,6 +79,10 @@ export default function Hero() {
           ↓
         </motion.div>
       </motion.div>
+
+      {/* Decoraciones de fondo */}
+      <div className="hero-gradient-spot" />
+      <div className="hero-noise-overlay" />
     </section>
   );
 }
