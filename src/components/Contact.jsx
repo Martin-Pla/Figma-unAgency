@@ -260,7 +260,7 @@ export default function Contact() {
                   Instagram
                 </a>
                 <a
-                  href="#"
+                  href="https://www.linkedin.com/company/the-unagency-co/"
                   className="contact-footer-link"
                   rel="noopener noreferrer"
                   target="_blank"

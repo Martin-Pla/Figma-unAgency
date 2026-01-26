@@ -79,7 +79,7 @@ const SchemaMarkup = () => {
       },
       "sameAs": [
         "https://www.instagram.com/theunagency",
-        "https://www.linkedin.com/company/theunagency"
+        "https://www.linkedin.com/company/the-unagency-co/"
       ]
     };
 
