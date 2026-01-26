@@ -1,8 +1,8 @@
 import { Helmet } from 'react-helmet-async';
 
 const SEO = ({ 
-  title = "The unAgency & Co. | Strategy & Brand Building",
-  description = "Global innovation & strategic planning firm. We transform visions into cult brands and high-value assets (NPD) through consumer insights and real ROI. Disrupt · Invent · Evolve.",
+  title = "The unAgency & Co. | Global Brand Development & Strategy",
+  description = "The unAgency is a global brand development, innovation, strategy, and advertising agency. We transform visions into high-value assets and cult brands.",
   keywords = "product design, brand architecture, NPD, new product development, branding boutique, strategic innovation, diseño de producto, branding, agencia creativa, spirits branding, tequila branding, bourbon branding, wine branding, California, Mexico, Guadalajara, San Diego, Tijuana",
   image = "https://www.theunagencyco.com/assets/favicon-unagency.png",
   url = "https://www.theunagencyco.com/",
