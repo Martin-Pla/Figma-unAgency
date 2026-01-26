@@ -5,19 +5,9 @@ const logoImg = "/assets/The-unAgency-w.svg";
 
 export default function Hero() {
   return (
-    <section 
-      className="hero-section-new"
-      style={{ position: 'relative', overflow: 'hidden', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#000000' }}
-    >
-      {/* Kinetic Depth Background - Ambient Blobs */}
-      <div className="hero-background-ambient">
-        <div className="blob-1"></div>
-        <div className="blob-2"></div>
-        <div className="blob-3"></div>
-      </div>
-
+    <section className="hero-container">
       {/* Contenido Principal */}
-      <div className="hero-content-container" style={{ zIndex: 10, position: 'relative', textAlign: 'center' }}>
+      <div className="hero-content">
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
