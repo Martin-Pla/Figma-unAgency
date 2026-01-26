@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-const logoImg = "/assets/logo-unagency.png";
+const logoImg = "/assets/The-unAgency-w.svg";
 
 export default function Hero() {
   return (

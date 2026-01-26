@@ -12,7 +12,7 @@ import SchemaMarkup from './components/SchemaMarkup';
 import SEO from './components/SEO';
 import SectionWrapper from './components/SectionWrapper';
 
-const logoImg = "/assets/logo-unagency.png";
+const logoImg = "/assets/The-unAgency-w.svg";
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState(null);
