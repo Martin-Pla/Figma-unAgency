@@ -337,16 +337,18 @@ export default function Projects({ onProjectSelect }) {
                       whileHover={{ scale: 1.05 }}
                       transition={{ duration: 0.3, ease: "easeOut" }}
                     />
-                    
-                    {/* Project Name on Hover */}
-                    <motion.div 
-                      className="projects-hover-title"
-                      initial={{ opacity: 0 }}
-                      whileHover={{ opacity: 1 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      <h3 className="projects-hover-title-text">{project.title}</h3>
-                    </motion.div>
+                  </div>
+                  
+                  {/* Project Info Block - Always Visible */}
+                  <div className="projects-info-block">
+                    <div className="projects-info-header">
+                      <span className="projects-serial-number">
+                        {String(index + 1).padStart(2, '0')}
+                      </span>
+                      <span className="projects-separator">/</span>
+                    </div>
+                    <h3 className="projects-title-text">{project.title}</h3>
+                    <p className="projects-category-text">{project.category}</p>
                   </div>
                 </motion.div>
               );
