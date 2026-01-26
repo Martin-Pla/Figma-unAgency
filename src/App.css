@@ -73,11 +73,10 @@ img,
 }
 
 .nav-logo-img {
-  width: 140px;
-  height: auto;
+  height: 36px;
+  width: auto;
+  max-width: 90px;
   object-fit: contain;
-  image-rendering: -webkit-optimize-contrast;
-  image-rendering: crisp-edges;
 }
 
 .nav-menu-button {
@@ -312,13 +311,11 @@ img,
 }
 
 .hero-logo-image {
-  width: 140px;
-  height: auto;
+  width: 80vw;
+  max-width: 750px;
   object-fit: contain;
   user-select: none;
   filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.5));
-  image-rendering: -webkit-optimize-contrast;
-  image-rendering: crisp-edges;
 }
 
 .hero-sheen {
