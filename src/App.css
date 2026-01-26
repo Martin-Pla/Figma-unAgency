@@ -40,93 +40,6 @@ img,
   border-radius: 0px !important;
 }
 
-/* Custom Cursor Styles */
-.custom-cursor {
-  position: fixed;
-  width: 8px;
-  height: 8px;
-  background: #ffffff;
-  border: 1px solid #ffffff;
-  pointer-events: none;
-  z-index: 9999;
-  transform: translate(-50%, -50%);
-  mix-blend-mode: difference;
-  transition: opacity 0.3s ease, background 0.2s ease, border-color 0.2s ease;
-}
-
-.custom-cursor-follower {
-  position: fixed;
-  width: 32px;
-  height: 32px;
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  background: transparent;
-  pointer-events: none;
-  z-index: 9998;
-  transform: translate(-50%, -50%);
-  transition: opacity 0.3s ease, border-color 0.2s ease, width 0.3s ease, height 0.3s ease;
-}
-
-/* Cursor states */
-.custom-cursor-pointer {
-  background: #ffffff;
-  border-color: #ffffff;
-}
-
-.custom-cursor-follower-pointer {
-  border-color: rgba(255, 255, 255, 0.8);
-  width: 40px;
-  height: 40px;
-}
-
-.custom-cursor-hover {
-  background: #ffffff;
-  border-color: #ffffff;
-}
-
-.custom-cursor-follower-hover {
-  border-color: rgba(255, 255, 255, 0.6);
-  width: 48px;
-  height: 48px;
-}
-
-.custom-cursor-text {
-  background: #a3a3a3;
-  border-color: #a3a3a3;
-  width: 2px;
-  height: 20px;
-  border-radius: 0px;
-}
-
-.custom-cursor-follower-text {
-  border-color: rgba(163, 163, 163, 0.3);
-  width: 24px;
-  height: 24px;
-}
-
-/* Ocultar cursor nativo en desktop cuando hay cursor personalizado */
-@media (hover: hover) and (pointer: fine) {
-  * {
-    cursor: none !important;
-  }
-  
-  /* Mantener cursor pointer en elementos interactivos para accesibilidad */
-  a, button, [role="button"], input, textarea, select {
-    cursor: none !important;
-  }
-}
-
-/* Mostrar cursor nativo en dispositivos táctiles */
-@media (hover: none) and (pointer: coarse) {
-  .custom-cursor,
-  .custom-cursor-follower {
-    display: none;
-  }
-  
-  * {
-    cursor: auto !important;
-  }
-}
-
 /* Selection */
 ::selection {
   background: #ffffff;
@@ -336,6 +249,49 @@ img,
   }
 }
 
+.hero-cta-wrapper {
+  margin-top: 64px;
+  position: relative;
+  z-index: 10;
+}
+
+@media (min-width: 768px) {
+  .hero-cta-wrapper {
+    margin-top: 80px;
+  }
+}
+
+.hero-cta-button {
+  display: inline-block;
+  padding: 20px 48px;
+  background: #ffffff;
+  color: #000000;
+  font-family: 'Space Mono', monospace;
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  border: 1px solid #ffffff;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border-radius: 0px;
+}
+
+.hero-cta-button:hover {
+  background: transparent;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(255, 255, 255, 0.2);
+}
+
+@media (min-width: 768px) {
+  .hero-cta-button {
+    padding: 24px 64px;
+    font-size: 18px;
+  }
+}
+
 .hero-tagline {
   font-size: 14px;
   font-family: 'Space Mono', monospace;
@@ -487,6 +443,74 @@ img,
   .projects-grid-updated {
     grid-template-columns: repeat(6, 1fr);
     gap: 48px;
+  }
+}
+
+/* Projects Grid Simplified - 2 Columns */
+.projects-grid-simplified {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+}
+
+@media (min-width: 768px) {
+  .projects-grid-simplified {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 48px;
+  }
+}
+
+.projects-item-simplified {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.projects-image-container-simplified {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background: #171717;
+  border: none;
+}
+
+.projects-image-simplified {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.projects-item-simplified:hover .projects-image-simplified {
+  transform: scale(1.05);
+}
+
+.projects-hover-title {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+  padding: 24px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.projects-hover-title-text {
+  font-family: 'Space Mono', monospace;
+  font-size: 1.5rem;
+  color: #ffffff;
+  margin: 0;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+@media (min-width: 768px) {
+  .projects-hover-title-text {
+    font-size: 2rem;
   }
 }
 

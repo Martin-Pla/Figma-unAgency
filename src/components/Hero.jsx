@@ -1,35 +1,15 @@
-import React, { useRef } from 'react';
-import { motion, useMotionValue, useSpring } from 'framer-motion';
+import React from 'react';
+import { motion } from 'framer-motion';
 
 const logoImg = "/assets/logo-unagency.png";
 
 export default function Hero() {
-  const containerRef = useRef(null);
-  
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  
-  const springConfig = { damping: 25, stiffness: 150 };
-  const springX = useSpring(mouseX, springConfig);
-  const springY = useSpring(mouseY, springConfig);
-
-  const handleMouseMove = (e) => {
-    const { clientX, clientY, currentTarget } = e;
-    const { width, height, left, top } = currentTarget.getBoundingClientRect();
-    const x = (clientX - left - width / 2) / 25;
-    const y = (clientY - top - height / 2) / 25;
-    mouseX.set(x);
-    mouseY.set(y);
-  };
-
   return (
     <section 
-      ref={containerRef}
-      onMouseMove={handleMouseMove}
       className="hero-section-new"
       style={{ position: 'relative', overflow: 'hidden', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
     >
-      {/* 1. Background Typography (Ahora con position absolute para que NO empuje nada) */}
+      {/* Background Typography */}
       <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', zIndex: 0, pointerEvents: 'none', width: '100%', textAlign: 'center' }}>
          <motion.h1 
            initial={{ opacity: 0 }}
@@ -42,12 +22,11 @@ export default function Hero() {
          </motion.h1>
       </div>
 
-      {/* 2. Contenido Principal */}
+      {/* Contenido Principal */}
       <div className="hero-content-container" style={{ zIndex: 10, position: 'relative', textAlign: 'center' }}>
         <motion.div
-          style={{ x: springX, y: springY }}
-          initial={{ opacity: 0, filter: "blur(20px)", scale: 0.95 }}
-          animate={{ opacity: 1, filter: "blur(0px)", scale: 1 }}
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
           className="hero-logo-wrapper"
         >
@@ -70,9 +49,21 @@ export default function Hero() {
             We don't follow the rules—we <span className="hero-tagline-bold">rewrite</span> them.
           </p>
         </motion.div>
+
+        {/* CTA Button */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.2, delay: 1.0, ease: "easeOut" }}
+          className="hero-cta-wrapper"
+        >
+          <a href="#contact" className="hero-cta-button">
+            Start a Project
+          </a>
+        </motion.div>
       </div>
 
-      {/* 3. Indicador de Scroll (Fijo abajo) */}
+      {/* Indicador de Scroll */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -90,7 +81,7 @@ export default function Hero() {
       </motion.div>
 
       {/* Decoraciones de fondo */}
-      <motion.div className="hero-gradient-spot" style={{ x: springX, y: springY }} />
+      <div className="hero-gradient-spot" />
       <div className="hero-noise-overlay" />
     </section>
   );

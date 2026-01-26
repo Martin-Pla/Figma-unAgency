@@ -245,19 +245,7 @@ const projects = [
   },
 ];
 
-const getSpanClass = (index) => {
-  const position = index % 6;
-  
-  if (position < 3) return "projects-span-2";
-  if (position < 5) return "projects-span-3";
-  return "projects-span-6";
-};
-
-const getAspectRatioClass = (index) => {
-  const position = index % 6;
-  if (position === 5) return "projects-aspect-wide";
-  return "projects-aspect-normal";
-};
+// Funciones de span y aspect ratio ya no se usan con la nueva grilla simplificada
 
 // Función para generar atributos alt descriptivos y bilingües
 const generateAltText = (project) => {
@@ -315,61 +303,42 @@ export default function Projects({ onProjectSelect }) {
 
         <motion.div 
           layout
-          className="projects-grid-updated"
+          className="projects-grid-simplified"
         >
           <AnimatePresence>
             {visibleProjects.map((project, index) => (
               <motion.div
                 layout
                 key={project.id}
-                initial={{ opacity: 0, y: 50 }}
+                initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.5, delay: index < 5 ? index * 0.1 : 0 }}
-                className={`projects-item ${getSpanClass(index)}`}
+                exit={{ opacity: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: index * 0.05 }}
+                className="projects-item-simplified"
               >
                 <div 
                   onClick={() => onProjectSelect && onProjectSelect(project)}
-                  className={`projects-image-container ${getAspectRatioClass(index)}`}
+                  className="projects-image-container-simplified"
                 >
-                  <div className="projects-image-bg" />
                   <motion.img
-                    style={{ scale: project.id === "6" || project.id === "12" ? 1.1 : 1 }}
-                    whileHover={{ scale: project.id === "6" || project.id === "12" ? 1.15 : 1.05 }}
-                    transition={{ duration: 0.6, ease: [0.33, 1, 0.68, 1] }}
                     src={project.image}
                     alt={generateAltText(project)}
                     loading="lazy"
-                    className="projects-image"
+                    className="projects-image-simplified"
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 0.3, ease: "easeOut" }}
                   />
-                  <div className="projects-overlay" />
                   
-                  {/* Overlay Text on Hover */}
-                  <div className="projects-hover-icon">
-                    <div className="projects-icon-bg">
-                      <span className="projects-icon" style={{ fontSize: '14px', fontFamily: 'Space Mono, monospace' }}>↗</span>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="projects-info">
-                  <div className="projects-info-left">
-                    <h3 
-                      onClick={() => onProjectSelect && onProjectSelect(project)}
-                      className="projects-info-title"
-                    >
-                      {project.title}
-                    </h3>
-                    {project.subtitle && (
-                      <p className="projects-info-subtitle">
-                        {project.subtitle}
-                      </p>
-                    )}
-                  </div>
-                  <span className="projects-info-category">
-                    {project.category}
-                  </span>
+                  {/* Project Name on Hover */}
+                  <motion.div 
+                    className="projects-hover-title"
+                    initial={{ opacity: 0 }}
+                    whileHover={{ opacity: 1 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <h3 className="projects-hover-title-text">{project.title}</h3>
+                  </motion.div>
                 </div>
               </motion.div>
             ))}
