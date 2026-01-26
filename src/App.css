@@ -15,6 +15,20 @@
   position: relative;
 }
 
+/* Global: Remove all border-radius from buttons, image containers, and form fields */
+button,
+input,
+textarea,
+select,
+img,
+.image-container,
+[class*="image"],
+[class*="button"],
+[class*="card"],
+[class*="container"] {
+  border-radius: 0px !important;
+}
+
 /* Selection */
 ::selection {
   background: #ffffff;
@@ -477,7 +491,7 @@
   background: #ffffff;
   color: #000000;
   padding: 8px;
-  border-radius: 50%;
+  border-radius: 0px;
 }
 
 .projects-icon {
@@ -804,7 +818,7 @@
   width: 500px;
   height: 500px;
   background: #ffffff;
-  border-radius: 50%;
+  border-radius: 0px;
   opacity: 0.02;
   filter: blur(150px);
   pointer-events: none;
@@ -945,7 +959,7 @@
   width: 48px;
   height: 48px;
   background: #262626;
-  border-radius: 8px;
+  border-radius: 0px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1720,7 +1734,7 @@
   font-size: 14px;
   border: 1px solid #262626;
   padding: 4px 12px;
-  border-radius: 9999px;
+  border-radius: 0px;
   color: #a3a3a3;
 }
 
