@@ -292,8 +292,6 @@ export default function Contact() {
           </div>
         </div>
       </div>
-        </motion.div>
-      </div>
     </footer>
   );
 }
