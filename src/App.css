@@ -456,7 +456,7 @@ img,
 @media (min-width: 768px) {
   .projects-grid-simplified {
     grid-template-columns: repeat(2, 1fr);
-    gap: 48px;
+    gap: 40px;
   }
 }
 
@@ -464,15 +464,27 @@ img,
   display: flex;
   flex-direction: column;
   cursor: pointer;
+  width: 100%;
 }
 
 .projects-image-container-simplified {
   position: relative;
   overflow: hidden;
   width: 100%;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 4 / 5;
   background: #171717;
   border: none;
+}
+
+/* Hero Project - Ocupa 2 columnas cuando hay número impar */
+@media (min-width: 768px) {
+  .projects-item-hero {
+    grid-column: span 2;
+  }
+  
+  .projects-item-hero .projects-image-container-simplified {
+    aspect-ratio: 21 / 9;
+  }
 }
 
 .projects-image-simplified {
@@ -1198,18 +1210,20 @@ img,
 }
 
 .services-cta-title-restructured {
-  font-size: 2.5rem;
+  font-size: 3rem;
   font-family: 'Space Mono', monospace;
-  font-weight: 700;
+  font-weight: 900;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: #ffffff;
   margin: 0 0 16px 0;
+  line-height: 1.1;
 }
 
 @media (min-width: 768px) {
   .services-cta-title-restructured {
-    font-size: 3.5rem;
+    font-size: 4.5rem;
+    font-weight: 900;
   }
 }
 
@@ -1349,6 +1363,7 @@ img,
 .contact-form-field {
   position: relative;
   width: 100%;
+  margin-bottom: 8px;
 }
 
 .contact-input,
@@ -1357,17 +1372,21 @@ img,
   background: transparent;
   border: none;
   border-bottom: 1px solid #404040;
+  border-top: none;
+  border-left: none;
+  border-right: none;
   padding: 16px 0;
   font-size: 16px;
   font-family: 'Space Mono', monospace;
   color: #ffffff;
   outline: none;
-  transition: border-color 0.3s ease;
+  transition: border-color 0.3s ease, border-width 0.3s ease;
 }
 
 .contact-input:focus,
 .contact-textarea:focus {
   border-bottom-color: #ffffff;
+  border-bottom-width: 2px;
 }
 
 .contact-input::placeholder,
@@ -1548,51 +1567,108 @@ img,
   margin: 0;
 }
 
-.contact-footer-bottom {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  font-size: 16px;
-  font-family: 'Space Mono', monospace;
-  color: #525252;
-  text-transform: uppercase;
-}
-
-.contact-copyright {
-  color: #525252;
-}
-
-.contact-footer-social {
-  display: flex;
-  gap: 24px;
-}
-
-.contact-footer-link {
-  color: #525252;
-  text-decoration: none;
-  transition: color 0.3s ease;
+/* Footer Boutique - Redes Sociales y Copyright */
+.contact-footer-boutique {
+  border-top: 1px solid #262626;
+  padding: 64px 16px;
+  background: #000000;
 }
 
 @media (min-width: 768px) {
-  .contact-footer-updated {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-end;
-  }
-  
-  .contact-footer-text {
-    flex: 1;
-    max-width: none;
-  }
-  
-  .contact-footer-bottom {
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 16px;
+  .contact-footer-boutique {
+    padding: 80px 80px;
   }
 }
 
-.contact-footer-link:hover {
+.contact-footer-boutique-container {
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.contact-footer-boutique-content {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .contact-footer-boutique-content {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0;
+  }
+}
+
+.contact-footer-copyright-boutique {
+  font-family: 'Space Mono', monospace;
+  font-size: 16px;
+  color: #525252;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  line-height: 1;
+}
+
+.contact-footer-social-boutique {
+  display: flex;
+  gap: 48px;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .contact-footer-social-boutique {
+    gap: 64px;
+  }
+}
+
+.contact-footer-link-boutique {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #525252;
+  text-decoration: none;
+  font-family: 'Space Mono', monospace;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  position: relative;
+  transition: color 0.3s ease;
+  padding: 8px 0;
+}
+
+.contact-footer-link-text {
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.contact-footer-link-arrow {
+  font-size: 14px;
+  transition: transform 0.3s ease, color 0.3s ease;
+  display: inline-block;
+}
+
+.contact-footer-link-boutique::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: #ffffff;
+  transition: width 0.4s ease;
+}
+
+.contact-footer-link-boutique:hover {
+  color: #ffffff;
+}
+
+.contact-footer-link-boutique:hover::before {
+  width: 100%;
+}
+
+.contact-footer-link-boutique:hover .contact-footer-link-arrow {
+  transform: translate(4px, -4px);
   color: #ffffff;
 }
 .bg-fix canvas, 

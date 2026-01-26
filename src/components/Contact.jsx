@@ -256,32 +256,42 @@ export default function Contact() {
                 Boutique Design & Strategy Hub serving San Diego (California, USA), Tijuana (Baja California, Mexico), and Guadalajara (Jalisco, Mexico).
               </p>
             </div>
-            <div className="contact-footer-bottom">
-              <span className="contact-copyright">
-                © {new Date().getFullYear()} The unAgency
-              </span>
-              <div className="contact-footer-social">
-                <a
-                  href="#"
-                  className="contact-footer-link"
-                  rel="noopener noreferrer"
-                  target="_blank"
-                  aria-label="Síguenos en Instagram"
-                >
-                  Instagram
-                </a>
-                <a
-                  href="https://www.linkedin.com/company/the-unagency-co/"
-                  className="contact-footer-link"
-                  rel="noopener noreferrer"
-                  target="_blank"
-                  aria-label="Conéctate con nosotros en LinkedIn"
-                >
-                  LinkedIn
-                </a>
-              </div>
+          </div>
+        </motion.div>
+      </div>
+      
+      {/* Footer Boutique - Redes Sociales y Copyright */}
+      <div className="contact-footer-boutique">
+        <div className="contact-footer-boutique-container">
+          <div className="contact-footer-boutique-content">
+            <span className="contact-footer-copyright-boutique">
+              © {new Date().getFullYear()} The unAgency
+            </span>
+            <div className="contact-footer-social-boutique">
+              <a
+                href="#"
+                className="contact-footer-link-boutique"
+                rel="noopener noreferrer"
+                target="_blank"
+                aria-label="Síguenos en Instagram"
+              >
+                <span className="contact-footer-link-text">INSTAGRAM</span>
+                <span className="contact-footer-link-arrow">↗</span>
+              </a>
+              <a
+                href="https://www.linkedin.com/company/the-unagency-co/"
+                className="contact-footer-link-boutique"
+                rel="noopener noreferrer"
+                target="_blank"
+                aria-label="Conéctate con nosotros en LinkedIn"
+              >
+                <span className="contact-footer-link-text">LINKEDIN</span>
+                <span className="contact-footer-link-arrow">↗</span>
+              </a>
             </div>
           </div>
+        </div>
+      </div>
         </motion.div>
       </div>
     </footer>

@@ -287,6 +287,10 @@ export default function Projects({ onProjectSelect }) {
   // Filtrar proyectos ocultos
   const visibleProjectsList = projects.filter(project => !project.hidden);
   const visibleProjects = showAll ? visibleProjectsList : visibleProjectsList.slice(0, 5);
+  
+  // Determinar si hay número impar de proyectos para crear "Hero Project"
+  const isOddCount = visibleProjects.length % 2 !== 0;
+  const lastIndex = visibleProjects.length - 1;
 
   return (
     <section id="projects" className="projects-section-updated">
@@ -306,42 +310,47 @@ export default function Projects({ onProjectSelect }) {
           className="projects-grid-simplified"
         >
           <AnimatePresence>
-            {visibleProjects.map((project, index) => (
-              <motion.div
-                layout
-                key={project.id}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.05 }}
-                className="projects-item-simplified"
-              >
-                <div 
-                  onClick={() => onProjectSelect && onProjectSelect(project)}
-                  className="projects-image-container-simplified"
+            {visibleProjects.map((project, index) => {
+              // Si hay número impar, el último proyecto ocupa 2 columnas (Hero Project)
+              const isHeroProject = isOddCount && index === lastIndex;
+              
+              return (
+                <motion.div
+                  layout
+                  key={project.id}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: index * 0.05 }}
+                  className={`projects-item-simplified ${isHeroProject ? 'projects-item-hero' : ''}`}
                 >
-                  <motion.img
-                    src={project.image}
-                    alt={generateAltText(project)}
-                    loading="lazy"
-                    className="projects-image-simplified"
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ duration: 0.3, ease: "easeOut" }}
-                  />
-                  
-                  {/* Project Name on Hover */}
-                  <motion.div 
-                    className="projects-hover-title"
-                    initial={{ opacity: 0 }}
-                    whileHover={{ opacity: 1 }}
-                    transition={{ duration: 0.2 }}
+                  <div 
+                    onClick={() => onProjectSelect && onProjectSelect(project)}
+                    className="projects-image-container-simplified"
                   >
-                    <h3 className="projects-hover-title-text">{project.title}</h3>
-                  </motion.div>
-                </div>
-              </motion.div>
-            ))}
+                    <motion.img
+                      src={project.image}
+                      alt={generateAltText(project)}
+                      loading="lazy"
+                      className="projects-image-simplified"
+                      whileHover={{ scale: 1.05 }}
+                      transition={{ duration: 0.3, ease: "easeOut" }}
+                    />
+                    
+                    {/* Project Name on Hover */}
+                    <motion.div 
+                      className="projects-hover-title"
+                      initial={{ opacity: 0 }}
+                      whileHover={{ opacity: 1 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <h3 className="projects-hover-title-text">{project.title}</h3>
+                    </motion.div>
+                  </div>
+                </motion.div>
+              );
+            })}
           </AnimatePresence>
         </motion.div>
         
