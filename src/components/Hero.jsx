@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
-import { ArrowDown } from 'lucide-react';
 
 const logoImg = "/assets/logo-unagency.png";
 
@@ -84,8 +83,9 @@ export default function Hero() {
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+          style={{ fontSize: '16px', color: '#525252', fontFamily: 'Space Mono, monospace' }}
         >
-          <ArrowDown size={20} />
+          ↓
         </motion.div>
       </motion.div>
 

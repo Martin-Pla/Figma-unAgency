@@ -1,11 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Sparkles, Palette, Zap, Target } from 'lucide-react';
 
 const services = [
   {
     number: '01',
-    icon: Sparkles,
     title: "Brand Architecture",
     subtitle: "Cult brands, not corporate identities",
     description: "We architect brand ecosystems that command attention. No logos. No fluff. Just systems that build unshakeable loyalty.",
@@ -19,7 +17,6 @@ const services = [
   },
   {
     number: '02',
-    icon: Palette,
     title: "Product Design",
     subtitle: "Products that define categories",
     description: "From concept to shelf. We engineer experiences that capture attention and drive sales. Beautiful? Yes. Functional? Always.",
@@ -33,7 +30,6 @@ const services = [
   },
   {
     number: '03',
-    icon: Zap,
     title: "Innovation Strategy",
     subtitle: "Ideas become market-dominating products",
     description: "We bridge vision and reality. Our framework transforms bold ideas into tangible products that capture market value.",
@@ -47,7 +43,6 @@ const services = [
   },
   {
     number: '04',
-    icon: Target,
     title: "Brand Positioning",
     subtitle: "Own your category before competitors do",
     description: "In a world of noise, positioning is everything. We craft strategies that cut through clutter and establish your brand as the definitive choice.",
@@ -82,7 +77,6 @@ export default function Services() {
         {/* Services Grid */}
         <div className="services-grid-restructured">
           {services.map((service, index) => {
-            const IconComponent = service.icon;
             return (
               <motion.div
                 key={index}
@@ -92,13 +86,10 @@ export default function Services() {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 className="services-card-restructured"
               >
-                {/* Number + Icon Header */}
+                {/* Number Header */}
                 <div className="services-card-header-restructured">
                   <div className="services-number-icon-group">
                     <span className="services-number-restructured">{service.number}</span>
-                    <div className="services-icon-wrapper-restructured">
-                      <IconComponent className="services-icon-restructured" size={24} />
-                    </div>
                   </div>
                 </div>
                 
@@ -117,7 +108,14 @@ export default function Services() {
                     // Parse bold text (wrapped in **)
                     const parts = item.split(/(\*\*.*?\*\*)/g);
                     return (
-                      <li key={itemIndex} className="services-deliverable-item-restructured">
+                      <motion.li 
+                        key={itemIndex} 
+                        className="services-deliverable-item-restructured"
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: 0.2 + (itemIndex * 0.1) }}
+                      >
                         <span className="services-deliverable-check">✓</span>
                         <span className="services-deliverable-text">
                           {parts.map((part, partIndex) => {
@@ -128,15 +126,21 @@ export default function Services() {
                             return <span key={partIndex}>{part}</span>;
                           })}
                         </span>
-                      </li>
+                      </motion.li>
                     );
                   })}
                 </ul>
                 
                 {/* Industries - Minimal Footer */}
-                <div className="services-industries-restructured">
+                <motion.div 
+                  className="services-industries-restructured"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.4 }}
+                >
                   <span className="services-industries-text">{service.industries}</span>
-                </div>
+                </motion.div>
               </motion.div>
             );
           })}
@@ -163,7 +167,7 @@ export default function Services() {
                 whileTap={{ scale: 0.95 }}
               >
                 Start a Project
-                <ArrowRight size={20} />
+                <span style={{ fontSize: '16px', marginLeft: '8px' }}>→</span>
               </motion.a>
               <motion.a
                 href="#projects"

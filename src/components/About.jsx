@@ -42,33 +42,59 @@ export default function About() {
                 We are the <span className="about-manifesto-italic">glitch</span> in the agency model. A collective of rogue creatives obsessed with the absolute.
               </h3>
               
-              <div className="about-text-grid">
-                <p className="about-text">
+              <motion.div 
+                className="about-text-grid"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+              >
+                <motion.p 
+                  className="about-text"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.3 }}
+                >
                   Traditional agencies sell time and bloated processes. We sell impact. We have surgically removed the account managers, the endless meetings, and the layers of middle-management that dilute vision.
-                </p>
-                <p className="about-text">
+                </motion.p>
+                <motion.p 
+                  className="about-text"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.4 }}
+                >
                   What remains is pure potency. Direct access to elite talent. Radical transparency. Relentless execution. We don't just build digital products; we engineer market dominance.
-                </p>
-              </div>
+                </motion.p>
+              </motion.div>
 
-              <div className="about-services">
-                <div className="about-service-item">
-                  <span className="about-service-number">01</span>
-                  <span className="about-service-label">Visceral Strategy</span>
-                </div>
-                <div className="about-service-item">
-                  <span className="about-service-number">02</span>
-                  <span className="about-service-label">Radical Design</span>
-                </div>
-                <div className="about-service-item">
-                  <span className="about-service-number">03</span>
-                  <span className="about-service-label">Kinetic Dev</span>
-                </div>
-                <div className="about-service-item">
-                  <span className="about-service-number">04</span>
-                  <span className="about-service-label">Total Impact</span>
-                </div>
-              </div>
+              <motion.div 
+                className="about-services"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+              >
+                {[
+                  { number: "01", label: "Visceral Strategy" },
+                  { number: "02", label: "Radical Design" },
+                  { number: "03", label: "Kinetic Dev" },
+                  { number: "04", label: "Total Impact" }
+                ].map((item, index) => (
+                  <motion.div
+                    key={item.number}
+                    className="about-service-item"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.5 + (index * 0.1) }}
+                  >
+                    <span className="about-service-number">{item.number}</span>
+                    <span className="about-service-label">{item.label}</span>
+                  </motion.div>
+                ))}
+              </motion.div>
             </motion.div>
           </div>
         </div>

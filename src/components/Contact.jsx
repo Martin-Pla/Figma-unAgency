@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
 
 const locations = [
   { city: "San Diego", country: "USA", time: "PST" },
@@ -132,7 +131,13 @@ export default function Contact() {
     >
       <div className="contact-container-updated">
         {/* Contact Form */}
-        <div className="contact-form-section">
+        <motion.div 
+          className="contact-form-section"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.1 }}
+        >
           <h2 className="contact-title-updated">
             LET'S TALK
           </h2>
@@ -200,13 +205,19 @@ export default function Contact() {
               disabled={isSubmitting}
             >
               {isSubmitting ? 'Sending...' : 'Send Inquiry'}
-              <ArrowRight className="contact-submit-icon" />
+              <span className="contact-submit-icon" style={{ fontSize: '16px', marginLeft: '8px' }}>→</span>
             </button>
           </form>
-        </div>
+        </motion.div>
 
         {/* Locations & Info */}
-        <div className="contact-info-section">
+        <motion.div 
+          className="contact-info-section"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+        >
           <div className="contact-info-content">
             <div className="contact-locations-section">
               <h3 className="contact-locations-title">
@@ -271,7 +282,7 @@ export default function Contact() {
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </footer>
   );

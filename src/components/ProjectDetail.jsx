@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowLeft } from 'lucide-react';
 import SEO from './SEO';
 
 const ProjectHeader = ({ project }) => (
@@ -403,7 +402,7 @@ export default function ProjectDetail({ project, onBack }) {
         onClick={onBack}
         className="project-detail-back-button"
       >
-        <ArrowLeft className="project-detail-back-icon" />
+        <span className="project-detail-back-icon" style={{ fontSize: '14px', fontFamily: 'Space Mono, monospace', marginRight: '8px' }}>←</span>
         Back
       </button>
 

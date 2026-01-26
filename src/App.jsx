@@ -10,6 +10,8 @@ import Contact from './components/Contact';
 import ProjectDetail from './components/ProjectDetail';
 import SchemaMarkup from './components/SchemaMarkup';
 import SEO from './components/SEO';
+import SectionWrapper from './components/SectionWrapper';
+import CustomCursor from './components/CustomCursor';
 
 const logoImg = "/assets/logo-unagency.png";
 function App() {
@@ -33,6 +35,7 @@ function App() {
     <div className="app-container-new">
       <SEO />
       <SchemaMarkup />
+      <CustomCursor />
       <div className="bg-fix">
         <FluidBackground />
       </div>
@@ -147,10 +150,18 @@ function App() {
             
             <main className="main-content">
               <Hero />
-              <Projects onProjectSelect={setSelectedProject} />
-              <About />
-              <Services />
-              <Contact />
+              <SectionWrapper delay={0.2}>
+                <Projects onProjectSelect={setSelectedProject} />
+              </SectionWrapper>
+              <SectionWrapper delay={0.3}>
+                <About />
+              </SectionWrapper>
+              <SectionWrapper delay={0.4}>
+                <Services />
+              </SectionWrapper>
+              <SectionWrapper delay={0.5}>
+                <Contact />
+              </SectionWrapper>
             </main>
           </motion.div>
         )}

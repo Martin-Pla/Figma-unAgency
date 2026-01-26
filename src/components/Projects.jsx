@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowUpRight } from 'lucide-react';
 
 // Projects data from Figma Make
 const projects = [
@@ -304,9 +303,15 @@ export default function Projects({ onProjectSelect }) {
   return (
     <section id="projects" className="projects-section-updated">
       <div className="projects-container">
-        <div className="projects-header-updated">
+        <motion.div 
+          className="projects-header-updated"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+        >
           <h2 className="projects-title-updated">PROJECTS</h2>
-        </div>
+        </motion.div>
 
         <motion.div 
           layout
@@ -343,7 +348,7 @@ export default function Projects({ onProjectSelect }) {
                   {/* Overlay Text on Hover */}
                   <div className="projects-hover-icon">
                     <div className="projects-icon-bg">
-                      <ArrowUpRight className="projects-icon" />
+                      <span className="projects-icon" style={{ fontSize: '14px', fontFamily: 'Space Mono, monospace' }}>↗</span>
                     </div>
                   </div>
                 </div>
@@ -372,14 +377,20 @@ export default function Projects({ onProjectSelect }) {
         </motion.div>
         
         {visibleProjectsList.length > 5 && (
-          <div className="projects-button-container">
+          <motion.div 
+            className="projects-button-container"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+          >
             <button 
               onClick={() => setShowAll(!showAll)}
               className="projects-view-all-button"
             >
               {showAll ? "Show Less" : "View All Projects"}
             </button>
-          </div>
+          </motion.div>
         )}
       </div>
     </section>
