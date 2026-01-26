@@ -73,9 +73,9 @@ img,
 }
 
 .nav-logo-img {
-  height: 35px;
+  height: 45px;
   width: auto;
-  max-width: 86px;
+  max-width: 111px;
   object-fit: contain;
   image-rendering: -webkit-optimize-contrast;
   image-rendering: crisp-edges;
@@ -230,7 +230,7 @@ img,
 
 .hero-logo-image {
   width: 80vw;
-  max-width: 422px;
+  max-width: 295px;
   object-fit: contain;
   user-select: none;
   filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.5));
