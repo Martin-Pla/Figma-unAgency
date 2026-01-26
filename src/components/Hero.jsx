@@ -7,19 +7,13 @@ export default function Hero() {
   return (
     <section 
       className="hero-section-new"
-      style={{ position: 'relative', overflow: 'hidden', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+      style={{ position: 'relative', overflow: 'hidden', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#000000' }}
     >
-      {/* Background Typography */}
-      <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', zIndex: 0, pointerEvents: 'none', width: '100%', textAlign: 'center' }}>
-         <motion.h1 
-           initial={{ opacity: 0 }}
-           animate={{ opacity: 0.03 }}
-           transition={{ duration: 2, delay: 0.5 }}
-           className="hero-background-text"
-           style={{ margin: 0, fontSize: '20vw', whiteSpace: 'nowrap' }}
-         >
-           The unAgency | Product Design & Brand Architecture
-         </motion.h1>
+      {/* Kinetic Depth Background - Ambient Blobs */}
+      <div className="hero-background-ambient">
+        <div className="blob-1"></div>
+        <div className="blob-2"></div>
+        <div className="blob-3"></div>
       </div>
 
       {/* Contenido Principal */}
@@ -80,9 +74,6 @@ export default function Hero() {
         </motion.div>
       </motion.div>
 
-      {/* Decoraciones de fondo */}
-      <div className="hero-gradient-spot" />
-      <div className="hero-noise-overlay" />
     </section>
   );
 }
