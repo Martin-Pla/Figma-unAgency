@@ -1,89 +1,86 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Sparkles, Palette, Zap, Target, TrendingUp, Users, Layers } from 'lucide-react';
+import { ArrowRight, Sparkles, Palette, Zap, Target } from 'lucide-react';
 
 const services = [
   {
+    number: '01',
     icon: Sparkles,
-    title: "Brand Architecture & Design",
-    subtitle: "Transform Your Identity Into a Cult Brand",
-    description: "We don't just design logos—we architect brand ecosystems that command attention and build unshakeable loyalty. Our boutique approach transforms corporate identities into cultural movements, creating emotional connections that turn customers into advocates.",
-    benefits: [
-      "Build a brand that stands out in crowded markets",
-      "Create visual systems that scale across all touchpoints",
-      "Develop brand stories that resonate deeply with your audience",
-      "Establish market leadership through distinctive identity"
+    title: "Brand Architecture",
+    subtitle: "Cult brands, not corporate identities",
+    description: "We architect brand ecosystems that command attention. No logos. No fluff. Just systems that build unshakeable loyalty.",
+    deliverables: [
+      "Build brands that stand out in crowded markets",
+      "Visual systems that scale across all touchpoints",
+      "Brand stories that turn customers into advocates",
+      "Establish **market leadership** through distinctive identity"
     ],
-    industries: "Spirits, Wine, Luxury Goods, Hospitality",
-    color: "#ffffff"
+    industries: "Spirits, Wine, Luxury, Hospitality"
   },
   {
+    number: '02',
     icon: Palette,
-    title: "Product Design & Packaging",
-    subtitle: "Design Products That Define Categories",
-    description: "From concept to shelf, we engineer product experiences that capture attention and drive sales. Our strategic design approach combines market intelligence with creative innovation, delivering packaging and product designs that don't just look beautiful—they perform.",
-    benefits: [
-      "Launch products that create new market categories",
-      "Design packaging that commands premium pricing",
-      "Develop product lines that tell cohesive brand stories",
-      "Optimize for both aesthetics and functional excellence"
+    title: "Product Design",
+    subtitle: "Products that define categories",
+    description: "From concept to shelf. We engineer experiences that capture attention and drive sales. Beautiful? Yes. Functional? Always.",
+    deliverables: [
+      "Launch products that create **new market categories**",
+      "Packaging that commands **premium pricing**",
+      "Product lines that tell cohesive brand stories",
+      "Aesthetics and function in perfect balance"
     ],
-    industries: "Spirits, Wine, Beverages, Consumer Goods",
-    color: "#ffffff"
+    industries: "Spirits, Wine, Beverages, Consumer Goods"
   },
   {
+    number: '03',
     icon: Zap,
-    title: "Innovation Strategy & NPD",
-    subtitle: "Turn Ideas Into Market-Dominating Products",
-    description: "We bridge the gap between vision and reality. Our innovation framework transforms bold ideas into tangible products that capture market value. We don't just design—we engineer competitive advantages through strategic product development.",
-    benefits: [
-      "Identify and capitalize on untapped market opportunities",
-      "Develop products that solve real consumer problems",
-      "Create innovation pipelines that drive sustained growth",
-      "Build product portfolios that maximize market share"
+    title: "Innovation Strategy",
+    subtitle: "Ideas become market-dominating products",
+    description: "We bridge vision and reality. Our framework transforms bold ideas into tangible products that capture market value.",
+    deliverables: [
+      "Identify and capitalize on untapped opportunities",
+      "Products that solve real consumer problems",
+      "Innovation pipelines that drive **sustained growth**",
+      "Product portfolios that maximize **market share**"
     ],
-    industries: "FMCG, Spirits, Technology, Retail",
-    color: "#ffffff"
+    industries: "FMCG, Spirits, Technology, Retail"
   },
   {
+    number: '04',
     icon: Target,
-    title: "Strategic Brand Positioning",
-    subtitle: "Own Your Category Before Your Competitors Do",
-    description: "In a world of noise, positioning is everything. We craft brand strategies that cut through the clutter and establish your brand as the definitive choice in your category. Our data-driven approach ensures every decision is backed by market intelligence.",
-    benefits: [
-      "Establish clear market differentiation",
-      "Command premium pricing through strategic positioning",
-      "Build brand equity that compounds over time",
-      "Create messaging that converts prospects into customers"
+    title: "Brand Positioning",
+    subtitle: "Own your category before competitors do",
+    description: "In a world of noise, positioning is everything. We craft strategies that cut through clutter and establish your brand as the definitive choice.",
+    deliverables: [
+      "Clear **market differentiation**",
+      "**Premium pricing** through strategic positioning",
+      "Brand equity that compounds over time",
+      "Messaging that converts prospects into customers"
     ],
-    industries: "All Industries, B2B, B2C, Luxury",
-    color: "#ffffff"
+    industries: "All Industries, B2B, B2C, Luxury"
   }
 ];
 
 export default function Services() {
-  const [hoveredIndex, setHoveredIndex] = useState(null);
-
   return (
-    <section id="services" className="services-section-new">
-      <div className="services-container-new">
+    <section id="services" className="services-section-restructured">
+      <div className="services-container-restructured">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="services-header-new"
+          className="services-header-restructured"
         >
-          <h2 className="services-title-new">What We Do</h2>
-          <p className="services-subtitle-new">
-            We transform brands into market leaders. Every project is engineered to deliver measurable impact, 
-            from category-defining product launches to brand transformations that reshape industries.
+          <h2 className="services-title-restructured">What We Do</h2>
+          <p className="services-subtitle-restructured">
+            We transform brands into market leaders. Every project delivers measurable impact.
           </p>
         </motion.div>
 
         {/* Services Grid */}
-        <div className="services-grid-new">
+        <div className="services-grid-restructured">
           {services.map((service, index) => {
             const IconComponent = service.icon;
             return (
@@ -93,35 +90,51 @@ export default function Services() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="services-card-new"
-                onMouseEnter={() => setHoveredIndex(index)}
-                onMouseLeave={() => setHoveredIndex(null)}
+                className="services-card-restructured"
               >
-                <div className="services-card-header">
-                  <div className="services-icon-wrapper">
-                    <IconComponent className="services-icon" size={32} />
+                {/* Number + Icon Header */}
+                <div className="services-card-header-restructured">
+                  <div className="services-number-icon-group">
+                    <span className="services-number-restructured">{service.number}</span>
+                    <div className="services-icon-wrapper-restructured">
+                      <IconComponent className="services-icon-restructured" size={24} />
+                    </div>
                   </div>
-                  <div className="services-card-number">0{index + 1}</div>
                 </div>
                 
-                <h3 className="services-card-title">{service.title}</h3>
-                <p className="services-card-subtitle">{service.subtitle}</p>
-                <p className="services-card-description">{service.description}</p>
+                {/* Title - Short & Aggressive */}
+                <h3 className="services-card-title-restructured">{service.title}</h3>
                 
-                <div className="services-benefits">
-                  <h4 className="services-benefits-title">You'll Get:</h4>
-                  <ul className="services-benefits-list">
-                    {service.benefits.map((benefit, benefitIndex) => (
-                      <li key={benefitIndex} className="services-benefit-item">
-                        <span className="services-benefit-check">✓</span>
-                        {benefit}
+                {/* Subtitle - One Line */}
+                <p className="services-card-subtitle-restructured">{service.subtitle}</p>
+                
+                {/* Description - Max 2-3 Lines */}
+                <p className="services-card-description-restructured">{service.description}</p>
+                
+                {/* Deliverables - Bullet Points with Strategic Bolds */}
+                <ul className="services-deliverables-restructured">
+                  {service.deliverables.map((item, itemIndex) => {
+                    // Parse bold text (wrapped in **)
+                    const parts = item.split(/(\*\*.*?\*\*)/g);
+                    return (
+                      <li key={itemIndex} className="services-deliverable-item-restructured">
+                        <span className="services-deliverable-check">✓</span>
+                        <span className="services-deliverable-text">
+                          {parts.map((part, partIndex) => {
+                            if (part.startsWith('**') && part.endsWith('**')) {
+                              const boldText = part.slice(2, -2);
+                              return <strong key={partIndex} className="services-deliverable-bold">{boldText}</strong>;
+                            }
+                            return <span key={partIndex}>{part}</span>;
+                          })}
+                        </span>
                       </li>
-                    ))}
-                  </ul>
-                </div>
+                    );
+                  })}
+                </ul>
                 
-                <div className="services-industries">
-                  <span className="services-industries-label">Industries:</span>
+                {/* Industries - Minimal Footer */}
+                <div className="services-industries-restructured">
                   <span className="services-industries-text">{service.industries}</span>
                 </div>
               </motion.div>
@@ -135,18 +148,17 @@ export default function Services() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="services-cta-new"
+          className="services-cta-restructured"
         >
-          <div className="services-cta-content">
-            <h3 className="services-cta-title">Ready to Transform Your Brand?</h3>
-            <p className="services-cta-description">
-              Let's discuss how we can help you dominate your category. 
-              Every great brand starts with a conversation.
+          <div className="services-cta-content-restructured">
+            <h3 className="services-cta-title-restructured">Ready to Transform Your Brand?</h3>
+            <p className="services-cta-description-restructured">
+              Let's discuss how we can help you dominate your category.
             </p>
-            <div className="services-cta-buttons">
+            <div className="services-cta-buttons-restructured">
               <motion.a
                 href="#contact"
-                className="services-cta-primary"
+                className="services-cta-primary-restructured"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -155,7 +167,7 @@ export default function Services() {
               </motion.a>
               <motion.a
                 href="#projects"
-                className="services-cta-secondary"
+                className="services-cta-secondary-restructured"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
