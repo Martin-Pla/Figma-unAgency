@@ -17,6 +17,7 @@ function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState(null);
   const [hasScrolled, setHasScrolled] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
@@ -24,9 +25,17 @@ function App() {
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
       setHasScrolled(scrollPosition > 100);
+      
+      // Calcular progreso del scroll
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+      const scrollableHeight = documentHeight - windowHeight;
+      const progress = scrollableHeight > 0 ? (scrollPosition / scrollableHeight) * 100 : 0;
+      setScrollProgress(Math.min(progress, 100));
     };
 
     window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Llamar una vez para inicializar
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -34,6 +43,13 @@ function App() {
     <div className="app-container-new">
       <SEO />
       <SchemaMarkup />
+      
+      {/* Barra de Progreso de Scroll */}
+      <div 
+        className="scroll-progress-bar"
+        style={{ width: `${scrollProgress}%` }}
+      />
+      
       <div className="bg-fix">
         <FluidBackground />
       </div>

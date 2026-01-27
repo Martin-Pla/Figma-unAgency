@@ -6,6 +6,19 @@ const logoImg = "/assets/The-unAgency-w.svg";
 export default function Hero() {
   return (
     <section className="hero-container">
+      {/* Mesh Gradient Container */}
+      <div className="mesh-gradient-container">
+        <div className="mesh-gradient-overlay"></div>
+      </div>
+      
+      {/* Línea Vertical Técnica */}
+      <div className="hero-vertical-line"></div>
+      
+      {/* Coordenadas en esquina inferior derecha */}
+      <div className="hero-coordinates">
+        REF. 2026_UNAGENCY // 32.51 N 117.03 W
+      </div>
+      
       {/* Contenido Principal */}
       <div className="hero-content">
         <motion.div
@@ -47,29 +60,22 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      {/* Scroll Indicator - Estilo Lightweight */}
-      <div className="hero-scroll-indicator-wrapper">
-        <div className="hero-scroll-line">
-          <motion.div
-            className="hero-scroll-progress"
-            initial={{ scaleY: 0 }}
-            animate={{ scaleY: 1 }}
-            transition={{ duration: 1.5, delay: 2, ease: "easeOut" }}
-          />
-        </div>
+      {/* Indicador de Scroll */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 2, duration: 1.5 }}
+        style={{ position: 'absolute', bottom: '40px', left: '50%', transform: 'translateX(-50%)', textAlign: 'center', zIndex: 10 }}
+      >
+        <span className="hero-scroll-text" style={{ display: 'block', fontSize: '12px', letterSpacing: '2px', marginBottom: '10px' }}>SCROLL</span>
         <motion.div
-          className="hero-scroll-dot"
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ 
-            opacity: 1, 
-            y: [0, 8, 0]
-          }}
-          transition={{ 
-            opacity: { duration: 1, delay: 2 },
-            y: { duration: 2, repeat: Infinity, ease: "easeInOut" }
-          }}
-        />
-      </div>
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+          style={{ fontSize: '16px', color: '#525252', fontFamily: 'Space Mono, monospace' }}
+        >
+          ↓
+        </motion.div>
+      </motion.div>
 
     </section>
   );
