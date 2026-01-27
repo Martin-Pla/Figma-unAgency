@@ -47,22 +47,29 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      {/* Indicador de Scroll */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 2, duration: 1.5 }}
-        style={{ position: 'absolute', bottom: '40px', left: '50%', transform: 'translateX(-50%)', textAlign: 'center', zIndex: 10 }}
-      >
-        <span className="hero-scroll-text" style={{ display: 'block', fontSize: '12px', letterSpacing: '2px', marginBottom: '10px' }}>SCROLL</span>
+      {/* Scroll Indicator - Estilo Lightweight */}
+      <div className="hero-scroll-indicator-wrapper">
+        <div className="hero-scroll-line">
+          <motion.div
+            className="hero-scroll-progress"
+            initial={{ scaleY: 0 }}
+            animate={{ scaleY: 1 }}
+            transition={{ duration: 1.5, delay: 2, ease: "easeOut" }}
+          />
+        </div>
         <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-          style={{ fontSize: '16px', color: '#525252', fontFamily: 'Space Mono, monospace' }}
-        >
-          ↓
-        </motion.div>
-      </motion.div>
+          className="hero-scroll-dot"
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ 
+            opacity: 1, 
+            y: [0, 8, 0]
+          }}
+          transition={{ 
+            opacity: { duration: 1, delay: 2 },
+            y: { duration: 2, repeat: Infinity, ease: "easeInOut" }
+          }}
+        />
+      </div>
 
     </section>
   );
