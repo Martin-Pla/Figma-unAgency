@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import emailjs from '@emailjs/browser';
 
 const locations = [
   { city: "San Diego", country: "USA", time: "PST" },
@@ -64,8 +65,19 @@ export default function Contact() {
   });
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null); // 'success' o 'error'
 
-  const handleSubmit = (e) => {
+  // Inicializar EmailJS cuando el componente se monte
+  useEffect(() => {
+    // Configuración de EmailJS - Reemplaza estos valores con tus credenciales reales
+    // Puedes obtenerlas creando una cuenta gratuita en https://www.emailjs.com/
+    const publicKey = process.env.REACT_APP_EMAILJS_PUBLIC_KEY || 'YOUR_PUBLIC_KEY';
+    if (publicKey && publicKey !== 'YOUR_PUBLIC_KEY') {
+      emailjs.init(publicKey);
+    }
+  }, []);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
     // Validar todos los campos
@@ -87,6 +99,7 @@ export default function Contact() {
     
     setIsSubmitting(true);
     setErrors({});
+    setSubmitStatus(null);
     
     // Sanitizar todos los valores antes de enviar
     // Para el mensaje, preservar espacios múltiples y saltos de línea
@@ -106,13 +119,76 @@ export default function Contact() {
       message: sanitizeMessage(formData.message)
     };
     
-    const subject = `New Inquiry from ${sanitizedData.name}`;
-    const body = `Name: ${sanitizedData.name}%0D%0AEmail: ${sanitizedData.email}%0D%0AMessage: ${sanitizedData.message}`;
+    // Configuración de EmailJS
+    const serviceId = process.env.REACT_APP_EMAILJS_SERVICE_ID || 'YOUR_SERVICE_ID';
+    const templateId = process.env.REACT_APP_EMAILJS_TEMPLATE_ID || 'YOUR_TEMPLATE_ID';
+    const publicKey = process.env.REACT_APP_EMAILJS_PUBLIC_KEY || 'YOUR_PUBLIC_KEY';
     
-    // Usar encodeURIComponent para mayor seguridad
-    window.location.href = `mailto:ad.theunagency@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body.replace(/%0D%0A/g, '\n'))}`;
-    
-    setIsSubmitting(false);
+    // Si EmailJS no está configurado, usar FormSubmit como fallback
+    if (serviceId === 'YOUR_SERVICE_ID' || templateId === 'YOUR_TEMPLATE_ID' || publicKey === 'YOUR_PUBLIC_KEY') {
+      // Usar FormSubmit (servicio gratuito que no requiere configuración)
+      const formDataToSend = new FormData();
+      formDataToSend.append('name', sanitizedData.name);
+      formDataToSend.append('email', sanitizedData.email);
+      formDataToSend.append('message', sanitizedData.message);
+      formDataToSend.append('subject', `New Inquiry from ${sanitizedData.name}`);
+      formDataToSend.append('_to', 'ad.theunagency@gmail.com');
+      formDataToSend.append('_captcha', 'false');
+      formDataToSend.append('_template', 'box');
+      
+      try {
+        const response = await fetch('https://formsubmit.co/ajax/ad.theunagency@gmail.com', {
+          method: 'POST',
+          body: formDataToSend,
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+        
+        const result = await response.json();
+        
+        if (response.ok && result.success) {
+          setSubmitStatus('success');
+          setIsSubmitting(false);
+          setFormData({ name: "", email: "", message: "" });
+          setTimeout(() => setSubmitStatus(null), 5000);
+        } else {
+          throw new Error(result.message || 'Error al enviar el formulario');
+        }
+      } catch (error) {
+        console.error('Error al enviar el correo:', error);
+        setSubmitStatus('error');
+        setIsSubmitting(false);
+        setErrors({ 
+          submit: 'Hubo un error al enviar el mensaje. Por favor, intenta nuevamente.' 
+        });
+      }
+    } else {
+      // Usar EmailJS si está configurado
+      try {
+        const templateParams = {
+          to_email: 'ad.theunagency@gmail.com',
+          from_name: sanitizedData.name,
+          from_email: sanitizedData.email,
+          message: sanitizedData.message,
+          subject: `New Inquiry from ${sanitizedData.name}`
+        };
+        
+        await emailjs.send(serviceId, templateId, templateParams);
+        
+        setSubmitStatus('success');
+        setIsSubmitting(false);
+        setFormData({ name: "", email: "", message: "" });
+        setTimeout(() => setSubmitStatus(null), 5000);
+      } catch (error) {
+        console.error('Error al enviar el correo:', error);
+        setSubmitStatus('error');
+        setIsSubmitting(false);
+        setErrors({ 
+          submit: 'Hubo un error al enviar el mensaje. Por favor, intenta nuevamente.' 
+        });
+      }
+    }
   };
 
   const handleChange = (e) => {
@@ -226,6 +302,28 @@ export default function Contact() {
               {isSubmitting ? 'Sending...' : 'Send Inquiry'}
               <span className="contact-submit-icon" style={{ fontSize: '16px', marginLeft: '8px' }}>→</span>
             </button>
+            
+            {submitStatus === 'success' && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="contact-success-message"
+                role="alert"
+              >
+                ¡Mensaje enviado exitosamente! Te contactaremos pronto.
+              </motion.div>
+            )}
+            
+            {submitStatus === 'error' && errors.submit && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="contact-error-message"
+                role="alert"
+              >
+                {errors.submit}
+              </motion.div>
+            )}
           </form>
         </motion.div>
 
