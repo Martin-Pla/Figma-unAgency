@@ -89,10 +89,21 @@ export default function Contact() {
     setErrors({});
     
     // Sanitizar todos los valores antes de enviar
+    // Para el mensaje, preservar espacios múltiples y saltos de línea
+    const sanitizeMessage = (input) => {
+      if (typeof input !== 'string') return '';
+      return input
+        .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
+        .replace(/<[^>]*>/g, '')
+        .replace(/javascript:/gi, '')
+        .replace(/on\w+\s*=/gi, '')
+        .trim(); // Solo trim al inicio y final, preserva espacios internos
+    };
+    
     const sanitizedData = {
       name: sanitizeInput(formData.name),
       email: sanitizeInput(formData.email),
-      message: sanitizeInput(formData.message)
+      message: sanitizeMessage(formData.message)
     };
     
     const subject = `New Inquiry from ${sanitizedData.name}`;
@@ -107,13 +118,21 @@ export default function Contact() {
   const handleChange = (e) => {
     const { name, value } = e.target;
     
-    // Sanitizar en tiempo real
-    const sanitized = sanitizeInput(value);
-    
-    setFormData({
-      ...formData,
-      [name]: sanitized
-    });
+    // Para el campo de mensaje, permitir espacios y no sanitizar en tiempo real
+    // Solo sanitizar al enviar para mantener la experiencia de escritura fluida
+    if (name === 'message') {
+      setFormData({
+        ...formData,
+        [name]: value
+      });
+    } else {
+      // Sanitizar en tiempo real para otros campos
+      const sanitized = sanitizeInput(value);
+      setFormData({
+        ...formData,
+        [name]: sanitized
+      });
+    }
     
     // Limpiar error del campo cuando el usuario empiece a escribir
     if (errors[name]) {
@@ -265,11 +284,11 @@ export default function Contact() {
         <div className="contact-footer-boutique-container">
           <div className="contact-footer-boutique-content">
             <span className="contact-footer-copyright-boutique">
-              © {new Date().getFullYear()} The unAgency
+              Copyright © {new Date().getFullYear()} The unAgency
             </span>
             <div className="contact-footer-social-boutique">
               <a
-                href="#"
+                href="https://www.instagram.com/theunagencyco/"
                 className="contact-footer-link-boutique"
                 rel="noopener noreferrer"
                 target="_blank"

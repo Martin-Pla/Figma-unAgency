@@ -78,7 +78,7 @@ const SchemaMarkup = () => {
         "addressCountry": "US"
       },
       "sameAs": [
-        "https://www.instagram.com/theunagency",
+        "https://www.instagram.com/theunagencyco/",
         "https://www.linkedin.com/company/the-unagency-co/"
       ]
     };
