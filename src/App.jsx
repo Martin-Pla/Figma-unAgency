@@ -4,7 +4,7 @@ import './App.css';
 import FluidBackground from './components/FluidBackground';
 import Preloader from './components/Preloader';
 import Hero from './components/Hero';
-import Projects from './components/Projects';
+import Projects, { projects, generateProjectSlug } from './components/Projects';
 import About from './components/About';
 import Services from './components/Services';
 import Contact from './components/Contact';
@@ -22,6 +22,51 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+
+  // Función para encontrar proyecto por slug
+  const findProjectBySlug = (slug) => {
+    return projects.find(project => generateProjectSlug(project.title) === slug);
+  };
+
+  // Leer la URL al cargar la página
+  useEffect(() => {
+    const path = window.location.pathname;
+    const projectMatch = path.match(/^\/project\/(.+)$/);
+    
+    if (projectMatch) {
+      const slug = projectMatch[1];
+      const project = findProjectBySlug(slug);
+      if (project) {
+        setSelectedProject(project);
+      } else {
+        // Si el proyecto no se encuentra, redirigir a la página principal
+        window.history.replaceState({}, '', '/');
+      }
+    }
+  }, []);
+
+  // Manejar cambios en la URL (botón atrás/adelante del navegador)
+  useEffect(() => {
+    const handlePopState = (event) => {
+      const path = window.location.pathname;
+      const projectMatch = path.match(/^\/project\/(.+)$/);
+      
+      if (projectMatch) {
+        const slug = projectMatch[1];
+        const project = findProjectBySlug(slug);
+        if (project) {
+          setSelectedProject(project);
+        } else {
+          setSelectedProject(null);
+        }
+      } else {
+        setSelectedProject(null);
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -64,7 +109,11 @@ function App() {
           <ProjectDetail 
             key="detail"
             project={selectedProject} 
-            onBack={() => setSelectedProject(null)} 
+            onBack={() => {
+              setSelectedProject(null);
+              // Limpiar la URL cuando se vuelve a la página principal
+              window.history.pushState({}, '', '/');
+            }} 
           />
         ) : (
           <motion.div 
@@ -81,9 +130,15 @@ function App() {
               className="nav-bar"
             >
               <motion.a 
-                href="#" 
+                href="/" 
                 className="nav-logo-link" 
-                onClick={() => setIsMenuOpen(false)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  setIsMenuOpen(false);
+                  setSelectedProject(null);
+                  window.history.pushState({}, '', '/');
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ 
                   opacity: hasScrolled ? 1 : 0,

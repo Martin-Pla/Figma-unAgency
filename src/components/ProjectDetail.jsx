@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import SEO from './SEO';
+import { generateProjectSlug } from './Projects';
 
 const ProjectHeader = ({ project }) => (
   <div className="project-detail-header">
@@ -364,7 +365,8 @@ export default function ProjectDetail({ project, onBack }) {
   const projectImage = project.image.startsWith('http') 
     ? project.image 
     : `https://theunagency.com${project.image}`;
-  const projectUrl = `https://theunagency.com/project/${project.id}`;
+  const projectSlug = generateProjectSlug(project.title);
+  const projectUrl = `https://theunagency.com/project/${projectSlug}`;
 
   const renderLayout = () => {
     switch (project.layout) {

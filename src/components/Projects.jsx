@@ -1,8 +1,18 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
+// Función helper para generar slug a partir del título
+export const generateProjectSlug = (title) => {
+  return title
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '') // Eliminar acentos
+    .replace(/[^a-z0-9]+/g, '-') // Reemplazar caracteres especiales con guiones
+    .replace(/^-+|-+$/g, ''); // Eliminar guiones al inicio y final
+};
+
 // Projects data from Figma Make
-const projects = [
+export const projects = [
   {
     id: "1",
     title: "AARON MAIER",
@@ -326,7 +336,15 @@ export default function Projects({ onProjectSelect }) {
                   className={`projects-item-simplified ${isHeroProject ? 'projects-item-hero' : ''}`}
                 >
                   <div 
-                    onClick={() => onProjectSelect && onProjectSelect(project)}
+                    onClick={() => {
+                      // Generar slug y actualizar la URL
+                      const slug = generateProjectSlug(project.title);
+                      window.history.pushState({ project: project.id }, '', `/project/${slug}`);
+                      // Llamar al callback para actualizar el estado
+                      if (onProjectSelect) {
+                        onProjectSelect(project);
+                      }
+                    }}
                     className="projects-image-container-simplified"
                   >
                     <motion.img
