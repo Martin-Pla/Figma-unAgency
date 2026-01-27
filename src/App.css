@@ -424,11 +424,12 @@ img,
 .hero-logo-wrapper {
   position: relative;
   z-index: 10;
+  margin-top: 30px;
 }
 
 .hero-logo-image {
   width: 80vw;
-  max-width: 221px;
+  max-width: 166px;
   object-fit: contain;
   user-select: none;
   filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.5));
