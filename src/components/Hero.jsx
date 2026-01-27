@@ -70,7 +70,7 @@ export default function Hero() {
             Start a Project
           </a>
         </motion.div>
-      </div>
+      </motion.div>
 
       {/* Indicador de Scroll */}
       <motion.div
