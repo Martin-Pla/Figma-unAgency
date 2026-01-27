@@ -3,7 +3,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 
 const logoImg = "/assets/The-unAgency-w.svg";
 
-export default function Hero() {
+export default function Hero({ isLoaded = false }) {
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -34,9 +34,13 @@ export default function Hero() {
         style={{ y: contentY, opacity }}
       >
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
+          initial={{ opacity: 0, scale: 0.95, filter: 'blur(20px)' }}
+          animate={{ 
+            opacity: isLoaded ? 1 : 0, 
+            scale: isLoaded ? 1 : 0.95,
+            filter: isLoaded ? 'blur(0px)' : 'blur(20px)'
+          }}
+          transition={{ duration: 1.2, delay: isLoaded ? 0.3 : 0, ease: [0.16, 1, 0.3, 1] }}
           className="hero-logo-wrapper"
         >
           <img 
@@ -48,9 +52,13 @@ export default function Hero() {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, delay: 0.8, ease: "easeOut" }}
+          initial={{ opacity: 0, y: 20, filter: 'blur(10px)' }}
+          animate={{ 
+            opacity: isLoaded ? 1 : 0, 
+            y: isLoaded ? 0 : 20,
+            filter: isLoaded ? 'blur(0px)' : 'blur(10px)'
+          }}
+          transition={{ duration: 1.2, delay: isLoaded ? 0.5 : 0, ease: "easeOut" }}
           className="hero-text-wrapper"
         >
           <p className="hero-tagline" style={{ marginTop: '20px' }}>
@@ -61,14 +69,35 @@ export default function Hero() {
 
         {/* CTA Button */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, delay: 1.0, ease: "easeOut" }}
+          initial={{ opacity: 0, y: 20, filter: 'blur(10px)' }}
+          animate={{ 
+            opacity: isLoaded ? 1 : 0, 
+            y: isLoaded ? 0 : 20,
+            filter: isLoaded ? 'blur(0px)' : 'blur(10px)'
+          }}
+          transition={{ duration: 1.2, delay: isLoaded ? 0.7 : 0, ease: "easeOut" }}
           className="hero-cta-wrapper"
         >
           <a href="#contact" className="hero-cta-button">
             Start a Project
           </a>
+          
+          {/* Indicador de Scroll debajo del botón */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.5, duration: 1.5 }}
+            className="hero-cta-scroll-indicator"
+          >
+            <span className="hero-cta-scroll-text">SCROLL</span>
+            <motion.div
+              animate={{ y: [0, 8, 0] }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+              className="hero-cta-scroll-arrow"
+            >
+              ↓
+            </motion.div>
+          </motion.div>
         </motion.div>
       </motion.div>
 

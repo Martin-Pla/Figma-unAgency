@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import './App.css';
 import FluidBackground from './components/FluidBackground';
+import Preloader from './components/Preloader';
 import Hero from './components/Hero';
 import Projects from './components/Projects';
 import About from './components/About';
@@ -18,6 +19,7 @@ function App() {
   const [selectedProject, setSelectedProject] = useState(null);
   const [hasScrolled, setHasScrolled] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
@@ -40,9 +42,12 @@ function App() {
   }, []);
 
   return (
-    <div className="app-container-new">
+    <div className={`app-container-new ${isLoading ? 'app-loading' : ''}`}>
       <SEO />
       <SchemaMarkup />
+      
+      {/* Preloader */}
+      <Preloader onComplete={() => setIsLoading(false)} />
       
       {/* Barra de Progreso de Scroll */}
       <div 
@@ -163,7 +168,7 @@ function App() {
             </AnimatePresence>
             
             <main className="main-content">
-              <Hero />
+              <Hero isLoaded={!isLoading} />
               <SectionWrapper delay={0.2}>
                 <Projects onProjectSelect={setSelectedProject} />
               </SectionWrapper>

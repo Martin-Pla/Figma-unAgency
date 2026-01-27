@@ -24,6 +24,12 @@
   min-height: 100vh;
   color: #ffffff;
   position: relative;
+  transition: filter 0.8s ease-out;
+}
+
+.app-container-new.app-loading {
+  filter: blur(10px);
+  overflow: hidden;
 }
 
 /* Global: Remove all border-radius from buttons, image containers, and form fields */
@@ -170,6 +176,60 @@ img,
 /* Main Content */
 .main-content {
   position: relative;
+}
+
+/* Preloader */
+.preloader {
+  position: fixed;
+  inset: 0;
+  background-color: #000000;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.preloader-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.preloader-text {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.7);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+
+.preloader-bar-container {
+  width: 200px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.preloader-bar {
+  height: 100%;
+  background: #ffffff;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transition: width 0.1s linear;
+}
+
+@media (min-width: 768px) {
+  .preloader-text {
+    font-size: 12px;
+    letter-spacing: 0.4em;
+  }
+  
+  .preloader-bar-container {
+    width: 240px;
+  }
 }
 
 /* Barra de Progreso de Scroll */
@@ -407,11 +467,55 @@ img,
   margin-top: 64px;
   position: relative;
   z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
 }
 
 @media (min-width: 768px) {
   .hero-cta-wrapper {
     margin-top: 80px;
+    gap: 40px;
+  }
+}
+
+/* Indicador de Scroll debajo del botón CTA */
+.hero-cta-scroll-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.hero-cta-scroll-text {
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  font-family: 'Space Mono', monospace;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+  font-weight: 400;
+}
+
+.hero-cta-scroll-arrow {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.4);
+  font-family: 'Space Mono', monospace;
+  line-height: 1;
+}
+
+@media (min-width: 768px) {
+  .hero-cta-scroll-indicator {
+    gap: 16px;
+  }
+  
+  .hero-cta-scroll-text {
+    font-size: 10px;
+    letter-spacing: 0.4em;
+  }
+  
+  .hero-cta-scroll-arrow {
+    font-size: 16px;
   }
 }
 
@@ -1177,6 +1281,7 @@ img,
 .services-container-restructured {
   max-width: 1400px;
   margin: 0 auto;
+  will-change: transform, opacity;
 }
 
 .services-header-restructured {
