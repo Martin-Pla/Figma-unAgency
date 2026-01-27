@@ -25,9 +25,6 @@ export default function Hero({ isLoaded = false }) {
         <div className="mesh-gradient-overlay"></div>
       </motion.div>
       
-      {/* Línea Vertical Técnica */}
-      <div className="hero-vertical-line"></div>
-      
       {/* Contenido Principal con Parallax */}
       <motion.div 
         className="hero-content"

@@ -347,19 +347,6 @@ img,
   }
 }
 
-/* Línea Vertical Técnica */
-.hero-vertical-line {
-  position: absolute;
-  left: 50%;
-  top: 0;
-  bottom: 0;
-  width: 1px;
-  background: rgba(255, 255, 255, 0.1);
-  z-index: 1;
-  pointer-events: none;
-  transform: translateX(-50%);
-}
-
 /* Indicador de Scroll - Estilo Lightweight */
 .hero-scroll-indicator {
   position: absolute;
