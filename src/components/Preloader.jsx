@@ -67,7 +67,7 @@ export default function Preloader({ onComplete }) {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="preloader-text"
             >
-              THE UNAGENCY // LOADING
+              Welcome LOADING
             </motion.div>
             
             <div className="preloader-bar-container">

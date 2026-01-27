@@ -252,7 +252,7 @@ img,
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  padding: 0 24px 40px;
+  padding: 0 16px 32px;
   will-change: transform;
 }
 
@@ -363,7 +363,7 @@ img,
 /* Indicador de Scroll - Estilo Lightweight */
 .hero-scroll-indicator {
   position: absolute;
-  bottom: 48px;
+  bottom: 32px;
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
@@ -371,12 +371,12 @@ img,
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
 }
 
 .hero-scroll-text {
-  font-size: 10px;
-  letter-spacing: 0.3em;
+  font-size: 9px;
+  letter-spacing: 0.2em;
   font-family: 'Space Mono', monospace;
   color: rgba(255, 255, 255, 0.7);
   text-transform: uppercase;
@@ -384,7 +384,7 @@ img,
 }
 
 .hero-scroll-arrow {
-  font-size: 18px;
+  font-size: 14px;
   color: rgba(255, 255, 255, 0.5);
   font-family: 'Space Mono', monospace;
   line-height: 1;
@@ -418,23 +418,40 @@ img,
   align-items: center;
   justify-content: center;
   will-change: transform, opacity;
+  padding: 0 16px;
+}
+
+@media (min-width: 768px) {
+  .hero-content {
+    padding: 0;
+  }
 }
 
 
 .hero-logo-wrapper {
   position: relative;
   z-index: 10;
-  margin-top: 30px;
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
 .hero-logo-image {
   width: 80vw;
-  max-width: 166px;
+  max-width: 125px;
   object-fit: contain;
   user-select: none;
   filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.5));
   image-rendering: -webkit-optimize-contrast;
   image-rendering: crisp-edges;
+}
+
+@media (min-width: 768px) {
+  .hero-logo-image {
+    max-width: 125px;
+  }
 }
 
 .hero-sheen {
@@ -452,26 +469,31 @@ img,
 }
 
 .hero-text-wrapper {
-  margin-top: 64px;
+  margin-top: 48px;
   position: relative;
   z-index: 10;
+  width: 100%;
+  max-width: 100%;
+  padding: 0 16px;
 }
 
 @media (min-width: 768px) {
   .hero-text-wrapper {
     margin-top: 96px;
+    padding: 0;
   }
 }
 
 
 .hero-cta-wrapper {
-  margin-top: 64px;
+  margin-top: 48px;
   position: relative;
   z-index: 10;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 32px;
+  gap: 24px;
+  width: 100%;
 }
 
 @media (min-width: 768px) {
@@ -522,11 +544,11 @@ img,
 
 .hero-cta-button {
   display: inline-block;
-  padding: 20px 48px;
+  padding: 16px 32px;
   background: #ffffff;
   color: #000000;
   font-family: 'Space Mono', monospace;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -535,6 +557,9 @@ img,
   transition: all 0.3s ease;
   cursor: pointer;
   border-radius: 0px;
+  text-align: center;
+  width: auto;
+  min-width: 200px;
 }
 
 .hero-cta-button:hover {
@@ -548,6 +573,7 @@ img,
   .hero-cta-button {
     padding: 24px 64px;
     font-size: 18px;
+    min-width: auto;
   }
 }
 
