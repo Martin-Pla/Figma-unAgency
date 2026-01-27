@@ -14,11 +14,6 @@ export default function Hero() {
       {/* Línea Vertical Técnica */}
       <div className="hero-vertical-line"></div>
       
-      {/* Coordenadas en esquina inferior derecha */}
-      <div className="hero-coordinates">
-        REF. 2026_UNAGENCY // 32.51 N 117.03 W
-      </div>
-      
       {/* Contenido Principal */}
       <div className="hero-content">
         <motion.div
@@ -60,6 +55,22 @@ export default function Hero() {
         </motion.div>
       </div>
 
+      {/* Indicador de Scroll */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 2, duration: 1.5 }}
+        className="hero-scroll-indicator"
+      >
+        <span className="hero-scroll-text">SCROLL</span>
+        <motion.div
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+          className="hero-scroll-arrow"
+        >
+          ↓
+        </motion.div>
+      </motion.div>
 
     </section>
   );
