@@ -1,21 +1,38 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useEffect, useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 const logoImg = "/assets/The-unAgency-w.svg";
 
 export default function Hero() {
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"]
+  });
+
+  // Parallax effects
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+  const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [1, 0.8, 0]);
+
   return (
-    <section className="hero-container">
-      {/* Mesh Gradient Container */}
-      <div className="mesh-gradient-container">
+    <section ref={containerRef} className="hero-container">
+      {/* Mesh Gradient Container con Parallax */}
+      <motion.div 
+        className="mesh-gradient-container"
+        style={{ y: backgroundY }}
+      >
         <div className="mesh-gradient-overlay"></div>
-      </div>
+      </motion.div>
       
       {/* Línea Vertical Técnica */}
       <div className="hero-vertical-line"></div>
       
-      {/* Contenido Principal */}
-      <div className="hero-content">
+      {/* Contenido Principal con Parallax */}
+      <motion.div 
+        className="hero-content"
+        style={{ y: contentY, opacity }}
+      >
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
