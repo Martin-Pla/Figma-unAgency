@@ -195,34 +195,38 @@ img,
 .hero-container::after {
   content: "";
   position: absolute;
-  width: 500px;
-  height: 500px;
+  width: 600px;
+  height: 600px;
   border-radius: 50%;
   filter: blur(120px);
-  opacity: 0.08;
-  z-index: -1;
+  opacity: 0.25;
+  z-index: 0;
   animation: drift 30s infinite alternate ease-in-out;
+  pointer-events: none;
 }
 
 .hero-container::before {
-  background: radial-gradient(circle, #333, transparent);
-  top: -10%;
-  left: -10%;
+  background: radial-gradient(circle, rgba(60, 60, 80, 0.6) 0%, rgba(30, 30, 40, 0.3) 50%, transparent 100%);
+  top: -15%;
+  left: -15%;
 }
 
 .hero-container::after {
-  background: radial-gradient(circle, #1a1a2e, transparent);
-  bottom: -10%;
-  right: -10%;
+  background: radial-gradient(circle, rgba(40, 30, 60, 0.6) 0%, rgba(20, 15, 40, 0.3) 50%, transparent 100%);
+  bottom: -15%;
+  right: -15%;
   animation-delay: -15s;
 }
 
 @keyframes drift {
-  from {
+  0% {
     transform: translate(0, 0) scale(1);
   }
-  to {
-    transform: translate(100px, 50px) scale(1.1);
+  50% {
+    transform: translate(80px, 60px) scale(1.15);
+  }
+  100% {
+    transform: translate(120px, 80px) scale(1.2);
   }
 }
 
