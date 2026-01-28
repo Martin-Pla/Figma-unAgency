@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
-import { initAssemblyAnimations, cleanupScrollTriggers, refreshScrollTriggers } from '../utils/gsapAnimations';
 import emailjs from '@emailjs/browser';
 
 const locations = [
@@ -238,38 +237,6 @@ export default function Contact() {
 
   const formInView = useInView(formRef, { once: true, margin: "-100px" });
   const infoInView = useInView(infoRef, { once: true, margin: "-100px" });
-
-  // Inicializar animaciones GSAP
-  useEffect(() => {
-    cleanupScrollTriggers();
-
-    const timer = setTimeout(() => {
-      // Animaciones para campos del formulario
-      initAssemblyAnimations('.contact-form-field', {
-        yOffset: 50,
-        duration: 0.8,
-        stagger: 0.1,
-        ease: 'power3.out',
-        start: 'top 90%'
-      });
-
-      // Animaciones para ubicaciones
-      initAssemblyAnimations('.contact-location-item', {
-        yOffset: 40,
-        duration: 0.7,
-        stagger: 0.08,
-        ease: 'power3.out',
-        start: 'top 85%'
-      });
-
-      refreshScrollTriggers();
-    }, 100);
-
-    return () => {
-      clearTimeout(timer);
-      cleanupScrollTriggers();
-    };
-  }, []);
 
   return (
     <footer

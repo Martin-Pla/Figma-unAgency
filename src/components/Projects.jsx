@@ -1,6 +1,5 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform, useInView } from 'framer-motion';
-import { initStaggeredProjects, initImageParallax, cleanupScrollTriggers, refreshScrollTriggers } from '../utils/gsapAnimations';
 
 // Función helper para generar slug a partir del título
 export const generateProjectSlug = (title) => {
@@ -318,10 +317,20 @@ const ProjectItem = ({ project, index, isHeroProject, onProjectSelect }) => {
     <motion.div
       ref={projectRef}
       layout
-      // GSAP manejará las animaciones iniciales, pero mantenemos las de hover
+      initial={{ opacity: 0, y: 60, scale: 0.9 }}
+      animate={isInView ? { 
+        opacity: 1, 
+        y: 0, 
+        scale: 1
+      } : {}}
+      exit={{ opacity: 0, scale: 0.9 }}
+      transition={{ 
+        duration: 0.7, 
+        delay: index * 0.1,
+        ease: [0.16, 1, 0.3, 1]
+      }}
       className={`projects-item-simplified ${isHeroProject ? 'projects-item-hero' : ''}`}
       style={{
-        // Mantener parallax de Framer Motion para efectos continuos
         y: isInView ? y : undefined,
         opacity: isInView ? opacity : undefined,
         willChange: 'transform, opacity'
@@ -414,40 +423,6 @@ export default function Projects({ onProjectSelect }) {
   const headerOpacity = useTransform(scrollYProgress, [0, 0.25, 0.75, 1], [0, 1, 1, 0.8]);
   const sectionScale = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.96, 1, 1, 0.98]);
   const headerScale = useTransform(scrollYProgress, [0, 0.3], [0.95, 1]);
-
-  // Inicializar animaciones GSAP cuando el componente se monte o cambien los proyectos
-  useEffect(() => {
-    // Limpiar animaciones anteriores
-    cleanupScrollTriggers();
-
-    // Pequeño delay para asegurar que el DOM esté actualizado
-    const timer = setTimeout(() => {
-      // Inicializar animaciones escalonadas para proyectos
-      initStaggeredProjects('.projects-item-simplified', {
-        yOffset: 100,
-        duration: 1.2,
-        baseStagger: 0.08,
-        ease: 'power3.out',
-        start: 'top 85%'
-      });
-
-      // Inicializar parallax para imágenes
-      initImageParallax('.projects-image-container-simplified', '.projects-image-simplified', {
-        yMovement: -50,
-        start: 'top bottom',
-        end: 'bottom top',
-        ease: 'none'
-      });
-
-      // Refrescar ScrollTrigger después de inicializar
-      refreshScrollTriggers();
-    }, 100);
-
-    return () => {
-      clearTimeout(timer);
-      cleanupScrollTriggers();
-    };
-  }, [visibleProjects, showAll]);
 
   return (
     <section id="projects" ref={sectionRef} className="projects-section-updated">

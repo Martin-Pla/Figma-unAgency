@@ -1,6 +1,5 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef } from 'react';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
-import { initAssemblyAnimations, initTextReveal, cleanupScrollTriggers, refreshScrollTriggers } from '../utils/gsapAnimations';
 
 const brands = [
   "JMRPACKING", "TBG GOLF", "BELTECH", "CASTELLANA IMPORTACIONES", 
@@ -30,38 +29,6 @@ export default function About() {
   // Scroll-driven para el contenido
   const contentY = useTransform(scrollYProgress, [0, 0.5], [0, 20]);
   const contentOpacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0.5]);
-
-  // Inicializar animaciones GSAP
-  useEffect(() => {
-    cleanupScrollTriggers();
-
-    const timer = setTimeout(() => {
-      // Animaciones para textos
-      initTextReveal('.about-text', {
-        yOffset: 60,
-        duration: 1,
-        stagger: 0.15,
-        ease: 'power3.out',
-        start: 'top 90%'
-      });
-
-      // Animaciones para servicios
-      initAssemblyAnimations('.about-service-item', {
-        yOffset: 50,
-        duration: 0.8,
-        stagger: 0.1,
-        ease: 'power3.out',
-        start: 'top 85%'
-      });
-
-      refreshScrollTriggers();
-    }, 100);
-
-    return () => {
-      clearTimeout(timer);
-      cleanupScrollTriggers();
-    };
-  }, []);
 
   return (
     <section id="about" ref={sectionRef} className="about-section-updated">
