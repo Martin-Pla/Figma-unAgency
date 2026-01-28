@@ -299,51 +299,41 @@ const ProjectItem = ({ project, index, isHeroProject, onProjectSelect }) => {
   // Detectar cuando el elemento está en viewport
   const isInView = useInView(projectRef, { 
     once: true, 
-    margin: "-100px",
-    amount: 0.3 
+    margin: "0px",
+    amount: 0.1 
   });
   
-  // Scroll progress individual para cada proyecto
-  const { scrollYProgress: itemScrollProgress } = useScroll({
+  // Scroll progress individual para cada proyecto (parallax effect)
+  const { scrollYProgress } = useScroll({
     target: projectRef,
     offset: ["start end", "end start"]
   });
 
-  // Transformaciones basadas en scroll para cada item
-  const itemY = useTransform(itemScrollProgress, [0, 1], [80, -80]);
-  const itemOpacity = useTransform(itemScrollProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0]);
-  const itemScale = useTransform(itemScrollProgress, [0, 0.5, 1], [0.8, 1, 0.95]);
-  const itemBlur = useTransform(itemScrollProgress, [0, 0.3, 0.7, 1], [10, 0, 0, 10]);
+  // Transformaciones basadas en scroll para parallax
+  const y = useTransform(scrollYProgress, [0, 1], [30, -30]);
+  const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.4, 1, 1, 0.4]);
 
   return (
     <motion.div
       ref={projectRef}
       layout
-      initial={{ opacity: 0, y: 100, scale: 0.8, filter: 'blur(20px)' }}
+      initial={{ opacity: 0, y: 60, scale: 0.9 }}
       animate={isInView ? { 
         opacity: 1, 
         y: 0, 
-        scale: 1,
-        filter: 'blur(0px)'
-      } : {
-        opacity: itemOpacity,
-        y: itemY,
-        scale: itemScale,
-        filter: `blur(${itemBlur}px)`
-      }}
-      exit={{ opacity: 0, scale: 0.8 }}
+        scale: 1
+      } : {}}
+      exit={{ opacity: 0, scale: 0.9 }}
       transition={{ 
-        duration: 0.8, 
+        duration: 0.7, 
         delay: index * 0.1,
         ease: [0.16, 1, 0.3, 1]
       }}
       className={`projects-item-simplified ${isHeroProject ? 'projects-item-hero' : ''}`}
       style={{
-        y: isInView ? 0 : itemY,
-        opacity: isInView ? 1 : itemOpacity,
-        scale: isInView ? 1 : itemScale,
-        filter: isInView ? 'blur(0px)' : `blur(${itemBlur}px)`,
-        willChange: 'transform, opacity, filter'
+        y: isInView ? y : undefined,
+        opacity: isInView ? opacity : undefined,
+        willChange: 'transform, opacity'
       }}
     >
       <motion.div 
@@ -375,14 +365,14 @@ const ProjectItem = ({ project, index, isHeroProject, onProjectSelect }) => {
       <motion.div 
         className="projects-info-block"
         initial={{ opacity: 0, x: -20 }}
-        animate={isInView ? { opacity: 1, x: 0 } : { opacity: itemOpacity, x: -20 }}
-        transition={{ duration: 0.6, delay: index * 0.1 + 0.3 }}
+        animate={isInView ? { opacity: 1, x: 0 } : {}}
+        transition={{ duration: 0.5, delay: index * 0.1 + 0.3 }}
       >
         <div className="projects-info-header">
           <motion.span 
             className="projects-serial-number"
-            initial={{ opacity: 0, scale: 0 }}
-            animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0 }}
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.4, delay: index * 0.1 + 0.4 }}
           >
             {String(index + 1).padStart(2, '0')}
@@ -392,7 +382,7 @@ const ProjectItem = ({ project, index, isHeroProject, onProjectSelect }) => {
         <motion.h3 
           className="projects-title-text"
           initial={{ opacity: 0, y: 10 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: itemOpacity, y: 10 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: index * 0.1 + 0.5 }}
         >
           {project.title}
@@ -400,7 +390,7 @@ const ProjectItem = ({ project, index, isHeroProject, onProjectSelect }) => {
         <motion.p 
           className="projects-category-text"
           initial={{ opacity: 0, y: 10 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: itemOpacity, y: 10 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: index * 0.1 + 0.6 }}
         >
           {project.category}
