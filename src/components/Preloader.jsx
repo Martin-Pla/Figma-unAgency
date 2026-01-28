@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 export default function Preloader({ onComplete }) {
   const [progress, setProgress] = useState(0);
   const [isComplete, setIsComplete] = useState(false);
+  
+  // Iniciar progreso mínimo inmediatamente para que sea visible
+  useEffect(() => {
+    setProgress(5);
+  }, []);
 
   useEffect(() => {
     let progressTimer;
@@ -142,38 +147,47 @@ export default function Preloader({ onComplete }) {
     };
   }, [onComplete]);
 
+  if (isComplete) {
+    return null;
+  }
+
   return (
-    <AnimatePresence>
-      {!isComplete && (
+    <motion.div
+      className="preloader"
+      initial={{ opacity: 1 }}
+      animate={{ opacity: 1 }}
+      exit={{ 
+        opacity: 0,
+        transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] }
+      }}
+    >
+      <div className="preloader-content">
         <motion.div
-          className="preloader"
-          initial={{ opacity: 1 }}
-          exit={{ 
-            opacity: 0,
-            transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] }
-          }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="preloader-welcome"
         >
-          <div className="preloader-content">
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="preloader-text"
-            >
-              LOADING
-            </motion.div>
-            
-            <div className="preloader-bar-container">
-              <motion.div
-                className="preloader-bar"
-                initial={{ width: '0%' }}
-                animate={{ width: `${progress}%` }}
-                transition={{ duration: 0.1, ease: 'linear' }}
-              />
-            </div>
-          </div>
+          Welcome
         </motion.div>
-      )}
-    </AnimatePresence>
+        
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="preloader-text"
+        >
+          LOADING
+        </motion.div>
+        
+        <div className="preloader-bar-container">
+          <motion.div
+            className="preloader-bar"
+            style={{ width: `${Math.max(progress, 5)}%` }}
+            transition={{ duration: 0.3, ease: 'easeOut' }}
+          />
+        </div>
+      </div>
+    </motion.div>
   );
 }
