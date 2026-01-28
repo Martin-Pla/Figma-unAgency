@@ -6,44 +6,138 @@ export default function Preloader({ onComplete }) {
   const [isComplete, setIsComplete] = useState(false);
 
   useEffect(() => {
-    // Simular carga con animación de progreso
-    const duration = 2500; // 2.5 segundos
-    const interval = 16; // ~60fps
-    const increment = 100 / (duration / interval);
+    let progressTimer;
+    let minDisplayTime = 2000; // Mínimo 2 segundos de visualización
+    const startTime = Date.now();
 
-    const timer = setInterval(() => {
-      setProgress((prev) => {
-        const newProgress = prev + increment;
-        if (newProgress >= 100) {
-          clearInterval(timer);
-          setIsComplete(true);
-          // Esperar un momento antes de desaparecer
-          setTimeout(() => {
-            if (onComplete) onComplete();
-          }, 300);
-          return 100;
+    // Función para cargar todas las imágenes
+    const loadAllImages = () => {
+      return new Promise((resolve) => {
+        // Lista de imágenes críticas que deben cargarse
+        const criticalImages = [
+          "/assets/The-unAgency-w.svg",
+          "/assets/img-3bg.png",
+          "/assets/img-agua-salada.png",
+          "/assets/img-akbal.png",
+          "/assets/img-ave-de-fuego.png",
+          "/assets/img-black-agnes.png",
+          "/assets/img-casarey.png",
+          "/assets/img-gallus.png",
+          "/assets/img-marielen.png",
+          "/assets/img-nuwa.png",
+          "/assets/img-suhar.png",
+          "/assets/img-tres-diablos.png",
+          "/assets/img-what-the-flock.png"
+        ];
+
+        // También obtener todas las imágenes del DOM
+        const domImages = Array.from(document.querySelectorAll('img'));
+        const allImageSources = new Set([
+          ...criticalImages,
+          ...domImages.map(img => img.src.replace(window.location.origin, ''))
+        ]);
+
+        const imageArray = Array.from(allImageSources);
+        
+        if (imageArray.length === 0) {
+          resolve();
+          return;
         }
-        return newProgress;
-      });
-    }, interval);
 
-    // También escuchar el evento window.onload
-    const handleLoad = () => {
+        let loadedCount = 0;
+        const totalImages = imageArray.length;
+        let resolved = false;
+
+        const checkComplete = () => {
+          if (resolved) return;
+          
+          loadedCount++;
+          const imageProgress = 20 + (loadedCount / totalImages) * 70; // 20-90% del progreso viene de imágenes
+          setProgress((prev) => Math.max(prev, imageProgress));
+          
+          if (loadedCount === totalImages) {
+            resolved = true;
+            resolve();
+          }
+        };
+
+        // Precargar imágenes críticas
+        imageArray.forEach((src) => {
+          const img = new Image();
+          img.onload = checkComplete;
+          img.onerror = checkComplete;
+          img.src = src.startsWith('/') ? src : `/${src}`;
+        });
+
+        // También verificar imágenes del DOM
+        domImages.forEach((img) => {
+          if (img.complete) {
+            checkComplete();
+          } else {
+            img.addEventListener('load', checkComplete, { once: true });
+            img.addEventListener('error', checkComplete, { once: true });
+          }
+        });
+      });
+    };
+
+    // Simular progreso inicial mientras se cargan las imágenes
+    const simulateProgress = () => {
+      const interval = 16; // ~60fps
+      let currentProgress = 0;
+      const targetProgress = 20; // Progreso inicial del 20%
+
+      progressTimer = setInterval(() => {
+        currentProgress += 0.5;
+        if (currentProgress < targetProgress) {
+          setProgress(currentProgress);
+        } else {
+          clearInterval(progressTimer);
+        }
+      }, interval);
+    };
+
+    // Función principal de carga
+    const handleLoad = async () => {
+      simulateProgress();
+      
+      // Esperar un momento para que React renderice los componentes
+      await new Promise(resolve => setTimeout(resolve, 300));
+      
+      // Esperar a que todas las imágenes se carguen
+      await loadAllImages();
+      
+      // Asegurar que el progreso llegue al 100%
       setProgress(100);
-      setIsComplete(true);
+      
+      // Esperar el tiempo mínimo de visualización
+      const elapsedTime = Date.now() - startTime;
+      const remainingTime = Math.max(0, minDisplayTime - elapsedTime);
+      
       setTimeout(() => {
-        if (onComplete) onComplete();
-      }, 300);
+        setIsComplete(true);
+        // Esperar un momento antes de desaparecer
+        setTimeout(() => {
+          if (onComplete) onComplete();
+        }, 500);
+      }, remainingTime);
+    };
+
+    // Iniciar carga después de un pequeño delay para asegurar que React haya renderizado
+    const initLoad = () => {
+      setTimeout(() => {
+        handleLoad();
+      }, 100);
     };
 
     if (document.readyState === 'complete') {
-      handleLoad();
+      initLoad();
     } else {
-      window.addEventListener('load', handleLoad);
+      window.addEventListener('load', initLoad);
     }
 
     return () => {
-      clearInterval(timer);
+      if (progressTimer) clearInterval(progressTimer);
       window.removeEventListener('load', handleLoad);
     };
   }, [onComplete]);
@@ -56,8 +150,7 @@ export default function Preloader({ onComplete }) {
           initial={{ opacity: 1 }}
           exit={{ 
             opacity: 0,
-            y: '-100%',
-            transition: { duration: 0.6, ease: [0.76, 0, 0.24, 1] }
+            transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] }
           }}
         >
           <div className="preloader-content">
@@ -67,7 +160,7 @@ export default function Preloader({ onComplete }) {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="preloader-text"
             >
-              Welcome LOADING
+              LOADING
             </motion.div>
             
             <div className="preloader-bar-container">
