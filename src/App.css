@@ -403,7 +403,7 @@ img,
 .hero-logo-wrapper {
   position: relative;
   z-index: 10;
-  margin-top: 40px;
+  margin-top: 80px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -411,8 +411,8 @@ img,
 }
 
 .hero-logo-image {
-  width: 80vw;
-  max-width: 125px;
+  width: 70vw;
+  max-width: 100px;
   object-fit: contain;
   user-select: none;
   filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.5));
@@ -421,8 +421,12 @@ img,
 }
 
 @media (min-width: 768px) {
+  .hero-logo-wrapper {
+    margin-top: 100px;
+  }
+  
   .hero-logo-image {
-    max-width: 125px;
+    max-width: 100px;
   }
 }
 
@@ -778,6 +782,11 @@ img,
   -webkit-backface-visibility: hidden;
   transform: translateZ(0);
   -webkit-transform: translateZ(0);
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  image-rendering: high-quality;
+  filter: brightness(1.05) contrast(1.05);
+  opacity: 1;
 }
 
 .projects-item-simplified:hover .projects-image-simplified {
@@ -911,12 +920,17 @@ img,
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.8;
-  transition: opacity 0.5s ease;
+  opacity: 1;
+  transition: opacity 0.5s ease, filter 0.5s ease;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  image-rendering: high-quality;
+  filter: brightness(1.05) contrast(1.05);
 }
 
 .projects-item:hover .projects-image {
   opacity: 1;
+  filter: brightness(1.1) contrast(1.1);
 }
 
 .projects-overlay {
@@ -2186,18 +2200,25 @@ img,
   width: 100%;
   aspect-ratio: 3 / 4;
   object-fit: cover;
-  filter: grayscale(100%);
+  filter: grayscale(0%) brightness(1.05) contrast(1.05);
   transition: filter 0.7s ease;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  image-rendering: high-quality;
 }
 
 .project-detail-gallery-image:hover {
-  filter: grayscale(0%);
+  filter: grayscale(0%) brightness(1.1) contrast(1.1);
 }
 
 .project-detail-bottom-image {
   width: 100%;
   aspect-ratio: 16 / 9;
   object-fit: cover;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  image-rendering: high-quality;
+  filter: brightness(1.05) contrast(1.05);
 }
 
 /* Project Info */
@@ -2323,10 +2344,14 @@ img,
   width: 100%;
   height: auto;
   object-fit: cover;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  image-rendering: high-quality;
+  filter: brightness(1.05) contrast(1.05);
 }
 
 .project-detail-masonry-image-grayscale {
-  filter: grayscale(100%);
+  filter: grayscale(0%) brightness(1.05) contrast(1.05);
 }
 
 .project-detail-masonry-placeholder {
@@ -2482,6 +2507,10 @@ img,
   object-fit: cover;
   object-position: center center;
   display: block;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  image-rendering: high-quality;
+  filter: brightness(1.05) contrast(1.05);
 }
 
 .project-detail-immersive-grid {
@@ -2508,12 +2537,15 @@ img,
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: grayscale(100%);
+  filter: grayscale(0%) brightness(1.05) contrast(1.05);
   transition: filter 0.7s ease;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  image-rendering: high-quality;
 }
 
 .project-detail-immersive-grid-item:hover .project-detail-immersive-grid-image {
-  filter: grayscale(0%);
+  filter: grayscale(0%) brightness(1.1) contrast(1.1);
 }
 
 .project-detail-immersive-grid-placeholder {
@@ -2709,13 +2741,16 @@ img,
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: grayscale(100%);
+  filter: grayscale(0%) brightness(1.05) contrast(1.05);
   transition: filter 0.7s ease, transform 0.7s ease;
   transform: scale(1);
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  image-rendering: high-quality;
 }
 
 .project-detail-cinematic-gallery-item:hover .project-detail-cinematic-gallery-image {
-  filter: grayscale(0%);
+  filter: grayscale(0%) brightness(1.1) contrast(1.1);
   transform: scale(1.05);
 }
 
@@ -2736,7 +2771,11 @@ img,
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.8;
+  opacity: 1;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  image-rendering: high-quality;
+  filter: brightness(1.05) contrast(1.05);
 }
 
 .project-detail-cinematic-bottom-overlay {
@@ -2833,13 +2872,16 @@ img,
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: grayscale(100%);
+  filter: grayscale(0%) brightness(1.05) contrast(1.05);
   transition: filter 0.7s ease, transform 0.7s ease;
   transform: scale(1);
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  image-rendering: high-quality;
 }
 
 .project-detail-carousel-item:hover .project-detail-carousel-image {
-  filter: grayscale(0%);
+  filter: grayscale(0%) brightness(1.1) contrast(1.1);
   transform: scale(1.05);
 }
 
