@@ -725,6 +725,10 @@ img,
   display: grid;
   grid-template-columns: 1fr;
   gap: 32px;
+  transform: translateZ(0);
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 @media (min-width: 768px) {
@@ -740,6 +744,11 @@ img,
   cursor: pointer;
   width: 100%;
   gap: 12px;
+  transform-origin: center;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  perspective: 1000px;
+  -webkit-perspective: 1000px;
 }
 
 .projects-image-container-simplified {
@@ -749,6 +758,10 @@ img,
   aspect-ratio: 4 / 5;
   background: #171717;
   border: none;
+  transform-origin: center;
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 /* Hero Project - Ocupa 2 columnas cuando hay número impar */
@@ -774,6 +787,11 @@ img,
   object-fit: cover;
   display: block;
   transition: transform 0.3s ease;
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
 }
 
 .projects-item-simplified:hover .projects-image-simplified {

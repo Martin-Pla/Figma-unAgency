@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useRef } from 'react';
+import { motion, AnimatePresence, useScroll, useTransform, useInView } from 'framer-motion';
 
 // Función helper para generar slug a partir del título
 export const generateProjectSlug = (title) => {
@@ -292,8 +292,128 @@ const generateAltText = (project) => {
   return altText;
 };
 
+// Componente individual de proyecto con scroll magic
+const ProjectItem = ({ project, index, isHeroProject, onProjectSelect }) => {
+  const projectRef = useRef(null);
+  
+  // Detectar cuando el elemento está en viewport
+  const isInView = useInView(projectRef, { 
+    once: true, 
+    margin: "-100px",
+    amount: 0.3 
+  });
+  
+  // Scroll progress individual para cada proyecto
+  const { scrollYProgress: itemScrollProgress } = useScroll({
+    target: projectRef,
+    offset: ["start end", "end start"]
+  });
+
+  // Transformaciones basadas en scroll para cada item
+  const itemY = useTransform(itemScrollProgress, [0, 1], [80, -80]);
+  const itemOpacity = useTransform(itemScrollProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0]);
+  const itemScale = useTransform(itemScrollProgress, [0, 0.5, 1], [0.8, 1, 0.95]);
+  const itemBlur = useTransform(itemScrollProgress, [0, 0.3, 0.7, 1], [10, 0, 0, 10]);
+
+  return (
+    <motion.div
+      ref={projectRef}
+      layout
+      initial={{ opacity: 0, y: 100, scale: 0.8, filter: 'blur(20px)' }}
+      animate={isInView ? { 
+        opacity: 1, 
+        y: 0, 
+        scale: 1,
+        filter: 'blur(0px)'
+      } : {
+        opacity: itemOpacity,
+        y: itemY,
+        scale: itemScale,
+        filter: `blur(${itemBlur}px)`
+      }}
+      exit={{ opacity: 0, scale: 0.8 }}
+      transition={{ 
+        duration: 0.8, 
+        delay: index * 0.1,
+        ease: [0.16, 1, 0.3, 1]
+      }}
+      className={`projects-item-simplified ${isHeroProject ? 'projects-item-hero' : ''}`}
+      style={{
+        y: isInView ? 0 : itemY,
+        opacity: isInView ? 1 : itemOpacity,
+        scale: isInView ? 1 : itemScale,
+        filter: isInView ? 'blur(0px)' : `blur(${itemBlur}px)`,
+        willChange: 'transform, opacity, filter'
+      }}
+    >
+      <motion.div 
+        onClick={() => {
+          // Generar slug y actualizar la URL
+          const slug = generateProjectSlug(project.title);
+          window.history.pushState({ project: project.id }, '', `/project/${slug}`);
+          // Llamar al callback para actualizar el estado
+          if (onProjectSelect) {
+            onProjectSelect(project);
+          }
+        }}
+        className="projects-image-container-simplified"
+        whileHover={{ scale: 1.05, y: -5 }}
+        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+      >
+        <motion.img
+          src={project.image}
+          alt={generateAltText(project)}
+          loading="lazy"
+          className="projects-image-simplified"
+          whileHover={{ scale: 1.08 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          style={{ willChange: 'transform' }}
+        />
+      </motion.div>
+      
+      {/* Project Info Block - Always Visible */}
+      <motion.div 
+        className="projects-info-block"
+        initial={{ opacity: 0, x: -20 }}
+        animate={isInView ? { opacity: 1, x: 0 } : { opacity: itemOpacity, x: -20 }}
+        transition={{ duration: 0.6, delay: index * 0.1 + 0.3 }}
+      >
+        <div className="projects-info-header">
+          <motion.span 
+            className="projects-serial-number"
+            initial={{ opacity: 0, scale: 0 }}
+            animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0 }}
+            transition={{ duration: 0.4, delay: index * 0.1 + 0.4 }}
+          >
+            {String(index + 1).padStart(2, '0')}
+          </motion.span>
+          <span className="projects-separator">/</span>
+        </div>
+        <motion.h3 
+          className="projects-title-text"
+          initial={{ opacity: 0, y: 10 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: itemOpacity, y: 10 }}
+          transition={{ duration: 0.5, delay: index * 0.1 + 0.5 }}
+        >
+          {project.title}
+        </motion.h3>
+        <motion.p 
+          className="projects-category-text"
+          initial={{ opacity: 0, y: 10 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: itemOpacity, y: 10 }}
+          transition={{ duration: 0.5, delay: index * 0.1 + 0.6 }}
+        >
+          {project.category}
+        </motion.p>
+      </motion.div>
+    </motion.div>
+  );
+};
+
 export default function Projects({ onProjectSelect }) {
   const [showAll, setShowAll] = useState(false);
+  const sectionRef = useRef(null);
+  
   // Filtrar proyectos ocultos
   const visibleProjectsList = projects.filter(project => !project.hidden);
   const visibleProjects = showAll ? visibleProjectsList : visibleProjectsList.slice(0, 5);
@@ -302,22 +422,43 @@ export default function Projects({ onProjectSelect }) {
   const isOddCount = visibleProjects.length % 2 !== 0;
   const lastIndex = visibleProjects.length - 1;
 
+  // Scroll magic: Parallax y efectos basados en scroll
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"]
+  });
+
+  // Transformaciones basadas en scroll
+  const headerY = useTransform(scrollYProgress, [0, 0.3], [50, 0]);
+  const headerOpacity = useTransform(scrollYProgress, [0, 0.2], [0, 1]);
+  const sectionScale = useTransform(scrollYProgress, [0, 1], [0.95, 1]);
+
   return (
-    <section id="projects" className="projects-section-updated">
+    <section id="projects" ref={sectionRef} className="projects-section-updated">
       <div className="projects-container">
         <motion.div 
           className="projects-header-updated"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.1 }}
+          style={{
+            y: headerY,
+            opacity: headerOpacity,
+            scale: sectionScale
+          }}
         >
-          <h2 className="projects-title-updated">PROJECTS</h2>
+          <motion.h2 
+            className="projects-title-updated"
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          >
+            PROJECTS
+          </motion.h2>
         </motion.div>
 
         <motion.div 
           layout
           className="projects-grid-simplified"
+          style={{ scale: sectionScale }}
         >
           <AnimatePresence>
             {visibleProjects.map((project, index) => {
@@ -325,50 +466,13 @@ export default function Projects({ onProjectSelect }) {
               const isHeroProject = isOddCount && index === lastIndex;
               
               return (
-                <motion.div
-                  layout
+                <ProjectItem
                   key={project.id}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: index * 0.05 }}
-                  className={`projects-item-simplified ${isHeroProject ? 'projects-item-hero' : ''}`}
-                >
-                  <div 
-                    onClick={() => {
-                      // Generar slug y actualizar la URL
-                      const slug = generateProjectSlug(project.title);
-                      window.history.pushState({ project: project.id }, '', `/project/${slug}`);
-                      // Llamar al callback para actualizar el estado
-                      if (onProjectSelect) {
-                        onProjectSelect(project);
-                      }
-                    }}
-                    className="projects-image-container-simplified"
-                  >
-                    <motion.img
-                      src={project.image}
-                      alt={generateAltText(project)}
-                      loading="lazy"
-                      className="projects-image-simplified"
-                      whileHover={{ scale: 1.05 }}
-                      transition={{ duration: 0.3, ease: "easeOut" }}
-                    />
-                  </div>
-                  
-                  {/* Project Info Block - Always Visible */}
-                  <div className="projects-info-block">
-                    <div className="projects-info-header">
-                      <span className="projects-serial-number">
-                        {String(index + 1).padStart(2, '0')}
-                      </span>
-                      <span className="projects-separator">/</span>
-                    </div>
-                    <h3 className="projects-title-text">{project.title}</h3>
-                    <p className="projects-category-text">{project.category}</p>
-                  </div>
-                </motion.div>
+                  project={project}
+                  index={index}
+                  isHeroProject={isHeroProject}
+                  onProjectSelect={onProjectSelect}
+                />
               );
             })}
           </AnimatePresence>
@@ -377,17 +481,24 @@ export default function Projects({ onProjectSelect }) {
         {visibleProjectsList.length > 5 && (
           <motion.div 
             className="projects-button-container"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3 }}
+            initial={{ opacity: 0, y: 30, scale: 0.9 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ 
+              duration: 0.6, 
+              delay: 0.3,
+              ease: [0.16, 1, 0.3, 1]
+            }}
           >
-            <button 
+            <motion.button 
               onClick={() => setShowAll(!showAll)}
               className="projects-view-all-button"
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ duration: 0.2 }}
             >
               {showAll ? "Show Less" : "View All Projects"}
-            </button>
+            </motion.button>
           </motion.div>
         )}
       </div>
