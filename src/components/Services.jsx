@@ -1,5 +1,6 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
+import { initAssemblyAnimations, cleanupScrollTriggers, refreshScrollTriggers } from '../utils/gsapAnimations';
 
 const services = [
   {
@@ -67,6 +68,29 @@ export default function Services() {
   const contentY = useTransform(scrollYProgress, [0, 1], [30, -30]);
   const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0.8]);
   const scale = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.98, 1, 1, 0.98]);
+
+  // Inicializar animaciones GSAP
+  useEffect(() => {
+    cleanupScrollTriggers();
+
+    const timer = setTimeout(() => {
+      // Animaciones para cards de servicios
+      initAssemblyAnimations('.services-card-restructured', {
+        yOffset: 80,
+        duration: 1.2,
+        stagger: 0.12,
+        ease: 'power3.out',
+        start: 'top 85%'
+      });
+
+      refreshScrollTriggers();
+    }, 100);
+
+    return () => {
+      clearTimeout(timer);
+      cleanupScrollTriggers();
+    };
+  }, []);
 
   return (
     <section ref={containerRef} id="services" className="services-section-restructured">

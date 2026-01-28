@@ -734,6 +734,8 @@ img,
   -webkit-backface-visibility: hidden;
   perspective: 1000px;
   -webkit-perspective: 1000px;
+  will-change: transform, opacity;
+  opacity: 0; /* Inicialmente oculto para GSAP */
 }
 
 .projects-image-container-simplified {
@@ -747,6 +749,11 @@ img,
   will-change: transform;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
+}
+
+.projects-image-container-simplified .projects-image-simplified {
+  will-change: transform;
+  transform: translateY(0);
 }
 
 /* Hero Project - Ocupa 2 columnas cuando hay número impar */
@@ -789,6 +796,7 @@ img,
   flex-direction: column;
   gap: 8px;
   padding-top: 4px;
+  will-change: transform, opacity;
 }
 
 .projects-info-header {
@@ -1053,7 +1061,7 @@ img,
   position: relative;
   z-index: 10;
   padding: 128px 16px;
-  background: #0a0a0a;
+  background: #171717;
   color: #ffffff;
   overflow: hidden;
 }
@@ -1129,7 +1137,7 @@ img,
   font-weight: 300;
   line-height: 1.1;
   margin-bottom: 64px;
-  color: #d4d4d4;
+  color: #e5e5e5;
 }
 
 @media (min-width: 768px) {
@@ -1154,7 +1162,7 @@ img,
   display: grid;
   grid-template-columns: 1fr;
   gap: 48px;
-  color: #a3a3a3;
+  color: #d4d4d4;
   font-family: 'Space Mono', monospace;
   font-size: 14px;
   line-height: 1.75;
@@ -1174,7 +1182,7 @@ img,
 .about-services {
   margin-top: 96px;
   padding-top: 48px;
-  border-top: 1px solid #262626;
+  border-top: 1px solid #404040;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 32px;
@@ -1203,7 +1211,7 @@ img,
   font-size: 16px;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: #737373;
+  color: #a3a3a3;
 }
 
 .about-carousel-container {
@@ -1216,7 +1224,7 @@ img,
 .about-carousel-label {
   text-align: center;
   font-family: 'Space Mono', monospace;
-  color: #737373;
+  color: #a3a3a3;
   font-size: 16px;
   letter-spacing: 0.2em;
   margin-bottom: 48px;
@@ -1251,7 +1259,7 @@ img,
   font-size: 1.5rem;
   font-family: 'Space Mono', monospace;
   font-weight: 700;
-  color: #404040;
+  color: #737373;
   transition: color 0.3s ease;
   text-transform: uppercase;
 }
