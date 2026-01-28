@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import emailjs from '@emailjs/browser';
 
 const locations = [
@@ -219,23 +219,53 @@ export default function Contact() {
     }
   };
 
+  const sectionRef = useRef(null);
+  const formRef = useRef(null);
+  const infoRef = useRef(null);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"]
+  });
+
+  // Scroll-driven animations
+  const formY = useTransform(scrollYProgress, [0, 0.5], [50, -20]);
+  const formOpacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0.8]);
+  
+  const infoY = useTransform(scrollYProgress, [0, 0.5], [40, -15]);
+  const infoOpacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0.7]);
+
+  const formInView = useInView(formRef, { once: true, margin: "-100px" });
+  const infoInView = useInView(infoRef, { once: true, margin: "-100px" });
+
   return (
     <footer
+      ref={sectionRef}
       id="contact"
       className="contact-section-updated"
     >
       <div className="contact-container-updated">
         {/* Contact Form */}
         <motion.div 
+          ref={formRef}
           className="contact-form-section"
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.1 }}
+          initial={{ opacity: 0, y: 50 }}
+          animate={formInView ? { opacity: 1, y: 0 } : {}}
+          style={{
+            y: formInView ? undefined : formY,
+            opacity: formInView ? undefined : formOpacity,
+          }}
+          transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
         >
-          <h2 className="contact-title-updated">
+          <motion.h2 
+            className="contact-title-updated"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
             LET'S TALK
-          </h2>
+          </motion.h2>
 
           <form onSubmit={handleSubmit} className="contact-form-updated" noValidate>
             <div className="contact-form-field">
@@ -329,11 +359,15 @@ export default function Contact() {
 
         {/* Locations & Info */}
         <motion.div 
+          ref={infoRef}
           className="contact-info-section"
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          initial={{ opacity: 0, y: 50 }}
+          animate={infoInView ? { opacity: 1, y: 0 } : {}}
+          style={{
+            y: infoInView ? undefined : infoY,
+            opacity: infoInView ? undefined : infoOpacity,
+          }}
+          transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
         >
           <div className="contact-info-content">
             <div className="contact-locations-section">

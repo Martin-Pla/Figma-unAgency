@@ -1,5 +1,5 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useRef } from 'react';
+import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 
 const brands = [
   "JMRPACKING", "TBG GOLF", "BELTECH", "CASTELLANA IMPORTACIONES", 
@@ -10,8 +10,28 @@ const brands = [
 const marqueeBrands = [...brands, ...brands, ...brands];
 
 export default function About() {
+  const sectionRef = useRef(null);
+  const titleRef = useRef(null);
+  const manifestoRef = useRef(null);
+  
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"]
+  });
+
+  const titleInView = useInView(titleRef, { once: true, margin: "-100px" });
+  const manifestoInView = useInView(manifestoRef, { once: true, margin: "-100px" });
+
+  // Scroll-driven parallax para el título
+  const titleY = useTransform(scrollYProgress, [0, 0.5], [0, -30]);
+  const titleOpacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0.3]);
+
+  // Scroll-driven para el contenido
+  const contentY = useTransform(scrollYProgress, [0, 0.5], [0, 20]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0.5]);
+
   return (
-    <section id="about" className="about-section-updated">
+    <section id="about" ref={sectionRef} className="about-section-updated">
       <div className="about-container-updated">
         <div className="about-grid">
           
@@ -19,10 +39,14 @@ export default function About() {
           <div className="about-left-column">
             <div className="about-sticky">
               <motion.h2 
-                initial={{ opacity: 0, x: -50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8 }}
+                ref={titleRef}
+                initial={{ opacity: 0, x: -60 }}
+                animate={titleInView ? { opacity: 1, x: 0 } : {}}
+                style={{
+                  y: titleInView ? undefined : titleY,
+                  opacity: titleInView ? undefined : titleOpacity,
+                }}
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                 className="about-title-updated"
               >
                 ABOUT
@@ -33,37 +57,47 @@ export default function About() {
           {/* Right Column - Manifesto */}
           <div className="about-right-column">
             <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
+              ref={manifestoRef}
+              initial={{ opacity: 0, y: 60 }}
+              animate={manifestoInView ? { opacity: 1, y: 0 } : {}}
+              style={{
+                y: manifestoInView ? undefined : contentY,
+                opacity: manifestoInView ? undefined : contentOpacity,
+              }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             >
-              <h3 className="about-manifesto">
+              <motion.h3 
+                className="about-manifesto"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+              >
                 We are the <span className="about-manifesto-italic">glitch</span> in the agency model. A collective of rogue creatives obsessed with the absolute.
-              </h3>
+              </motion.h3>
               
               <motion.div 
                 className="about-text-grid"
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.2 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.8, delay: 0.3 }}
               >
                 <motion.p 
                   className="about-text"
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: 0.3 }}
+                  transition={{ duration: 0.6, delay: 0.4 }}
                 >
                   Traditional agencies sell time and bloated processes. We sell impact. We have surgically removed the account managers, the endless meetings, and the layers of middle-management that dilute vision.
                 </motion.p>
                 <motion.p 
                   className="about-text"
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: 0.4 }}
+                  transition={{ duration: 0.6, delay: 0.5 }}
                 >
                   What remains is pure potency. Direct access to elite talent. Radical transparency. Relentless execution. We don't just build digital products; we engineer market dominance.
                 </motion.p>
@@ -71,10 +105,10 @@ export default function About() {
 
               <motion.div 
                 className="about-services"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.4 }}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.6, delay: 0.6 }}
               >
                 {[
                   { number: "01", label: "Visceral Strategy" },
@@ -88,7 +122,7 @@ export default function About() {
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.5 + (index * 0.1) }}
+                    transition={{ duration: 0.5, delay: 0.7 + (index * 0.1) }}
                   >
                     <span className="about-service-number">{item.number}</span>
                     <span className="about-service-label">{item.label}</span>

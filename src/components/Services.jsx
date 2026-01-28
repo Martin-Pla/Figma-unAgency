@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 
 const services = [
   {
@@ -63,15 +63,16 @@ export default function Services() {
     offset: ["start end", "end start"]
   });
 
-  // Parallax effects
-  const contentY = useTransform(scrollYProgress, [0, 1], ["10%", "-10%"]);
-  const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0.9]);
+  // Scroll-driven parallax effects mejorados
+  const contentY = useTransform(scrollYProgress, [0, 1], [30, -30]);
+  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0.8]);
+  const scale = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.98, 1, 1, 0.98]);
 
   return (
     <section ref={containerRef} id="services" className="services-section-restructured">
       <motion.div 
         className="services-container-restructured"
-        style={{ y: contentY, opacity }}
+        style={{ y: contentY, opacity, scale }}
       >
         {/* Header */}
         <motion.div

@@ -7,7 +7,7 @@ export default function Preloader({ onComplete }) {
   
   // Iniciar progreso mínimo inmediatamente para que sea visible
   useEffect(() => {
-    setProgress(5);
+    setProgress(10);
   }, []);
 
   useEffect(() => {
@@ -158,35 +158,15 @@ export default function Preloader({ onComplete }) {
       animate={{ opacity: 1 }}
       exit={{ 
         opacity: 0,
-        transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] }
+        transition: { duration: 0.6, ease: [0.76, 0, 0.24, 1] }
       }}
     >
-      <div className="preloader-content">
+      <div className="preloader-line-container">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="preloader-welcome"
-        >
-          Welcome
-        </motion.div>
-        
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="preloader-text"
-        >
-          LOADING
-        </motion.div>
-        
-        <div className="preloader-bar-container">
-          <motion.div
-            className="preloader-bar"
-            style={{ width: `${Math.max(progress, 5)}%` }}
-            transition={{ duration: 0.3, ease: 'easeOut' }}
-          />
-        </div>
+          className="preloader-line"
+          style={{ width: `${Math.max(progress, 0)}%` }}
+          transition={{ duration: 0.2, ease: 'linear' }}
+        />
       </div>
     </motion.div>
   );

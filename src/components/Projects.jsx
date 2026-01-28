@@ -418,10 +418,11 @@ export default function Projects({ onProjectSelect }) {
     offset: ["start end", "end start"]
   });
 
-  // Transformaciones basadas en scroll
-  const headerY = useTransform(scrollYProgress, [0, 0.3], [50, 0]);
-  const headerOpacity = useTransform(scrollYProgress, [0, 0.2], [0, 1]);
-  const sectionScale = useTransform(scrollYProgress, [0, 1], [0.95, 1]);
+  // Transformaciones basadas en scroll mejoradas (inspirado en Lightweight)
+  const headerY = useTransform(scrollYProgress, [0, 0.4], [60, -20]);
+  const headerOpacity = useTransform(scrollYProgress, [0, 0.25, 0.75, 1], [0, 1, 1, 0.8]);
+  const sectionScale = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.96, 1, 1, 0.98]);
+  const headerScale = useTransform(scrollYProgress, [0, 0.3], [0.95, 1]);
 
   return (
     <section id="projects" ref={sectionRef} className="projects-section-updated">
@@ -431,12 +432,12 @@ export default function Projects({ onProjectSelect }) {
           style={{
             y: headerY,
             opacity: headerOpacity,
-            scale: sectionScale
+            scale: headerScale
           }}
         >
           <motion.h2 
             className="projects-title-updated"
-            initial={{ opacity: 0, x: -50 }}
+            initial={{ opacity: 0, x: -60 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
