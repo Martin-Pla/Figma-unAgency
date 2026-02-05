@@ -11,15 +11,14 @@ export const useLanguage = () => {
 };
 
 export const LanguageProvider = ({ children }) => {
-  // Obtener idioma del localStorage o detectar del navegador
+  // Obtener idioma del localStorage o usar inglés por defecto
   const getInitialLanguage = () => {
     const saved = localStorage.getItem('language');
     if (saved && (saved === 'en' || saved === 'es')) {
       return saved;
     }
-    // Detectar idioma del navegador
-    const browserLang = navigator.language || navigator.userLanguage;
-    return browserLang.startsWith('es') ? 'es' : 'en';
+    // Por defecto inglés
+    return 'en';
   };
 
   const [language, setLanguage] = useState(getInitialLanguage);
