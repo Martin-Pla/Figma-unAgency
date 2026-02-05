@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import emailjs from '@emailjs/browser';
+import { useLanguage } from '../context/LanguageContext';
+import { getTranslation } from '../utils/translations';
 
 const locations = [
   { city: "San Diego", country: "USA", time: "PST" },
@@ -153,14 +155,14 @@ export default function Contact() {
           setFormData({ name: "", email: "", message: "" });
           setTimeout(() => setSubmitStatus(null), 5000);
         } else {
-          throw new Error(result.message || 'Error al enviar el formulario');
+          throw new Error(result.message || getTranslation(language, 'errorMessage'));
         }
       } catch (error) {
         console.error('Error al enviar el correo:', error);
         setSubmitStatus('error');
         setIsSubmitting(false);
         setErrors({ 
-          submit: 'Hubo un error al enviar el mensaje. Por favor, intenta nuevamente.' 
+          submit: getTranslation(language, 'errorMessage')
         });
       }
     } else {
@@ -185,7 +187,7 @@ export default function Contact() {
         setSubmitStatus('error');
         setIsSubmitting(false);
         setErrors({ 
-          submit: 'Hubo un error al enviar el mensaje. Por favor, intenta nuevamente.' 
+          submit: getTranslation(language, 'errorMessage')
         });
       }
     }
@@ -219,6 +221,7 @@ export default function Contact() {
     }
   };
 
+  const { language } = useLanguage();
   const sectionRef = useRef(null);
   const formRef = useRef(null);
   const infoRef = useRef(null);
@@ -264,7 +267,7 @@ export default function Contact() {
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            LET'S TALK
+            {getTranslation(language, 'contactTitle')}
           </motion.h2>
 
           <form onSubmit={handleSubmit} className="contact-form-updated" noValidate>
@@ -274,12 +277,12 @@ export default function Contact() {
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
-                placeholder="NAME"
+                placeholder={getTranslation(language, 'namePlaceholder')}
                 required
                 maxLength={100}
                 pattern="[a-zA-Z\s\-'áéíóúÁÉÍÓÚñÑüÜ]{2,100}"
                 className="contact-input"
-                aria-label="Nombre"
+                aria-label={getTranslation(language, 'namePlaceholder')}
               />
               {errors.name && (
                 <span className="contact-error-message" role="alert">
@@ -293,11 +296,11 @@ export default function Contact() {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                placeholder="EMAIL"
+                placeholder={getTranslation(language, 'emailPlaceholder')}
                 required
                 maxLength={254}
                 className="contact-input"
-                aria-label="Email"
+                aria-label={getTranslation(language, 'emailPlaceholder')}
               />
               {errors.email && (
                 <span className="contact-error-message" role="alert">
@@ -310,12 +313,12 @@ export default function Contact() {
                 name="message"
                 value={formData.message}
                 onChange={handleChange}
-                placeholder="MESSAGE"
+                placeholder={getTranslation(language, 'messagePlaceholder')}
                 rows={1}
                 required
                 maxLength={2000}
                 className="contact-textarea"
-                aria-label="Mensaje"
+                aria-label={getTranslation(language, 'messagePlaceholder')}
               />
               {errors.message && (
                 <span className="contact-error-message" role="alert">
@@ -329,7 +332,7 @@ export default function Contact() {
               className="contact-submit-button-updated"
               disabled={isSubmitting}
             >
-              {isSubmitting ? 'Sending...' : 'Send Inquiry'}
+              {isSubmitting ? getTranslation(language, 'sending') : getTranslation(language, 'sendInquiry')}
               <span className="contact-submit-icon" style={{ fontSize: '16px', marginLeft: '8px' }}>→</span>
             </button>
             
@@ -340,7 +343,7 @@ export default function Contact() {
                 className="contact-success-message"
                 role="alert"
               >
-                ¡Mensaje enviado exitosamente! Te contactaremos pronto.
+                {getTranslation(language, 'successMessage')}
               </motion.div>
             )}
             
@@ -372,7 +375,7 @@ export default function Contact() {
           <div className="contact-info-content">
             <div className="contact-locations-section">
               <h3 className="contact-locations-title">
-                Locations
+                {getTranslation(language, 'locations')}
               </h3>
               <ul className="contact-locations-list">
                 {locations

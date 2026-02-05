@@ -12,9 +12,15 @@ import ProjectDetail from './components/ProjectDetail';
 import SchemaMarkup from './components/SchemaMarkup';
 import SEO from './components/SEO';
 import SectionWrapper from './components/SectionWrapper';
+import { LanguageProvider, useLanguage } from './context/LanguageContext';
+import LanguageSelector from './components/LanguageSelector';
+import { getTranslation } from './utils/translations';
 
 const logoImg = "/assets/The-unAgency-w.svg";
-function App() {
+
+// Componente interno que usa el contexto
+function AppContent() {
+  const { language } = useLanguage();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState(null);
   const [hasScrolled, setHasScrolled] = useState(false);
@@ -150,12 +156,15 @@ function App() {
                 <img src={logoImg} alt="The unAgency" className="nav-logo-img" />
               </motion.a>
               
-              <button 
-                onClick={toggleMenu}
-                className="nav-menu-button"
-              >
-                {isMenuOpen ? "Close" : "Menu"}
-              </button>
+              <div className="nav-right-group">
+                <LanguageSelector />
+                <button 
+                  onClick={toggleMenu}
+                  className="nav-menu-button"
+                >
+                  {isMenuOpen ? getTranslation(language, 'close') : getTranslation(language, 'menu')}
+                </button>
+              </div>
             </motion.nav>
 
             {/* Full Screen Menu Overlay */}
@@ -169,17 +178,17 @@ function App() {
                   className="menu-overlay"
                 >
                   <div className="menu-items">
-                    {['Projects', 'About', 'Services', 'Contact'].map((item, index) => (
+                    {['projects', 'about', 'services', 'contact'].map((item, index) => (
                       <motion.a 
                         key={item} 
-                        href={`#${item.toLowerCase()}`}
+                        href={`#${item}`}
                         onClick={() => setIsMenuOpen(false)}
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.2 + (index * 0.1), duration: 0.5 }}
                         className="menu-item-link"
                       >
-                        {item}
+                        {getTranslation(language, item)}
                       </motion.a>
                     ))}
                   </div>
@@ -241,6 +250,15 @@ function App() {
         )}
       </AnimatePresence>
     </div>
+  );
+}
+
+// Componente principal con Provider
+function App() {
+  return (
+    <LanguageProvider>
+      <AppContent />
+    </LanguageProvider>
   );
 }
 

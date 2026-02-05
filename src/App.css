@@ -87,6 +87,18 @@ img,
   image-rendering: crisp-edges;
 }
 
+.nav-right-group {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+@media (max-width: 480px) {
+  .nav-right-group {
+    gap: 16px;
+  }
+}
+
 .nav-menu-button {
   font-size: 14px;
   font-family: 'Space Mono', monospace;

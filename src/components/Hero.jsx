@@ -1,9 +1,12 @@
 import React, { useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { useLanguage } from '../context/LanguageContext';
+import { getTranslation } from '../utils/translations';
 
 const logoImg = "/assets/The-unAgency-w.svg";
 
 export default function Hero({ isLoaded = false }) {
+  const { language } = useLanguage();
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -14,6 +17,12 @@ export default function Hero({ isLoaded = false }) {
   const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
   const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [1, 0.8, 0]);
+  
+  // Traducciones
+  const tagline = getTranslation(language, 'heroTagline');
+  const taglineSecond = getTranslation(language, 'heroTaglineSecond');
+  const cta = getTranslation(language, 'heroCta');
+  const scrollText = getTranslation(language, 'scroll');
 
   return (
     <section ref={containerRef} className="hero-container">
@@ -59,8 +68,8 @@ export default function Hero({ isLoaded = false }) {
           className="hero-text-wrapper"
         >
           <p className="hero-tagline" style={{ marginTop: '20px' }}>
-            Where creativity meets strategy. <br className="hero-tagline-break" /> 
-            We don't follow the rules—we <span className="hero-tagline-bold">rewrite</span> them.
+            {tagline} <br className="hero-tagline-break" /> 
+            <span dangerouslySetInnerHTML={{ __html: taglineSecond }} />
           </p>
         </motion.div>
 
@@ -76,7 +85,7 @@ export default function Hero({ isLoaded = false }) {
           className="hero-cta-wrapper"
         >
           <a href="#contact" className="hero-cta-button">
-            Start a Project
+            {cta}
           </a>
           
           {/* Indicador de Scroll debajo del botón */}
@@ -86,7 +95,7 @@ export default function Hero({ isLoaded = false }) {
             transition={{ delay: 1.5, duration: 1.5 }}
             className="hero-cta-scroll-indicator"
           >
-            <span className="hero-cta-scroll-text">SCROLL</span>
+            <span className="hero-cta-scroll-text">{scrollText}</span>
             <motion.div
               animate={{ y: [0, 8, 0] }}
               transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
@@ -105,7 +114,7 @@ export default function Hero({ isLoaded = false }) {
         transition={{ delay: 2, duration: 1.5 }}
         className="hero-scroll-indicator"
       >
-        <span className="hero-scroll-text">SCROLL</span>
+        <span className="hero-scroll-text">{scrollText}</span>
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}

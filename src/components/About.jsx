@@ -1,5 +1,7 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
+import { useLanguage } from '../context/LanguageContext';
+import { getTranslation } from '../utils/translations';
 
 const brands = [
   "JMRPACKING", "TBG GOLF", "BELTECH", "CASTELLANA IMPORTACIONES", 
@@ -10,6 +12,7 @@ const brands = [
 const marqueeBrands = [...brands, ...brands, ...brands];
 
 export default function About() {
+  const { language } = useLanguage();
   const sectionRef = useRef(null);
   const titleRef = useRef(null);
   const manifestoRef = useRef(null);
@@ -49,7 +52,7 @@ export default function About() {
                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                 className="about-title-updated"
               >
-                ABOUT
+                {getTranslation(language, 'about')}
               </motion.h2>
             </div>
           </div>
@@ -73,7 +76,7 @@ export default function About() {
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.8, delay: 0.2 }}
               >
-                We are the <span className="about-manifesto-italic">glitch</span> in the agency model. A collective of rogue creatives obsessed with the absolute.
+                <span dangerouslySetInnerHTML={{ __html: getTranslation(language, 'aboutManifesto') }} />
               </motion.h3>
               
               <motion.div 
@@ -90,7 +93,7 @@ export default function About() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: 0.4 }}
                 >
-                  Traditional agencies sell time and bloated processes. We sell impact. We have surgically removed the account managers, the endless meetings, and the layers of middle-management that dilute vision.
+                  {getTranslation(language, 'aboutText1')}
                 </motion.p>
                 <motion.p 
                   className="about-text"
@@ -99,7 +102,7 @@ export default function About() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: 0.5 }}
                 >
-                  What remains is pure potency. Direct access to elite talent. Radical transparency. Relentless execution. We don't just build digital products; we engineer market dominance.
+                  {getTranslation(language, 'aboutText2')}
                 </motion.p>
               </motion.div>
 
@@ -111,10 +114,10 @@ export default function About() {
                 transition={{ duration: 0.6, delay: 0.6 }}
               >
                 {[
-                  { number: "01", label: "Visceral Strategy" },
-                  { number: "02", label: "Radical Design" },
-                  { number: "03", label: "Kinetic Dev" },
-                  { number: "04", label: "Total Impact" }
+                  { number: "01", label: getTranslation(language, 'service1') },
+                  { number: "02", label: getTranslation(language, 'service2') },
+                  { number: "03", label: getTranslation(language, 'service3') },
+                  { number: "04", label: getTranslation(language, 'service4') }
                 ].map((item, index) => (
                   <motion.div
                     key={item.number}
@@ -136,7 +139,7 @@ export default function About() {
 
       {/* Client Carousel */}
       <div className="about-carousel-container">
-        <p className="about-carousel-label">Trusted By</p>
+        <p className="about-carousel-label">{getTranslation(language, 'trustedBy')}</p>
         <div className="about-carousel-wrapper">
           <motion.div 
             className="about-carousel"

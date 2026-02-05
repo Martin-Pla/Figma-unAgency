@@ -1,5 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform, useInView } from 'framer-motion';
+import { useLanguage } from '../context/LanguageContext';
+import { getTranslation } from '../utils/translations';
 
 // Función helper para generar slug a partir del título
 export const generateProjectSlug = (title) => {
@@ -401,6 +403,7 @@ const ProjectItem = ({ project, index, isHeroProject, onProjectSelect }) => {
 };
 
 export default function Projects({ onProjectSelect }) {
+  const { language } = useLanguage();
   const [showAll, setShowAll] = useState(false);
   const sectionRef = useRef(null);
   
@@ -442,7 +445,7 @@ export default function Projects({ onProjectSelect }) {
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
-            PROJECTS
+            {getTranslation(language, 'projects')}
           </motion.h2>
         </motion.div>
 
@@ -488,7 +491,7 @@ export default function Projects({ onProjectSelect }) {
               whileTap={{ scale: 0.95 }}
               transition={{ duration: 0.2 }}
             >
-              {showAll ? "Show Less" : "View All Projects"}
+              {showAll ? getTranslation(language, 'showLess') : getTranslation(language, 'viewAll')}
             </motion.button>
           </motion.div>
         )}

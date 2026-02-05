@@ -1,5 +1,7 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
+import { useLanguage } from '../context/LanguageContext';
+import { getTranslation } from '../utils/translations';
 
 const services = [
   {
@@ -57,6 +59,7 @@ const services = [
 ];
 
 export default function Services() {
+  const { language } = useLanguage();
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -82,9 +85,9 @@ export default function Services() {
           transition={{ duration: 0.8 }}
           className="services-header-restructured"
         >
-          <h2 className="services-title-restructured">What We Do</h2>
+          <h2 className="services-title-restructured">{getTranslation(language, 'servicesTitle')}</h2>
           <p className="services-subtitle-restructured">
-            We transform brands into market leaders. Every project delivers measurable impact.
+            {getTranslation(language, 'servicesSubtitle')}
           </p>
         </motion.div>
 
