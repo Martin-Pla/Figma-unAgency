@@ -134,12 +134,12 @@ export default function Contact() {
       formDataToSend.append('email', sanitizedData.email);
       formDataToSend.append('message', sanitizedData.message);
       formDataToSend.append('subject', `New Inquiry from ${sanitizedData.name}`);
-      formDataToSend.append('_to', 'ad.theunagency@gmail.com');
+      formDataToSend.append('_to', 'hello@theunagencyco.com');
       formDataToSend.append('_captcha', 'false');
       formDataToSend.append('_template', 'box');
       
       try {
-        const response = await fetch('https://formsubmit.co/ajax/ad.theunagency@gmail.com', {
+        const response = await fetch('https://formsubmit.co/ajax/hello@theunagencyco.com', {
           method: 'POST',
           body: formDataToSend,
           headers: {
@@ -169,7 +169,7 @@ export default function Contact() {
       // Usar EmailJS si está configurado
       try {
         const templateParams = {
-          to_email: 'ad.theunagency@gmail.com',
+          to_email: 'hello@theunagencyco.com',
           from_name: sanitizedData.name,
           from_email: sanitizedData.email,
           message: sanitizedData.message,
@@ -399,6 +399,18 @@ export default function Contact() {
                     </li>
                   ))}
               </ul>
+            </div>
+
+            {/* Email Section */}
+            <div className="contact-email-section">
+              <h3 className="contact-email-title">
+                {getTranslation(language, 'email')}
+              </h3>
+              <div className="contact-email-content">
+                <a href="mailto:hello@theunagencyco.com" className="contact-email-link">
+                  hello@theunagencyco.com
+                </a>
+              </div>
             </div>
 
           </div>

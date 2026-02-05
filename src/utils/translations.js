@@ -44,6 +44,7 @@ export const translations = {
     sendInquiry: "Send Inquiry",
     sending: "Sending...",
     locations: "Locations",
+    email: "Email",
     successMessage: "Message sent successfully! We'll contact you soon.",
     errorMessage: "There was an error sending the message. Please try again.",
     
@@ -96,6 +97,7 @@ export const translations = {
     sendInquiry: "Enviar Consulta",
     sending: "Enviando...",
     locations: "Ubicaciones",
+    email: "Correo",
     successMessage: "¡Mensaje enviado exitosamente! Te contactaremos pronto.",
     errorMessage: "Hubo un error al enviar el mensaje. Por favor, intenta nuevamente.",
     
