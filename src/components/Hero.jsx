@@ -68,8 +68,17 @@ export default function Hero({ isLoaded = false }) {
           className="hero-text-wrapper"
         >
           <p className="hero-tagline" style={{ marginTop: '20px' }}>
-            {tagline} <br className="hero-tagline-break" /> 
-            <span dangerouslySetInnerHTML={{ __html: taglineSecond }} />
+            {language === 'es' ? (
+              <>
+                Donde la creatividad se encuentra con la estrategia. <br />
+                No seguimos las reglas—las <span className="hero-tagline-playfair">reescribimos</span>.
+              </>
+            ) : (
+              <>
+                {tagline} <br className="hero-tagline-break" /> 
+                <span dangerouslySetInnerHTML={{ __html: taglineSecond }} />
+              </>
+            )}
           </p>
         </motion.div>
 

@@ -605,6 +605,13 @@ img,
   font-weight: 700;
 }
 
+.hero-tagline-playfair {
+  font-family: 'Playfair Display', serif;
+  color: #ffffff;
+  font-weight: 400;
+  font-style: italic;
+}
+
 .hero-scroll-indicator {
   margin-top: 48px;
   margin-bottom: 32px;

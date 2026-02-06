@@ -65,7 +65,7 @@ export const translations = {
     // Hero
     heroTagline: "Donde la creatividad se encuentra con la estrategia.",
     heroTaglineBold: "reescribimos",
-    heroTaglineSecond: "No seguimos las reglas—las <strong>reescribimos</strong>.",
+    heroTaglineSecond: "No seguimos las reglas—las <span class=\"hero-tagline-playfair\">reescribimos</span>.",
     heroCta: "Iniciar un Proyecto",
     scroll: "DESPLAZAR",
     
