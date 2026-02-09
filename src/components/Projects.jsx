@@ -16,6 +16,32 @@ export const generateProjectSlug = (title) => {
 // Projects data from Figma Make
 export const projects = [
   {
+    id: "15",
+    title: "LÚMINA",
+    subtitle: "Ancestral Origin & Contemporary Narrative",
+    category: "Brand Architecture",
+    image: "/assets/cn/LETRERO-corazon.jpg",
+    layout: "carousel",
+    description: "Tradition is not a limit; it is a foundation for evolution.\n\nFor Lúmina, we disrupted the conventional visual codes of artisanal coffee to engage a more sophisticated, contemporary audience. By merging organic illustration with a vibrant, high-contrast palette, we redefined 'coffee of origin' through an emotional and technical lens. The result is a graphic system designed for high recall and market dominance, bridging the gap between ancestral heritage and modern aesthetics.",
+    year: "2025",
+    services: ["Brand Identity", "Packaging Design", "Visual Architecture"],
+    artDirection: "Perla Castañeda",
+    credits: "Lead Designer: Perla Castañeda",
+    gallery: [
+      "/assets/cn/BOLSA-corazon.jpg",
+      "/assets/cn/VASO-corazon.jpg",
+      "/assets/cn/CN-lifestyle-01.png",
+      "/assets/cn/CN-lifestyle-02.png",
+      "/assets/cn/CN-lifestyle-03.png",
+      "/assets/cn/CN-lifestyle-04.png",
+      "/assets/cn/CN-lifestyle-05.png",
+      "/assets/cn/CN-lifestyle-06.png",
+      "/assets/cn/CN-lifestyle-07.png"
+    ],
+    bottomImage: "/assets/cn/LETRERO-corazon.jpg",
+    quote: "Tradition is not a limit; it is a foundation for evolution.",
+  },
+  {
     id: "14",
     title: "BEAUTY TIME",
     subtitle: "Ritual Identity & Sensory Packaging",
