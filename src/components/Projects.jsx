@@ -26,8 +26,9 @@ export const projects = [
     year: "2025",
     services: ["Brand Identity", "Packaging Design", "Visual Architecture"],
     artDirection: "Perla Castañeda",
-    credits: "Lead Designer: Perla Castañeda\nAgency: The unAgency Co.",
+    credits: "Lead Designer: Perla Castañeda",
     gallery: [
+      "/assets/bt/BT.jpg",
       "/assets/bt/BT2.jpg",
       "/assets/bt/BT3.jpg",
       "/assets/bt/BT4.jpg",
@@ -39,7 +40,7 @@ export const projects = [
       "/assets/bt/lifestyle-BT-06.png",
       "/assets/bt/lifestyle-BT-07.png"
     ],
-    bottomImage: "/assets/bt/lifestyle-BT-07.png",
+    bottomImage: "/assets/bt/BT4.jpg",
     quote: "An identity crafted to dominate both digital and physical shelves through visual purity.",
   },
   {
