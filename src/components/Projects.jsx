@@ -28,8 +28,6 @@ export const projects = [
     artDirection: "Perla Castañeda",
     credits: "Lead Designer: Perla Castañeda",
     gallery: [
-      "/assets/bt/BT.jpg",
-      "/assets/bt/BT2.jpg",
       "/assets/bt/BT3.jpg",
       "/assets/bt/BT4.jpg",
       "/assets/bt/lifestyle-BT-01.png",

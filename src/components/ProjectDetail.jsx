@@ -176,14 +176,9 @@ const ImmersiveLayout = ({ project }) => {
       <div className="project-detail-immersive-grid">
         {project.gallery && project.gallery.length > 0 ? (
           <>
-            {project.gallery.slice(0, 4).map((img, i) => (
+            {project.gallery.map((img, i) => (
               <div key={i} className="project-detail-immersive-grid-item">
-                <img src={img} alt={`Gallery ${i}`} className="project-detail-immersive-grid-image" />
-              </div>
-            ))}
-            {[...Array(Math.max(0, 4 - project.gallery.length))].map((_, i) => (
-              <div key={`empty-${i}`} className="project-detail-immersive-grid-placeholder">
-                <span className="project-detail-grid-number">0{(project.gallery?.length || 0) + i + 1}</span>
+                <img src={img} alt={`Gallery ${i + 1}`} className="project-detail-immersive-grid-image" />
               </div>
             ))}
           </>

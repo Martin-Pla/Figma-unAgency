@@ -2628,13 +2628,12 @@ img,
 .project-detail-immersive-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  height: 256px;
+  gap: 0;
 }
 
 @media (min-width: 768px) {
   .project-detail-immersive-grid {
     grid-template-columns: repeat(4, 1fr);
-    height: 384px;
   }
 }
 
@@ -2643,6 +2642,13 @@ img,
   position: relative;
   border-right: 1px solid #262626;
   overflow: hidden;
+  min-height: 256px;
+}
+
+@media (min-width: 768px) {
+  .project-detail-immersive-grid-item {
+    min-height: 384px;
+  }
 }
 
 .project-detail-immersive-grid-image {
