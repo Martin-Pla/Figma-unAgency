@@ -57,8 +57,8 @@ const ProjectInfo = ({ project }) => (
     {project.artDirection && (
       <div className="project-detail-info-section">
         <h3 className="project-detail-info-label">Credits</h3>
-        <p className="project-detail-description">
-          Art Direction by {project.artDirection}
+        <p className="project-detail-description" style={{ whiteSpace: 'pre-line' }}>
+          {project.credits || `Lead Designer: ${project.artDirection}\nAgency: The unAgency Co.`}
         </p>
       </div>
     )}

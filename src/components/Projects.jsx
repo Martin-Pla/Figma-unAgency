@@ -16,6 +16,29 @@ export const generateProjectSlug = (title) => {
 // Projects data from Figma Make
 export const projects = [
   {
+    id: "14",
+    title: "BEAUTY TIME",
+    subtitle: "Ritual Identity & Sensory Packaging",
+    category: "Brand Architecture",
+    image: "/assets/bt/BT.jpg",
+    layout: "immersive",
+    description: "In a market saturated by visual noise, distinction is not an option—it is a strategic necessity.\n\nFor Beauty Time, the challenge went beyond design; it was about creating a value asset that transforms skincare into a ritual of authority. We elevated brand perception through a minimal and sophisticated visual architecture, engineered for those who seek not just self-care, but a tactile and cohesive luxury experience.\n\nThe Un-Process (Highlights)\n\nSignature Minimalism: Curated typography designed to project well-being and uncompromising sophistication.\n\nSensory Experience: Packaging development that communicates accessible luxury through strategic textures and gradients.\n\nElite Positioning: An identity crafted to dominate both digital and physical shelves through visual purity.",
+    year: "2025",
+    services: ["Brand Identity", "Packaging Design", "Visual Architecture"],
+    artDirection: "Perla Castañeda",
+    credits: "Lead Designer: Perla Castañeda\nAgency: The unAgency Co.",
+    gallery: [
+      "/assets/bt/BT2.jpg",
+      "/assets/bt/BT3.jpg",
+      "/assets/bt/BT4.jpg",
+      "/assets/bt/lifestyle-BT-01.png",
+      "/assets/bt/lifestyle-BT-02.png",
+      "/assets/bt/lifestyle-BT-03.png"
+    ],
+    bottomImage: "/assets/bt/lifestyle-BT-04.png",
+    quote: "An identity crafted to dominate both digital and physical shelves through visual purity.",
+  },
+  {
     id: "1",
     title: "AARON MAIER",
     subtitle: "Chef",
