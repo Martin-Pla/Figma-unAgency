@@ -21,7 +21,7 @@ export const projects = [
     subtitle: "Ritual Identity & Sensory Packaging",
     category: "Brand Architecture",
     image: "/assets/bt/BT.jpg",
-    layout: "immersive",
+    layout: "carousel",
     description: "In a market saturated by visual noise, distinction is not an option—it is a strategic necessity.\n\nFor Beauty Time, the challenge went beyond design; it was about creating a value asset that transforms skincare into a ritual of authority. We elevated brand perception through a minimal and sophisticated visual architecture, engineered for those who seek not just self-care, but a tactile and cohesive luxury experience.\n\nThe Un-Process (Highlights)\n\nSignature Minimalism: Curated typography designed to project well-being and uncompromising sophistication.\n\nSensory Experience: Packaging development that communicates accessible luxury through strategic textures and gradients.\n\nElite Positioning: An identity crafted to dominate both digital and physical shelves through visual purity.",
     year: "2025",
     services: ["Brand Identity", "Packaging Design", "Visual Architecture"],
