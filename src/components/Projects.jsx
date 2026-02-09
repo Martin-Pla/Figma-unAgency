@@ -33,9 +33,13 @@ export const projects = [
       "/assets/bt/BT4.jpg",
       "/assets/bt/lifestyle-BT-01.png",
       "/assets/bt/lifestyle-BT-02.png",
-      "/assets/bt/lifestyle-BT-03.png"
+      "/assets/bt/lifestyle-BT-03.png",
+      "/assets/bt/lifestyle-BT-04.png",
+      "/assets/bt/lifestyle-BT-05.png",
+      "/assets/bt/lifestyle-BT-06.png",
+      "/assets/bt/lifestyle-BT-07.png"
     ],
-    bottomImage: "/assets/bt/lifestyle-BT-04.png",
+    bottomImage: "/assets/bt/lifestyle-BT-07.png",
     quote: "An identity crafted to dominate both digital and physical shelves through visual purity.",
   },
   {
