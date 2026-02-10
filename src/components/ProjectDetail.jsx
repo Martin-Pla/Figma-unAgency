@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
-import { motion } from 'framer-motion';
+import React, { useEffect, useMemo, useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 import SEO from './SEO';
-import { generateProjectSlug } from './Projects';
+import { generateProjectSlug, projects } from './Projects';
 
 const ProjectHeader = ({ project }) => (
   <div className="project-detail-header">
@@ -347,7 +347,91 @@ const CarouselLayout = ({ project }) => {
   );
 };
 
-export default function ProjectDetail({ project, onBack }) {
+// Componente para la sección "Explore More"
+const ExploreMoreProjects = ({ currentProject, onProjectSelect, onBackToAll }) => {
+  const sectionRef = useRef(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+
+  // Seleccionar 3 proyectos aleatorios (excluyendo el actual)
+  const relatedProjects = useMemo(() => {
+    const filtered = projects.filter(p => p.id !== currentProject.id && !p.hidden);
+    // Mezclar y tomar 3
+    const shuffled = [...filtered].sort(() => Math.random() - 0.5);
+    return shuffled.slice(0, 3);
+  }, [currentProject.id]);
+
+  const handleProjectClick = (selectedProject) => {
+    if (onProjectSelect) {
+      const slug = generateProjectSlug(selectedProject.title);
+      window.history.pushState({}, '', `/project/${slug}`);
+      onProjectSelect(selectedProject);
+      window.scrollTo(0, 0);
+    }
+  };
+
+  return (
+    <div className="explore-more-section" ref={sectionRef}>
+      {/* Línea separadora */}
+      <div className="explore-more-divider"></div>
+      
+      {/* Título */}
+      <motion.h2
+        className="explore-more-title"
+        initial={{ opacity: 0, y: 20 }}
+        animate={isInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.6, delay: 0.2 }}
+      >
+        EXPLORE MORE
+      </motion.h2>
+
+      {/* Grid de proyectos */}
+      <div className="explore-more-grid">
+        {relatedProjects.map((relatedProject, index) => (
+          <motion.div
+            key={relatedProject.id}
+            className="explore-more-item"
+            initial={{ opacity: 0, y: 40 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
+            onClick={() => handleProjectClick(relatedProject)}
+          >
+            <div className="explore-more-image-wrapper">
+              <img
+                src={relatedProject.image}
+                alt={relatedProject.title}
+                className="explore-more-image"
+              />
+              <div className="explore-more-overlay">
+                <div className="explore-more-overlay-content">
+                  <h3 className="explore-more-overlay-title">{relatedProject.title}</h3>
+                  <p className="explore-more-overlay-category">{relatedProject.category}</p>
+                  <span className="explore-more-arrow">→</span>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Botón Back to All Projects */}
+      <motion.div
+        className="explore-more-back-wrapper"
+        initial={{ opacity: 0 }}
+        animate={isInView ? { opacity: 1 } : {}}
+        transition={{ duration: 0.6, delay: 0.6 }}
+      >
+        <button
+          onClick={onBackToAll}
+          className="explore-more-back-button"
+        >
+          BACK TO ALL PROJECTS
+        </button>
+      </motion.div>
+    </div>
+  );
+};
+
+export default function ProjectDetail({ project, onBack, onProjectSelect }) {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -404,6 +488,13 @@ export default function ProjectDetail({ project, onBack }) {
       </button>
 
       {renderLayout()}
+
+      {/* Explore More Section */}
+      <ExploreMoreProjects 
+        currentProject={project} 
+        onProjectSelect={onProjectSelect}
+        onBackToAll={onBack}
+      />
 
       {/* Footer */}
       <div className="project-detail-footer">

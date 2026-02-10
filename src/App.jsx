@@ -119,7 +119,12 @@ function AppContent() {
               setSelectedProject(null);
               // Limpiar la URL cuando se vuelve a la página principal
               window.history.pushState({}, '', '/');
-            }} 
+            }}
+            onProjectSelect={(project) => {
+              setSelectedProject(project);
+              const slug = generateProjectSlug(project.title);
+              window.history.pushState({}, '', `/project/${slug}`);
+            }}
           />
         ) : (
           <motion.div 
