@@ -3,25 +3,42 @@
 
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Inicializar Resend solo si la API key está disponible
+let resend;
+try {
+  if (process.env.RESEND_API_KEY) {
+    resend = new Resend(process.env.RESEND_API_KEY);
+  }
+} catch (error) {
+  console.error('Error initializing Resend:', error);
+}
 
 export default async function handler(req, res) {
-  // Solo permitir método POST
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
-  }
-
-  // CORS headers para permitir requests desde el frontend
+  // Configurar headers CORS y JSON desde el inicio
+  res.setHeader('Content-Type', 'application/json');
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
   // Manejar preflight request
   if (req.method === 'OPTIONS') {
-    return res.status(200).end();
+    return res.status(200).json({ message: 'OK' });
+  }
+
+  // Solo permitir método POST
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
   }
 
   try {
+    // Verificar que el body existe y es un objeto
+    if (!req.body || typeof req.body !== 'object') {
+      return res.status(400).json({ 
+        error: 'Invalid request body',
+        details: 'Request body must be a valid JSON object'
+      });
+    }
+
     const { name, email, message } = req.body;
 
     // Validación básica
@@ -53,11 +70,12 @@ export default async function handler(req, res) {
       });
     }
 
-    // Verificar que RESEND_API_KEY esté configurada
-    if (!process.env.RESEND_API_KEY) {
+    // Verificar que RESEND_API_KEY esté configurada y Resend esté inicializado
+    if (!process.env.RESEND_API_KEY || !resend) {
       console.error('RESEND_API_KEY is not configured');
       return res.status(500).json({ 
-        error: 'Email service not configured'
+        error: 'Email service not configured',
+        details: 'RESEND_API_KEY environment variable is missing'
       });
     }
 
@@ -114,9 +132,22 @@ This email was sent from the contact form on The unAgency website.
 
   } catch (error) {
     console.error('Error processing request:', error);
-    return res.status(500).json({ 
-      error: 'Internal server error',
-      details: error.message || 'Unknown error occurred'
-    });
+    
+    // Asegurar que siempre devolvemos JSON, incluso en caso de error
+    try {
+      return res.status(500).json({ 
+        error: 'Internal server error',
+        details: error?.message || 'Unknown error occurred',
+        type: error?.name || 'Error'
+      });
+    } catch (jsonError) {
+      // Si incluso el JSON falla, devolver texto plano con headers JSON
+      console.error('Failed to send JSON response:', jsonError);
+      res.setHeader('Content-Type', 'application/json');
+      return res.status(500).end(JSON.stringify({ 
+        error: 'Internal server error',
+        details: 'Failed to process request'
+      }));
+    }
   }
 }

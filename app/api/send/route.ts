@@ -4,11 +4,33 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Inicializar Resend solo si la API key está disponible
+let resend: Resend | null = null;
+try {
+  if (process.env.RESEND_API_KEY) {
+    resend = new Resend(process.env.RESEND_API_KEY);
+  }
+} catch (error) {
+  console.error('Error initializing Resend:', error);
+}
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
+    let body;
+    try {
+      body = await request.json();
+    } catch (parseError) {
+      return NextResponse.json(
+        { 
+          error: 'Invalid request body',
+          details: 'Request body must be valid JSON'
+        },
+        { 
+          status: 400,
+          headers: { 'Content-Type': 'application/json' }
+        }
+      );
+    }
     const { name, email, message } = body;
 
     // Validación básica
@@ -46,12 +68,18 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Verificar que RESEND_API_KEY esté configurada
-    if (!process.env.RESEND_API_KEY) {
+    // Verificar que RESEND_API_KEY esté configurada y Resend esté inicializado
+    if (!process.env.RESEND_API_KEY || !resend) {
       console.error('RESEND_API_KEY is not configured');
       return NextResponse.json(
-        { error: 'Email service not configured' },
-        { status: 500 }
+        { 
+          error: 'Email service not configured',
+          details: 'RESEND_API_KEY environment variable is missing'
+        },
+        { 
+          status: 500,
+          headers: { 'Content-Type': 'application/json' }
+        }
       );
     }
 
@@ -114,13 +142,34 @@ This email was sent from the contact form on The unAgency website.
 
   } catch (error) {
     console.error('Error processing request:', error);
-    return NextResponse.json(
-      { 
-        error: 'Internal server error',
-        details: error instanceof Error ? error.message : 'Unknown error occurred'
-      },
-      { status: 500 }
-    );
+    
+    // Asegurar que siempre devolvemos JSON
+    try {
+      return NextResponse.json(
+        { 
+          error: 'Internal server error',
+          details: error instanceof Error ? error.message : 'Unknown error occurred',
+          type: error instanceof Error ? error.name : 'Error'
+        },
+        { 
+          status: 500,
+          headers: { 'Content-Type': 'application/json' }
+        }
+      );
+    } catch (jsonError) {
+      // Si incluso el JSON falla, devolver respuesta básica
+      console.error('Failed to send JSON response:', jsonError);
+      return new NextResponse(
+        JSON.stringify({ 
+          error: 'Internal server error',
+          details: 'Failed to process request'
+        }),
+        { 
+          status: 500,
+          headers: { 'Content-Type': 'application/json' }
+        }
+      );
+    }
   }
 }
 

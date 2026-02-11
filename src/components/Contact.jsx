@@ -116,6 +116,7 @@ export default function Contact() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json',
         },
         body: JSON.stringify({
           name: sanitizedData.name,
@@ -124,10 +125,36 @@ export default function Contact() {
         }),
       });
 
-      const result = await response.json();
+      // Verificar el Content-Type antes de parsear
+      const contentType = response.headers.get('content-type');
+      let result;
 
+      if (contentType && contentType.includes('application/json')) {
+        try {
+          result = await response.json();
+        } catch (jsonError) {
+          console.error('Error parsing JSON response:', jsonError);
+          const textResponse = await response.text();
+          console.error('Server response (text):', textResponse);
+          throw new Error(getTranslation(language, 'errorMessage') + ': Invalid server response');
+        }
+      } else {
+        // Si no es JSON, leer como texto y loguear
+        const textResponse = await response.text();
+        console.error('Server returned non-JSON response:', textResponse);
+        console.error('Response status:', response.status);
+        console.error('Response headers:', Object.fromEntries(response.headers.entries()));
+        throw new Error(getTranslation(language, 'errorMessage') + ': Server error');
+      }
+
+      // Log para debugging si la respuesta no es OK
       if (!response.ok) {
-        throw new Error(result.error || result.details || getTranslation(language, 'errorMessage'));
+        console.error('Response not OK:', {
+          status: response.status,
+          statusText: response.statusText,
+          result: result
+        });
+        throw new Error(result?.error || result?.details || getTranslation(language, 'errorMessage'));
       }
 
       if (result.success) {
@@ -140,7 +167,7 @@ export default function Contact() {
           setSubmitStatus(null);
         }, 5000);
       } else {
-        throw new Error(result.error || getTranslation(language, 'errorMessage'));
+        throw new Error(result?.error || getTranslation(language, 'errorMessage'));
       }
     } catch (error) {
       console.error('Error al enviar el correo:', error);
