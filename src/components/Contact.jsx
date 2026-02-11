@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
-import emailjs from '@emailjs/browser';
 import { useLanguage } from '../context/LanguageContext';
 import { getTranslation } from '../utils/translations';
 
@@ -69,16 +68,6 @@ export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null); // 'success' o 'error'
 
-  // Inicializar EmailJS cuando el componente se monte
-  useEffect(() => {
-    // Configuración de EmailJS - Reemplaza estos valores con tus credenciales reales
-    // Puedes obtenerlas creando una cuenta gratuita en https://www.emailjs.com/
-    const publicKey = process.env.REACT_APP_EMAILJS_PUBLIC_KEY || 'YOUR_PUBLIC_KEY';
-    if (publicKey && publicKey !== 'YOUR_PUBLIC_KEY') {
-      emailjs.init(publicKey);
-    }
-  }, []);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     
@@ -121,75 +110,46 @@ export default function Contact() {
       message: sanitizeMessage(formData.message)
     };
     
-    // Configuración de EmailJS
-    const serviceId = process.env.REACT_APP_EMAILJS_SERVICE_ID || 'YOUR_SERVICE_ID';
-    const templateId = process.env.REACT_APP_EMAILJS_TEMPLATE_ID || 'YOUR_TEMPLATE_ID';
-    const publicKey = process.env.REACT_APP_EMAILJS_PUBLIC_KEY || 'YOUR_PUBLIC_KEY';
-    
-    // Si EmailJS no está configurado, usar FormSubmit como fallback
-    if (serviceId === 'YOUR_SERVICE_ID' || templateId === 'YOUR_TEMPLATE_ID' || publicKey === 'YOUR_PUBLIC_KEY') {
-      // Usar FormSubmit (servicio gratuito que no requiere configuración)
-      const formDataToSend = new FormData();
-      formDataToSend.append('name', sanitizedData.name);
-      formDataToSend.append('email', sanitizedData.email);
-      formDataToSend.append('message', sanitizedData.message);
-      formDataToSend.append('subject', `New Inquiry from ${sanitizedData.name}`);
-      formDataToSend.append('_to', 'hello@theunagencyco.com');
-      formDataToSend.append('_captcha', 'false');
-      formDataToSend.append('_template', 'box');
-      
-      try {
-        const response = await fetch('https://formsubmit.co/ajax/hello@theunagencyco.com', {
-          method: 'POST',
-          body: formDataToSend,
-          headers: {
-            'Accept': 'application/json'
-          }
-        });
-        
-        const result = await response.json();
-        
-        if (response.ok && result.success) {
-          setSubmitStatus('success');
-          setIsSubmitting(false);
-          setFormData({ name: "", email: "", message: "" });
-          setTimeout(() => setSubmitStatus(null), 5000);
-        } else {
-          throw new Error(result.message || getTranslation(language, 'errorMessage'));
-        }
-      } catch (error) {
-        console.error('Error al enviar el correo:', error);
-        setSubmitStatus('error');
-        setIsSubmitting(false);
-        setErrors({ 
-          submit: getTranslation(language, 'errorMessage')
-        });
-      }
-    } else {
-      // Usar EmailJS si está configurado
-      try {
-        const templateParams = {
-          to_email: 'hello@theunagencyco.com',
-          from_name: sanitizedData.name,
-          from_email: sanitizedData.email,
+    // Enviar usando la API de Resend
+    try {
+      const response = await fetch('/api/send', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: sanitizedData.name,
+          email: sanitizedData.email,
           message: sanitizedData.message,
-          subject: `New Inquiry from ${sanitizedData.name}`
-        };
-        
-        await emailjs.send(serviceId, templateId, templateParams);
-        
+        }),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || result.details || getTranslation(language, 'errorMessage'));
+      }
+
+      if (result.success) {
         setSubmitStatus('success');
         setIsSubmitting(false);
         setFormData({ name: "", email: "", message: "" });
-        setTimeout(() => setSubmitStatus(null), 5000);
-      } catch (error) {
-        console.error('Error al enviar el correo:', error);
-        setSubmitStatus('error');
-        setIsSubmitting(false);
-        setErrors({ 
-          submit: getTranslation(language, 'errorMessage')
-        });
+        setErrors({});
+        // El estado de éxito se mantiene visible por 5 segundos
+        setTimeout(() => {
+          setSubmitStatus(null);
+        }, 5000);
+      } else {
+        throw new Error(result.error || getTranslation(language, 'errorMessage'));
       }
+    } catch (error) {
+      console.error('Error al enviar el correo:', error);
+      setSubmitStatus('error');
+      setIsSubmitting(false);
+      setErrors({ 
+        submit: error.message || getTranslation(language, 'errorMessage')
+      });
+      // El estado de error se mantiene visible hasta que el usuario intente de nuevo
     }
   };
 
@@ -329,28 +289,34 @@ export default function Contact() {
 
             <button
               type="submit"
-              className="contact-submit-button-updated"
-              disabled={isSubmitting}
+              className={`contact-submit-button-updated ${
+                submitStatus === 'success' ? 'contact-submit-button-success' : ''
+              } ${submitStatus === 'error' ? 'contact-submit-button-error' : ''}`}
+              disabled={isSubmitting || submitStatus === 'success'}
             >
-              {isSubmitting ? getTranslation(language, 'sending') : getTranslation(language, 'sendInquiry')}
-              <span className="contact-submit-icon" style={{ fontSize: '16px', marginLeft: '8px' }}>→</span>
+              {isSubmitting ? (
+                <>
+                  {getTranslation(language, 'sending')}
+                  <span className="contact-submit-loading" style={{ marginLeft: '8px' }}>⋯</span>
+                </>
+              ) : submitStatus === 'success' ? (
+                <>
+                  {getTranslation(language, 'successMessage')}
+                  <span className="contact-submit-icon" style={{ fontSize: '16px', marginLeft: '8px' }}>✓</span>
+                </>
+              ) : (
+                <>
+                  {getTranslation(language, 'sendInquiry')}
+                  <span className="contact-submit-icon" style={{ fontSize: '16px', marginLeft: '8px' }}>→</span>
+                </>
+              )}
             </button>
-            
-            {submitStatus === 'success' && (
-              <motion.div
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="contact-success-message"
-                role="alert"
-              >
-                {getTranslation(language, 'successMessage')}
-              </motion.div>
-            )}
             
             {submitStatus === 'error' && errors.submit && (
               <motion.div
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
                 className="contact-error-message"
                 role="alert"
               >
