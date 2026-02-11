@@ -214,7 +214,7 @@ function AppContent() {
                       Instagram
                     </a>
                     <a 
-                      href="#" 
+                      href="https://www.linkedin.com/company/the-unagency-co/"
                       className="menu-social-link"
                       rel="noopener noreferrer"
                       target="_blank"
@@ -223,7 +223,7 @@ function AppContent() {
                       LinkedIn
                     </a>
                     <a 
-                      href="#" 
+                      href="https://twitter.com/theunagencyco"
                       className="menu-social-link"
                       rel="noopener noreferrer"
                       target="_blank"
