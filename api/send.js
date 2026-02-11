@@ -81,38 +81,18 @@ export default async function handler(req, res) {
 
     // Enviar email usando Resend
     const { data, error } = await resend.emails.send({
-      from: 'The unAgency Contact <onboarding@resend.dev>', // Cambia esto con tu dominio verificado
-      to: 'hello@theunagencyco.com',
-      subject: `New Inquiry from ${name}`,
+      from: 'The unAgency Web <system@theunagencyco.com>',
+      to: ['martin.plascencia@theunagencyco.com'],
+      subject: `New Project Inquiry from ${name}`,
+      reply_to: email,
       html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-          <h2 style="color: #171717; border-bottom: 1px solid #262626; padding-bottom: 10px;">
-            New Contact Form Submission
-          </h2>
-          <div style="margin-top: 20px;">
-            <p><strong>Name:</strong> ${name}</p>
-            <p><strong>Email:</strong> ${email}</p>
-            <p><strong>Message:</strong></p>
-            <div style="background: #f5f5f5; padding: 15px; border-left: 3px solid #171717; margin-top: 10px;">
-              ${message.replace(/\n/g, '<br>')}
-            </div>
-          </div>
-          <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e5e5e5; font-size: 12px; color: #737373;">
-            <p>This email was sent from the contact form on The unAgency website.</p>
-          </div>
+        <div style="font-family: sans-serif; background: #000; color: #fff; padding: 20px;">
+          <h2 style="color: #FF4D00;">New Inquiry: The unAgency</h2>
+          <p><strong>Name:</strong> ${name}</p>
+          <p><strong>Email:</strong> ${email}</p>
+          <p><strong>Message:</strong> </p>
+          <p style="background: #111; padding: 15px; border-radius: 5px;">${message}</p>
         </div>
-      `,
-      text: `
-New Contact Form Submission
-
-Name: ${name}
-Email: ${email}
-
-Message:
-${message}
-
----
-This email was sent from the contact form on The unAgency website.
       `,
     });
 
