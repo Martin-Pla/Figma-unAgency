@@ -183,15 +183,15 @@ export default function Contact() {
   const handleChange = (e) => {
     const { name, value } = e.target;
     
-    // Para el campo de mensaje, permitir espacios y no sanitizar en tiempo real
+    // Para el campo de mensaje y nombre, permitir espacios y no sanitizar en tiempo real
     // Solo sanitizar al enviar para mantener la experiencia de escritura fluida
-    if (name === 'message') {
+    if (name === 'message' || name === 'name') {
       setFormData({
         ...formData,
         [name]: value
       });
     } else {
-      // Sanitizar en tiempo real para otros campos
+      // Sanitizar en tiempo real solo para email
       const sanitized = sanitizeInput(value);
       setFormData({
         ...formData,
