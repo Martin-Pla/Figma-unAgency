@@ -1733,7 +1733,7 @@ img,
 .contact-input,
 .contact-textarea {
   width: 100%;
-  background: transparent;
+  background: transparent !important;
   border: none;
   border-bottom: 1px solid #404040;
   border-top: none;
@@ -1745,6 +1745,20 @@ img,
   color: #ffffff;
   outline: none;
   transition: border-color 0.3s ease, border-width 0.3s ease;
+}
+
+/* Prevenir fondo azul/gris del autocompletado de Google */
+.contact-input:-webkit-autofill,
+.contact-input:-webkit-autofill:hover,
+.contact-input:-webkit-autofill:focus,
+.contact-textarea:-webkit-autofill,
+.contact-textarea:-webkit-autofill:hover,
+.contact-textarea:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0px 1000px transparent inset !important;
+  -webkit-text-fill-color: #ffffff !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  transition: background-color 5000s ease-in-out 0s;
 }
 
 .contact-input:focus,
