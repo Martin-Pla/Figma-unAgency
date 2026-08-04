@@ -36,7 +36,11 @@
   ],
   "rewrites": [
     {
-      "source": "/(.*)",
+      "source": "/19hpetfood.com",
+      "destination": "/19hpetfood.com/index.html"
+    },
+    {
+      "source": "/((?!19hpetfood\\.com/).*)",
       "destination": "/index.html"
     }
   ]

@@ -15,7 +15,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build || CI=false react-scripts build",
+    "build:19hpetfood": "npm install --prefix 19hpetfood && npm run build --prefix 19hpetfood && rm -rf public/19hpetfood.com && mkdir -p public/19hpetfood.com && cp -R 19hpetfood/out/. public/19hpetfood.com/",
+    "build": "npm run build:19hpetfood && (react-scripts build || CI=false react-scripts build)",
     "build:seo": "npm run build && node scripts/generate-static-html.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
