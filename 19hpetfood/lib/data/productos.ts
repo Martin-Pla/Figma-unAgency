@@ -4,6 +4,8 @@ export type Etapa = "cachorro" | "adulto" | "todas";
 export type Producto = {
   slug: string;
   nombre: string;
+  /** Título completo de la ficha de producto */
+  titulo: string;
   especie: Especie;
   etapa: Etapa;
   lineaVida: string;
@@ -21,6 +23,7 @@ export type Producto = {
   imagen?: string;
 };
 
+// TODO: reemplazar con datos reales del costal
 const nutricionPlaceholder = {
   proteina: "XX%",
   grasa: "XX%",
@@ -33,6 +36,7 @@ export const productos: Producto[] = [
   {
     slug: "silver-kan-cachorro",
     nombre: "Silver Kan Cachorro®",
+    titulo: "Silver Kan Cachorro® — Nutrición para perros en crecimiento.",
     especie: "perro",
     etapa: "cachorro",
     lineaVida: "Perros en crecimiento",
@@ -49,12 +53,13 @@ export const productos: Producto[] = [
   {
     slug: "silver-kan",
     nombre: "Silver Kan®",
+    titulo: "Silver Kan® — Nutrición completa para perros adultos.",
     especie: "perro",
     etapa: "adulto",
     lineaVida: "Perros adultos",
     beneficio: "Proteínas, vitaminas y minerales para el desempeño diario",
     descripcion:
-      "Nutrición completa con proteínas, vitaminas y minerales esenciales.",
+      "Fórmula balanceada con proteínas, vitaminas y minerales esenciales, pensada para el desempeño diario de tu perro adulto.",
     beneficios: [
       "Proteína de calidad para mantenimiento muscular",
       "Vitaminas y minerales para un sistema inmune fuerte",
@@ -65,6 +70,7 @@ export const productos: Producto[] = [
   {
     slug: "silver-kan-premium",
     nombre: "Silver Kan Premium®",
+    titulo: "Silver Kan Premium® — Nutrición equilibrada para perros adultos.",
     especie: "perro",
     etapa: "adulto",
     lineaVida: "Perros adultos",
@@ -81,6 +87,7 @@ export const productos: Producto[] = [
   {
     slug: "kan-kan",
     nombre: "Kan Kan®",
+    titulo: "Kan Kan® — Alimentación práctica para el día a día.",
     especie: "perro",
     etapa: "adulto",
     lineaVida: "Perros adultos",
@@ -97,6 +104,7 @@ export const productos: Producto[] = [
   {
     slug: "mi-boob",
     nombre: "Mi Boob®",
+    titulo: "Mi Boob® — Nutrición versátil para todas las etapas.",
     especie: "perro",
     etapa: "todas",
     lineaVida: "Todas las etapas",
@@ -113,6 +121,7 @@ export const productos: Producto[] = [
   {
     slug: "silver-cat",
     nombre: "Silver Cat®",
+    titulo: "Silver Cat® — Nutrición completa para gatos adultos.",
     especie: "gato",
     etapa: "adulto",
     lineaVida: "Gatos adultos",
@@ -134,4 +143,13 @@ export function getProductoBySlug(slug: string): Producto | undefined {
 
 export function getProductosByEspecie(especie: Especie): Producto[] {
   return productos.filter((p) => p.especie === especie);
+}
+
+/** Otros productos de la misma especie (cross-sell), excluyendo el actual */
+export function getRelatedProductos(slug: string, limit = 3): Producto[] {
+  const current = getProductoBySlug(slug);
+  if (!current) return [];
+  return productos
+    .filter((p) => p.especie === current.especie && p.slug !== slug)
+    .slice(0, limit);
 }
