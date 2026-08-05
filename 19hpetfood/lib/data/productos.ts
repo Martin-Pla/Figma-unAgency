@@ -20,7 +20,14 @@ export type Producto = {
     humedad: string;
     cenizas: string;
   };
+  /** Foto de estudio del costal */
   imagen?: string;
+  /** Foto lifestyle principal (héroe / catálogo) */
+  imagenLifestyle?: string;
+  /** Alt descriptivo en español para la imagen lifestyle */
+  altLifestyle?: string;
+  /** Galería lifestyle adicional */
+  galeria?: Array<{ src: string; alt: string }>;
   peso?: string;
 };
 
@@ -52,6 +59,15 @@ export const productos: Producto[] = [
     ],
     nutricion: nutricionPlaceholder,
     imagen: "/productos/silver-kan-cachorro.png",
+    imagenLifestyle: "/productos/lifestyle/silver-kan-cachorro-01.jpg",
+    altLifestyle:
+      "Cachorro golden dormido abrazando un costal Silver Kan Cachorro en el sofá",
+    galeria: [
+      {
+        src: "/productos/lifestyle/silver-kan-cachorro-01.jpg",
+        alt: "Cachorro golden dormido abrazando un costal Silver Kan Cachorro en el sofá",
+      },
+    ],
     peso: "20 Kg",
   },
   {
@@ -70,7 +86,6 @@ export const productos: Producto[] = [
       "Formulación pensada para el gasto energético diario de un perro adulto",
     ],
     nutricion: nutricionPlaceholder,
-    // Imagen de costal pendiente
   },
   {
     slug: "silver-kan-premium",
@@ -89,6 +104,19 @@ export const productos: Producto[] = [
     ],
     nutricion: nutricionPlaceholder,
     imagen: "/productos/silver-kan-premium.png",
+    imagenLifestyle: "/productos/lifestyle/silver-kan-premium-02.jpg",
+    altLifestyle:
+      "Pastor alemán sentado junto a un costal Silver Kan Premium en la sala",
+    galeria: [
+      {
+        src: "/productos/lifestyle/silver-kan-premium-02.jpg",
+        alt: "Pastor alemán sentado junto a un costal Silver Kan Premium en la sala",
+      },
+      {
+        src: "/productos/lifestyle/silver-kan-premium-01.jpg",
+        alt: "Mano sirviendo croquetas Silver Kan Premium en un plato de cerámica",
+      },
+    ],
     peso: "20 Kg",
   },
   {
@@ -109,6 +137,19 @@ export const productos: Producto[] = [
     ],
     nutricion: nutricionPlaceholder,
     imagen: "/productos/kan-kan.png",
+    imagenLifestyle: "/productos/lifestyle/kan-kan-01.jpg",
+    altLifestyle:
+      "Golden Retriever sonriendo junto a un costal Kan Kan naranja en la sala",
+    galeria: [
+      {
+        src: "/productos/lifestyle/kan-kan-01.jpg",
+        alt: "Golden Retriever sonriendo junto a un costal Kan Kan naranja en la sala",
+      },
+      {
+        src: "/productos/lifestyle/kan-kan-02.jpg",
+        alt: "Pastor alemán cargando un costal Kan Kan en el jardín al atardecer",
+      },
+    ],
     peso: "25 Kg",
   },
   {
@@ -128,6 +169,19 @@ export const productos: Producto[] = [
     ],
     nutricion: nutricionPlaceholder,
     imagen: "/productos/mi-boob.png",
+    imagenLifestyle: "/productos/lifestyle/mi-boob-01.jpg",
+    altLifestyle:
+      "Golden Retriever en la cocina junto a un costal Mi Boob y una croqueta en la mano",
+    galeria: [
+      {
+        src: "/productos/lifestyle/mi-boob-01.jpg",
+        alt: "Golden Retriever en la cocina junto a un costal Mi Boob y una croqueta en la mano",
+      },
+      {
+        src: "/productos/lifestyle/mi-boob-02.jpg",
+        alt: "Mano sirviendo croquetas Mi Boob en un plato de acero inoxidable",
+      },
+    ],
     peso: "20 Kg",
   },
   {
@@ -148,9 +202,44 @@ export const productos: Producto[] = [
     ],
     nutricion: nutricionPlaceholder,
     imagen: "/productos/silver-cat.png",
+    imagenLifestyle: "/productos/lifestyle/silver-cat-02.jpg",
+    altLifestyle:
+      "Gato siamés sentado junto a un costal Silver Cat en la sala",
+    galeria: [
+      {
+        src: "/productos/lifestyle/silver-cat-02.jpg",
+        alt: "Gato siamés sentado junto a un costal Silver Cat en la sala",
+      },
+      {
+        src: "/productos/lifestyle/silver-cat-01.jpg",
+        alt: "Gato siamés asomándose a un costal Silver Cat sobre la barra de la cocina",
+      },
+      {
+        src: "/productos/lifestyle/silver-cat-03.jpg",
+        alt: "Mano sirviendo croquetas Silver Cat mientras un gato siamés observa el plato",
+      },
+    ],
     peso: "15 Kg",
   },
 ];
+
+/** Imágenes lifestyle para el héroe Home según modo mascota */
+export const heroLifestyle = {
+  perro: "/productos/lifestyle/kan-kan-01.jpg",
+  gato: "/productos/lifestyle/silver-cat-02.jpg",
+} as const;
+
+/** Imágenes para scrollytelling de historia */
+export const historiaImages = [
+  {
+    src: "/productos/lifestyle/silver-kan-cachorro-01.jpg",
+    alt: "Cachorro descansando junto a Silver Kan Cachorro en casa",
+  },
+  {
+    src: "/productos/lifestyle/kan-kan-02.jpg",
+    alt: "Pastor alemán con costal Kan Kan en el jardín",
+  },
+] as const;
 
 export function getProductoBySlug(slug: string): Producto | undefined {
   return productos.find((p) => p.slug === slug);
@@ -167,4 +256,9 @@ export function getRelatedProductos(slug: string, limit = 3): Producto[] {
   return productos
     .filter((p) => p.especie === current.especie && p.slug !== slug)
     .slice(0, limit);
+}
+
+/** Imagen visible prioritaria: lifestyle > costal */
+export function getProductoVisual(producto: Producto): string | undefined {
+  return producto.imagenLifestyle || producto.imagen;
 }

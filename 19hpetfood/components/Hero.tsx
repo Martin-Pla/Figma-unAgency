@@ -1,6 +1,8 @@
 "use client";
 
+import Image from "next/image";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { heroLifestyle } from "@/lib/data/productos";
 
 type HeroProps = {
   mode?: "perro" | "gato";
@@ -10,18 +12,21 @@ type HeroProps = {
 const modeCopy = {
   perro: {
     lineLabel: "Línea para perros",
-    imageLabel: "Placeholder · perro en campo mexicano",
   },
   gato: {
     lineLabel: "Línea para gatos",
-    imageLabel: "Placeholder · gato en hogar",
   },
 } as const;
 
 export default function Hero({ mode = "perro", onModeChange }: HeroProps) {
   const reduce = useReducedMotion();
-  const accent = mode === "perro" ? "#C9743A" : "#2A6F77";
+  const accent = mode === "perro" ? "#A85A28" : "#2A6F77";
   const copy = modeCopy[mode];
+  const lifestyleSrc = heroLifestyle[mode];
+  const lifestyleAlt =
+    mode === "perro"
+      ? "Golden Retriever junto a un costal Kan Kan en la sala"
+      : "Gato siamés junto a un costal Silver Cat en la sala";
 
   return (
     <section
@@ -36,36 +41,46 @@ export default function Hero({ mode = "perro", onModeChange }: HeroProps) {
           animate={{ opacity: 1 }}
           exit={reduce ? undefined : { opacity: 0 }}
           transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-          aria-hidden
         >
+          {/* Foto lifestyle full-bleed — visible en todo el viewport */}
+          <div className="absolute inset-0">
+            <Image
+              src={lifestyleSrc}
+              alt={lifestyleAlt}
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover object-[70%_center] md:object-[60%_center]"
+            />
+          </div>
+          {/* Veladura: más densa a la izquierda (copy), más abierta a la derecha (foto) */}
           <div
             className="absolute inset-0"
             style={{
               background:
                 mode === "perro"
-                  ? "linear-gradient(135deg, #F7F3EC 0%, #E8D5C4 42%, #C9743A 160%)"
-                  : "linear-gradient(135deg, #F7F3EC 0%, #C5D5D4 42%, #2A6F77 160%)",
+                  ? "linear-gradient(105deg, rgba(247,243,236,0.94) 0%, rgba(247,243,236,0.82) 34%, rgba(247,243,236,0.25) 58%, rgba(26,18,20,0.15) 100%)"
+                  : "linear-gradient(105deg, rgba(247,243,236,0.94) 0%, rgba(247,243,236,0.82) 34%, rgba(247,243,236,0.25) 58%, rgba(26,18,20,0.18) 100%)",
             }}
           />
+          {/* En mobile, refuerzo legibilidad sobre la foto */}
+          <div className="absolute inset-0 bg-cream/55 md:hidden" />
           <div
-            className="absolute inset-y-0 right-0 w-full md:w-[55%]"
+            className="absolute inset-y-0 right-0 hidden w-[55%] md:block"
             style={{
               background:
                 mode === "perro"
-                  ? "radial-gradient(ellipse at 70% 40%, rgba(201,116,58,0.45) 0%, transparent 65%)"
-                  : "radial-gradient(ellipse at 70% 40%, rgba(42,111,119,0.45) 0%, transparent 65%)",
+                  ? "radial-gradient(ellipse at 70% 40%, rgba(168,90,40,0.12) 0%, transparent 65%)"
+                  : "radial-gradient(ellipse at 70% 40%, rgba(42,111,119,0.14) 0%, transparent 65%)",
             }}
           />
-          <div className="absolute bottom-8 right-6 hidden max-w-[14rem] text-right text-xs uppercase tracking-[0.18em] text-[var(--foreground)]/40 md:block">
-            {copy.imageLabel}
-          </div>
         </motion.div>
       </AnimatePresence>
 
       <div className="relative mx-auto flex min-h-[100svh] max-w-6xl flex-col justify-end px-5 pb-16 pt-28 sm:px-6 md:justify-center md:pb-24 md:pt-32">
         <div className="max-w-2xl">
           <div
-            className="mb-6 inline-flex rounded-sm border border-[var(--foreground)]/10 bg-cream/70 p-1 backdrop-blur-sm"
+            className="mb-6 inline-flex max-w-full rounded-sm border border-[var(--foreground)]/10 bg-cream/80 p-1 shadow-sm backdrop-blur-sm"
             role="group"
             aria-label="Elegir modo mascota"
           >
@@ -77,7 +92,7 @@ export default function Hero({ mode = "perro", onModeChange }: HeroProps) {
                   type="button"
                   onClick={() => onModeChange?.(option)}
                   aria-pressed={active}
-                  className="relative min-h-11 min-w-[5.5rem] rounded-sm px-4 py-2.5 text-sm font-medium capitalize transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red"
+                  className="relative min-h-11 min-w-[4.75rem] flex-1 rounded-sm px-3 py-2.5 text-center text-sm font-medium capitalize transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red sm:min-w-[5.5rem] sm:flex-none sm:px-4"
                   style={{ color: active ? "#F7F3EC" : "var(--foreground)" }}
                 >
                   {active && (
@@ -88,7 +103,9 @@ export default function Hero({ mode = "perro", onModeChange }: HeroProps) {
                       transition={{ type: "spring", stiffness: 380, damping: 32 }}
                     />
                   )}
-                  <span className="relative z-10">{option === "perro" ? "Perro" : "Gato"}</span>
+                  <span className="relative z-10">
+                    {option === "perro" ? "Perro" : "Gato"}
+                  </span>
                 </button>
               );
             })}
@@ -112,7 +129,7 @@ export default function Hero({ mode = "perro", onModeChange }: HeroProps) {
             Nutrición de campo, hecha para tu hogar.
           </h1>
 
-          <p className="mt-5 max-w-xl font-body text-base leading-relaxed text-[var(--foreground)]/80 sm:text-lg">
+          <p className="mt-5 max-w-xl font-body text-base leading-relaxed text-[var(--foreground)]/85 sm:text-lg">
             Alimento balanceado para perros y gatos, elaborado en Tototlán,
             Jalisco, con una fórmula para cada etapa de su vida.
           </p>
@@ -120,14 +137,14 @@ export default function Hero({ mode = "perro", onModeChange }: HeroProps) {
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <a
               href="#productos"
-              className="btn-interactive inline-flex min-h-12 items-center justify-center rounded-sm px-6 py-3 text-center text-sm font-semibold text-cream focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red"
-              style={{ backgroundColor: accent }}
+              className="btn-interactive inline-flex min-h-12 items-center justify-center rounded-sm px-6 py-3 text-sm font-semibold text-cream focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red"
+              style={{ backgroundColor: accent, color: "#F7F3EC" }}
             >
               Descubre tu alimento ideal
             </a>
             <a
               href="#donde-comprar"
-              className="btn-interactive inline-flex min-h-12 items-center justify-center rounded-sm border border-brand-red/30 bg-cream/60 px-6 py-3 text-center text-sm font-semibold text-brand-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red"
+              className="btn-interactive inline-flex min-h-12 items-center justify-center rounded-sm border border-brand-red/30 bg-cream/80 px-6 py-3 text-center text-sm font-semibold text-brand-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red"
             >
               Encuentra un distribuidor
             </a>

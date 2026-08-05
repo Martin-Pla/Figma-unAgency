@@ -6,13 +6,21 @@
   --background: #f7f3ec;
   --foreground: #1a1214;
   --brand-red: #c41e3a;
-  --accent-dog: #c9743a;
+  /* Ámbar oscurecido a #A85A28 para AA ≥4.5:1 con crema/texto claro */
+  --accent-dog: #a85a28;
+  --accent-dog-bright: #c9743a;
   --accent-cat: #2a6f77;
   --accent: var(--accent-dog);
+  --on-accent: #f7f3ec;
 }
 
 html {
   scroll-padding-top: 5rem;
+  overflow-x: clip;
+}
+
+body {
+  overflow-x: clip;
 }
 
 @media (prefers-reduced-motion: no-preference) {

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Producto } from "@/lib/data/productos";
 import FadeIn from "@/components/FadeIn";
 import ProductImage from "@/components/ProductImage";
@@ -10,6 +11,10 @@ type ProductHeroProps = {
 export default function ProductHero({ producto }: ProductHeroProps) {
   const accent =
     producto.especie === "gato" ? "var(--accent-cat)" : "var(--accent-dog)";
+
+  const secondaryLifestyle = producto.galeria?.find(
+    (g) => g.src !== producto.imagenLifestyle,
+  );
 
   return (
     <section className="bg-cream pt-24 md:pt-28">
@@ -23,13 +28,37 @@ export default function ProductHero({ producto }: ProductHeroProps) {
       </div>
 
       <div className="mx-auto grid max-w-6xl gap-10 px-5 py-12 sm:px-6 md:grid-cols-2 md:gap-14 md:py-16">
-        <FadeIn duration={0.5}>
+        <FadeIn duration={0.5} className="space-y-4">
           <ProductImage
             producto={producto}
             variant="hero"
             priority
-            className="rounded-sm"
+            className="rounded-sm shadow-lg"
           />
+          {producto.imagen && producto.imagenLifestyle && (
+            <div className="grid grid-cols-2 gap-3">
+              <div className="relative aspect-[3/4] overflow-hidden rounded-sm bg-black">
+                <Image
+                  src={producto.imagen}
+                  alt={`Costal de alimento ${producto.nombre}`}
+                  fill
+                  sizes="25vw"
+                  className="object-contain p-2"
+                />
+              </div>
+              {secondaryLifestyle && (
+                <div className="relative aspect-[3/4] overflow-hidden rounded-sm bg-[#1a1214]">
+                  <Image
+                    src={secondaryLifestyle.src}
+                    alt={secondaryLifestyle.alt}
+                    fill
+                    sizes="25vw"
+                    className="object-cover"
+                  />
+                </div>
+              )}
+            </div>
+          )}
         </FadeIn>
 
         <FadeIn

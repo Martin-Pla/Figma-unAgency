@@ -1,18 +1,20 @@
 "use client";
 
+import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import FadeIn from "@/components/FadeIn";
+import { historiaImages } from "@/lib/data/productos";
 
 const beats = [
   {
     title: "Tototlán, Jalisco",
     body: "Todo empezó en Tototlán, Jalisco, con una promesa simple: alimentar bien cuesta lo justo.",
-    imageLabel: "Placeholder · campo en Tototlán",
+    image: historiaImages[0],
   },
   {
     title: "Nueve estados",
     body: "Hoy llevamos esa misma promesa a los tazones de perros y gatos en nueve estados del país, seleccionando cada ingrediente por calidad y desempeño, no solo por costo.",
-    imageLabel: "Placeholder · distribución regional",
+    image: historiaImages[1],
   },
 ];
 
@@ -41,17 +43,15 @@ export default function Historia() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                className="relative aspect-[4/3] overflow-hidden rounded-sm"
-                style={{
-                  background:
-                    index === 0
-                      ? "linear-gradient(145deg, #E8D5C4 0%, #C41E3A 120%)"
-                      : "linear-gradient(145deg, #D4C4B0 0%, #C9743A 130%)",
-                }}
+                className="relative aspect-[4/5] min-h-[280px] w-full min-w-0 overflow-hidden rounded-sm shadow-md sm:aspect-[4/3] sm:min-h-[320px]"
               >
-                <span className="absolute bottom-4 left-4 text-xs uppercase tracking-[0.16em] text-cream/80">
-                  {beat.imageLabel}
-                </span>
+                <Image
+                  src={beat.image.src}
+                  alt={beat.image.alt}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover object-center"
+                />
               </motion.div>
 
               <motion.div
@@ -59,6 +59,7 @@ export default function Historia() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.5, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
+                className="min-w-0"
               >
                 <p
                   className="mb-3 text-sm font-semibold uppercase tracking-[0.18em]"

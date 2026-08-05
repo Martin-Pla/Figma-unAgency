@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Hero from "@/components/Hero";
 import TrustBar from "@/components/TrustBar";
 import Historia from "@/components/Historia";
+import LifestyleStrip from "@/components/LifestyleStrip";
 import CatalogoFinder from "@/components/CatalogoFinder";
 import CalidadIngredientes from "@/components/CalidadIngredientes";
 import DondeComprar from "@/components/DondeComprar";
@@ -31,6 +32,7 @@ export default function HomePage() {
       <Hero mode={mode} onModeChange={setMode} />
       <TrustBar />
       <Historia />
+      <LifestyleStrip />
       <CatalogoFinder key={catalogEspecie} initialEspecie={catalogEspecie} />
       <CalidadIngredientes />
       <DondeComprar />

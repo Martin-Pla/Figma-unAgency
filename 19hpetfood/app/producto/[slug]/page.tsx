@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import type { CSSProperties } from "react";
 import type { Metadata } from "next";
 import ProductHero from "@/components/ProductHero";
+import ProductGallery from "@/components/ProductGallery";
 import ProductBenefits from "@/components/ProductBenefits";
 import ProductNutritionTable from "@/components/ProductNutritionTable";
 import ProductRelated from "@/components/ProductRelated";
@@ -49,6 +50,7 @@ export default function ProductoPage({ params }: PageProps) {
   return (
     <main className="min-h-screen bg-cream" style={mainStyle}>
       <ProductHero producto={producto} />
+      <ProductGallery producto={producto} />
       <ProductBenefits producto={producto} />
       <ProductNutritionTable producto={producto} />
       <ProductRelated productos={related} />

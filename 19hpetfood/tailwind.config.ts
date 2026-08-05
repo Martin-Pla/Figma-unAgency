@@ -15,7 +15,8 @@ const config: Config = {
           DEFAULT: "#C41E3A",
         },
         accent: {
-          dog: "#C9743A",
+          dog: "#A85A28",
+          dogBright: "#C9743A",
           cat: "#2A6F77",
         },
       },
