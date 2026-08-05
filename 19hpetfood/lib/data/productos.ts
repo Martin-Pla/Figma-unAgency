@@ -21,6 +21,7 @@ export type Producto = {
     cenizas: string;
   };
   imagen?: string;
+  peso?: string;
 };
 
 // TODO: reemplazar con datos reales del costal
@@ -40,15 +41,18 @@ export const productos: Producto[] = [
     especie: "perro",
     etapa: "cachorro",
     lineaVida: "Perros en crecimiento",
-    beneficio: "Proteína y minerales para un desarrollo óseo fuerte",
+    beneficio: "Huesos sanos y fuertes",
     descripcion:
-      "Nutrición para la etapa de crecimiento con proteínas, vitaminas y minerales.",
+      "Elaborado con cereales y productos de la más alta calidad para el desarrollo óptimo de tu mascota. Alimento balanceado para todo tipo de razas.",
     beneficios: [
-      "Proteína y minerales para un desarrollo óseo fuerte",
-      "Vitaminas esenciales para el crecimiento",
-      "Fórmula pensada para cachorros activos",
+      "Máxima energía y vitalidad",
+      "Pelo suave y saludable",
+      "Fácil y máxima digestión",
+      "Huesos sanos y fuertes",
     ],
     nutricion: nutricionPlaceholder,
+    imagen: "/productos/silver-kan-cachorro.png",
+    peso: "20 Kg",
   },
   {
     slug: "silver-kan",
@@ -66,6 +70,7 @@ export const productos: Producto[] = [
       "Formulación pensada para el gasto energético diario de un perro adulto",
     ],
     nutricion: nutricionPlaceholder,
+    // Imagen de costal pendiente
   },
   {
     slug: "silver-kan-premium",
@@ -74,15 +79,17 @@ export const productos: Producto[] = [
     especie: "perro",
     etapa: "adulto",
     lineaVida: "Perros adultos",
-    beneficio: "Ingredientes seleccionados para pelaje y digestión",
+    beneficio: "Prebióticos que mejoran la integridad intestinal",
     descripcion:
-      "Fórmula con ingredientes seleccionados para una nutrición equilibrada.",
+      "Alimento premium con prebióticos, vitaminas y minerales que apoyan su salud y energía. Para perros adultos de todas las razas y tamaños.",
     beneficios: [
-      "Ingredientes seleccionados para pelaje y digestión",
-      "Nutrición equilibrada para perros adultos",
-      "Fórmula premium de la línea Silver Kan",
+      "Minerales orgánicos que favorecen la salud del pelo y la piel",
+      "Antioxidantes para la salud de articulaciones y músculos",
+      "Prebióticos que mejoran la integridad intestinal",
     ],
     nutricion: nutricionPlaceholder,
+    imagen: "/productos/silver-kan-premium.png",
+    peso: "20 Kg",
   },
   {
     slug: "kan-kan",
@@ -91,32 +98,37 @@ export const productos: Producto[] = [
     especie: "perro",
     etapa: "adulto",
     lineaVida: "Perros adultos",
-    beneficio: "Nutrientes esenciales para la rutina del día a día",
+    beneficio: "Máxima energía y vitalidad",
     descripcion:
-      "Alimentación práctica para el día a día, con nutrientes esenciales.",
+      "Kan-Kan® está elaborado con cereales y materias primas de alta calidad, pensado para apoyar el desarrollo y bienestar de tu mascota. Alimento balanceado para todo tipo de razas.",
     beneficios: [
-      "Nutrientes esenciales para la rutina del día a día",
-      "Alimentación práctica y accesible",
-      "Fórmula pensada para perros adultos activos",
+      "Máxima energía y vitalidad",
+      "Piel sana y pelo brillante",
+      "Fácil y óptima digestión",
+      "Huesos sanos",
     ],
     nutricion: nutricionPlaceholder,
+    imagen: "/productos/kan-kan.png",
+    peso: "25 Kg",
   },
   {
     slug: "mi-boob",
     nombre: "Mi Boob®",
-    titulo: "Mi Boob® — Nutrición versátil para todas las etapas.",
+    titulo: "Mi Boob® — El alimento que pone feliz a tu mascota.",
     especie: "perro",
     etapa: "todas",
     lineaVida: "Todas las etapas",
-    beneficio: "Vitaminas y minerales para distintas razas y edades",
+    beneficio: "Alimento balanceado para todo tipo de razas",
     descripcion:
-      "Nutrición versátil con vitaminas y minerales para diferentes razas y edades.",
+      "Elaborado con cereales y productos de la más alta calidad para el desarrollo óptimo de tu mascota. Alimento balanceado para todo tipo de razas.",
     beneficios: [
-      "Vitaminas y minerales para distintas razas y edades",
-      "Fórmula versátil para todas las etapas",
-      "Nutrición adaptable a diferentes tamaños",
+      "Alimento balanceado para todo tipo de razas",
+      "Elaborado con cereales y productos de alta calidad",
+      "Pensado para el desarrollo óptimo de tu mascota",
     ],
     nutricion: nutricionPlaceholder,
+    imagen: "/productos/mi-boob.png",
+    peso: "20 Kg",
   },
   {
     slug: "silver-cat",
@@ -125,15 +137,18 @@ export const productos: Producto[] = [
     especie: "gato",
     etapa: "adulto",
     lineaVida: "Gatos adultos",
-    beneficio: "Nutrición completa para su actividad diaria",
+    beneficio: "Sabor a pollo y pescado",
     descripcion:
-      "Nutrición completa con nutrientes esenciales para su alimentación diaria.",
+      "Nutrición confiable para tu gato; proteínas de origen animal, vitaminas y minerales que contribuyen a su salud, energía y una vida activa.",
     beneficios: [
-      "Nutrición completa para su actividad diaria",
-      "Nutrientes esenciales para gatos adultos",
-      "Fórmula pensada para el bienestar diario",
+      "Sabor a pollo y pescado",
+      "Mejor digestión",
+      "Balanceado para controlar la acidificación de la orina",
+      "Fibras naturales que ayudan a un adecuado tránsito intestinal",
     ],
     nutricion: nutricionPlaceholder,
+    imagen: "/productos/silver-cat.png",
+    peso: "15 Kg",
   },
 ];
 

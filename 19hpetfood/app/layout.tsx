@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Plus_Jakarta_Sans } from "next/font/google";
+import SiteHeader from "@/components/SiteHeader";
+import SiteFooter from "@/components/SiteFooter";
 import "./globals.css";
 
 const display = Plus_Jakarta_Sans({
@@ -35,7 +37,9 @@ export default function RootLayout({
       <body
         className={`${display.variable} ${body.variable} bg-cream text-[var(--foreground)] antialiased`}
       >
+        <SiteHeader />
         {children}
+        <SiteFooter />
       </body>
     </html>
   );

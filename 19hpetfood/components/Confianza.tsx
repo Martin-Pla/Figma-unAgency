@@ -32,7 +32,7 @@ export default function Confianza() {
         <div className="mt-12 grid gap-5 md:grid-cols-3">
           {placeholders.map((item, i) => (
             <FadeIn key={item.author} delay={i * 0.08}>
-              <blockquote className="h-full border border-dashed border-brand-red/20 p-6">
+              <blockquote className="card-interactive h-full border border-dashed border-brand-red/20 p-6">
                 <p className="font-body text-base leading-relaxed text-[var(--foreground)]/70">
                   “{item.quote}”
                 </p>

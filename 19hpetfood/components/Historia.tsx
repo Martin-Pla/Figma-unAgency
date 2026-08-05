@@ -37,10 +37,10 @@ export default function Historia() {
               }`}
             >
               <motion.div
-                initial={reduce ? false : { opacity: 0, y: 32 }}
+                initial={reduce ? false : { opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
                 className="relative aspect-[4/3] overflow-hidden rounded-sm"
                 style={{
                   background:
@@ -55,10 +55,10 @@ export default function Historia() {
               </motion.div>
 
               <motion.div
-                initial={reduce ? false : { opacity: 0, x: index % 2 === 0 ? 28 : -28 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.55, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
+                initial={reduce ? false : { opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.5, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
               >
                 <p
                   className="mb-3 text-sm font-semibold uppercase tracking-[0.18em]"
@@ -77,7 +77,7 @@ export default function Historia() {
         <FadeIn className="mt-14 md:mt-16" delay={0.1}>
           <a
             href="#calidad"
-            className="inline-flex min-h-12 items-center justify-center rounded-sm border border-brand-red/30 px-6 py-3 text-sm font-semibold text-brand-red transition-transform hover:scale-[1.02] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red"
+            className="btn-interactive inline-flex min-h-12 items-center justify-center rounded-sm border border-brand-red/30 px-6 py-3 text-sm font-semibold text-brand-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red"
           >
             Conoce nuestra historia completa
           </a>

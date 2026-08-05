@@ -42,7 +42,7 @@ export default function DondeComprar() {
         <FadeIn className="mt-10" delay={0.12}>
           <a
             href="#contacto"
-            className="inline-flex min-h-12 items-center justify-center rounded-sm px-6 py-3 text-sm font-semibold text-cream transition-transform hover:scale-[1.02] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red"
+            className="btn-interactive inline-flex min-h-12 items-center justify-center rounded-sm px-6 py-3 text-sm font-semibold text-cream focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red"
             style={{ backgroundColor: "var(--accent)" }}
           >
             Buscar distribuidor por estado

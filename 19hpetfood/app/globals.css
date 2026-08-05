@@ -11,6 +11,16 @@
   --accent: var(--accent-dog);
 }
 
+html {
+  scroll-padding-top: 5rem;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
 body {
   color: var(--foreground);
   background: var(--background);
@@ -26,6 +36,30 @@ h6 {
   font-family: var(--font-display), system-ui, sans-serif;
 }
 
+@layer components {
+  .btn-interactive {
+    @apply transition-all duration-300 ease-out;
+  }
+
+  .btn-interactive:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 24px rgba(26, 18, 20, 0.1);
+  }
+
+  .btn-interactive:active {
+    transform: scale(1);
+  }
+
+  .card-interactive {
+    @apply transition-all duration-300 ease-out;
+  }
+
+  .card-interactive:hover {
+    transform: scale(1.02);
+    box-shadow: 0 12px 32px rgba(26, 18, 20, 0.1);
+  }
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
@@ -36,4 +70,17 @@ h6 {
 :focus-visible {
   outline: 2px solid var(--brand-red);
   outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-interactive,
+  .card-interactive {
+    transition: none;
+  }
+
+  .btn-interactive:hover,
+  .card-interactive:hover {
+    transform: none;
+    box-shadow: none;
+  }
 }

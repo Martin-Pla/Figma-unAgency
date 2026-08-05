@@ -120,14 +120,14 @@ export default function Hero({ mode = "perro", onModeChange }: HeroProps) {
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <a
               href="#productos"
-              className="inline-flex min-h-12 items-center justify-center rounded-sm px-6 py-3 text-center text-sm font-semibold text-cream transition-transform hover:scale-[1.02] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red"
+              className="btn-interactive inline-flex min-h-12 items-center justify-center rounded-sm px-6 py-3 text-center text-sm font-semibold text-cream focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red"
               style={{ backgroundColor: accent }}
             >
               Descubre tu alimento ideal
             </a>
             <a
               href="#donde-comprar"
-              className="inline-flex min-h-12 items-center justify-center rounded-sm border border-brand-red/30 bg-cream/60 px-6 py-3 text-center text-sm font-semibold text-brand-red transition-transform hover:scale-[1.02] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red"
+              className="btn-interactive inline-flex min-h-12 items-center justify-center rounded-sm border border-brand-red/30 bg-cream/60 px-6 py-3 text-center text-sm font-semibold text-brand-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red"
             >
               Encuentra un distribuidor
             </a>

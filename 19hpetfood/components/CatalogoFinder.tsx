@@ -2,8 +2,8 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import FadeIn from "@/components/FadeIn";
+import ProductImage from "@/components/ProductImage";
 import {
   productos,
   type Especie,
@@ -78,27 +78,13 @@ export default function CatalogoFinder({
 
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {filtered.map((producto, i) => (
-            <FadeIn key={producto.slug} delay={Math.min(i * 0.05, 0.2)}>
+            <FadeIn key={producto.slug} delay={Math.min(i * 0.05, 0.2)} duration={0.5}>
               <Link
                 href={`/producto/${producto.slug}`}
-                className="group relative block overflow-hidden rounded-sm border border-brand-red/10 bg-cream focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red"
+                className="card-interactive group relative block overflow-hidden rounded-sm border border-brand-red/10 bg-cream focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red"
               >
-                <motion.article
-                  whileHover={{ y: -4, scale: 1.02 }}
-                  transition={{ type: "spring", stiffness: 360, damping: 28 }}
-                  className="h-full shadow-sm transition-shadow group-hover:shadow-md"
-                >
-                  <div
-                    className="aspect-[4/3] w-full"
-                    style={{
-                      background:
-                        producto.especie === "gato"
-                          ? "linear-gradient(145deg, #D5E4E3 0%, #2A6F77 140%)"
-                          : "linear-gradient(145deg, #E8D5C4 0%, #C9743A 140%)",
-                    }}
-                    role="img"
-                    aria-label={`Imagen placeholder de ${producto.nombre}`}
-                  />
+                <article className="h-full">
+                  <ProductImage producto={producto} variant="card" />
                   <div className="p-5">
                     <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--foreground)]/50">
                       {producto.lineaVida}
@@ -111,7 +97,7 @@ export default function CatalogoFinder({
                       {producto.beneficio}
                     </p>
                   </div>
-                </motion.article>
+                </article>
               </Link>
             </FadeIn>
           ))}
