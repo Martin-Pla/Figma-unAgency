@@ -1,9 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
+import { asset } from "@/lib/asset";
+import { logo19Hermanos } from "@/lib/data/productos";
 
 const navItems = [
   { href: "/#inicio", label: "Inicio" },
@@ -49,9 +52,20 @@ export default function SiteHeader() {
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-6 md:h-[4.25rem]">
         <Link
           href="/"
-          className="font-display text-lg font-extrabold tracking-tight text-brand-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red"
+          className="flex items-center gap-2.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red"
         >
-          19hPetFood
+          <span className="relative h-9 w-9 shrink-0 overflow-hidden rounded-full bg-brand-red sm:h-10 sm:w-10">
+            <Image
+              src={asset(logo19Hermanos)}
+              alt="Logotipo Los 19 Hermanos"
+              fill
+              sizes="40px"
+              className="object-cover"
+            />
+          </span>
+          <span className="font-display text-lg font-extrabold tracking-tight text-brand-red">
+            19hPetFood
+          </span>
         </Link>
 
         <nav

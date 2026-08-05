@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { heroLifestyle } from "@/lib/data/productos";
+import { asset } from "@/lib/asset";
 
 type HeroProps = {
   mode?: "perro" | "gato";
@@ -45,7 +46,7 @@ export default function Hero({ mode = "perro", onModeChange }: HeroProps) {
           {/* Foto lifestyle full-bleed — visible en todo el viewport */}
           <div className="absolute inset-0">
             <Image
-              src={lifestyleSrc}
+              src={asset(lifestyleSrc)}
               alt={lifestyleAlt}
               fill
               priority

@@ -1,4 +1,7 @@
 import Link from "next/link";
+import Image from "next/image";
+import { asset } from "@/lib/asset";
+import { logo19Hermanos } from "@/lib/data/productos";
 
 const socials = [
   { label: "Instagram", href: "#redes" },
@@ -11,9 +14,20 @@ export default function SiteFooter() {
     <footer className="border-t border-brand-red/10 bg-cream">
       <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 sm:px-6 md:grid-cols-3 md:gap-8 md:py-16">
         <div>
-          <p className="font-display text-xl font-extrabold text-brand-red">
-            19hPetFood
-          </p>
+          <div className="flex items-center gap-3">
+            <span className="relative h-12 w-12 shrink-0 overflow-hidden rounded-full">
+              <Image
+                src={asset(logo19Hermanos)}
+                alt="Logotipo Los 19 Hermanos"
+                fill
+                sizes="48px"
+                className="object-cover"
+              />
+            </span>
+            <p className="font-display text-xl font-extrabold text-brand-red">
+              19hPetFood
+            </p>
+          </div>
           <p className="mt-3 max-w-xs font-body text-sm leading-relaxed text-[var(--foreground)]/65">
             Nutrición de campo, hecha para tu hogar. Forrajera Los 19 Hermanos ·
             Tototlán, Jalisco.

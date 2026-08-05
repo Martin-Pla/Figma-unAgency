@@ -1,19 +1,20 @@
 import Image from "next/image";
 import FadeIn from "@/components/FadeIn";
+import { asset } from "@/lib/asset";
 
 const momentos = [
   {
-    src: "/productos/lifestyle/mi-boob-02.jpg",
+    src: "/assets/19hPetfood/Mi-Boob-02.jpg",
     alt: "Sirviendo Mi Boob en el hogar",
     label: "En el tazón",
   },
   {
-    src: "/productos/lifestyle/silver-kan-premium-02.jpg",
+    src: "/assets/19hPetfood/Silver-Kan-Premium-02.jpg",
     alt: "Pastor alemán con Silver Kan Premium",
     label: "Compañía diaria",
   },
   {
-    src: "/productos/lifestyle/silver-cat-03.jpg",
+    src: "/assets/19hPetfood/Silver-Cat-03.jpg",
     alt: "Sirviendo Silver Cat a un gato",
     label: "Para gatos",
   },
@@ -40,7 +41,7 @@ export default function LifestyleStrip() {
             <FadeIn key={item.src} delay={i * 0.08} duration={0.5}>
               <figure className="group relative aspect-[3/4] min-h-[300px] overflow-hidden rounded-sm bg-[#1a1214] shadow-md">
                 <Image
-                  src={item.src}
+                  src={asset(item.src)}
                   alt={item.alt}
                   fill
                   sizes="(max-width: 640px) 100vw, 33vw"

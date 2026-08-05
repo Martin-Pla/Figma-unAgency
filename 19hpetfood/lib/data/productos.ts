@@ -1,3 +1,5 @@
+import { ASSETS } from "@/lib/asset";
+
 export type Especie = "perro" | "gato";
 export type Etapa = "cachorro" | "adulto" | "todas";
 
@@ -58,13 +60,13 @@ export const productos: Producto[] = [
       "Huesos sanos y fuertes",
     ],
     nutricion: nutricionPlaceholder,
-    imagen: "/productos/silver-kan-cachorro.png",
-    imagenLifestyle: "/productos/lifestyle/silver-kan-cachorro-01.jpg",
+    imagen: `${ASSETS}/Costales/silver-kan-cachorro.jpg`,
+    imagenLifestyle: `${ASSETS}/Cachorro-01.jpg`,
     altLifestyle:
       "Cachorro golden dormido abrazando un costal Silver Kan Cachorro en el sofá",
     galeria: [
       {
-        src: "/productos/lifestyle/silver-kan-cachorro-01.jpg",
+        src: `${ASSETS}/Cachorro-01.jpg`,
         alt: "Cachorro golden dormido abrazando un costal Silver Kan Cachorro en el sofá",
       },
     ],
@@ -103,17 +105,17 @@ export const productos: Producto[] = [
       "Prebióticos que mejoran la integridad intestinal",
     ],
     nutricion: nutricionPlaceholder,
-    imagen: "/productos/silver-kan-premium.png",
-    imagenLifestyle: "/productos/lifestyle/silver-kan-premium-02.jpg",
+    imagen: `${ASSETS}/Costales/silver-kan-premium.jpg`,
+    imagenLifestyle: `${ASSETS}/Silver-Kan-Premium-02.jpg`,
     altLifestyle:
       "Pastor alemán sentado junto a un costal Silver Kan Premium en la sala",
     galeria: [
       {
-        src: "/productos/lifestyle/silver-kan-premium-02.jpg",
+        src: `${ASSETS}/Silver-Kan-Premium-02.jpg`,
         alt: "Pastor alemán sentado junto a un costal Silver Kan Premium en la sala",
       },
       {
-        src: "/productos/lifestyle/silver-kan-premium-01.jpg",
+        src: `${ASSETS}/Silver-Kan-Premium-01.jpg`,
         alt: "Mano sirviendo croquetas Silver Kan Premium en un plato de cerámica",
       },
     ],
@@ -136,17 +138,17 @@ export const productos: Producto[] = [
       "Huesos sanos",
     ],
     nutricion: nutricionPlaceholder,
-    imagen: "/productos/kan-kan.png",
-    imagenLifestyle: "/productos/lifestyle/kan-kan-01.jpg",
+    imagen: `${ASSETS}/Costales/kan-kan.jpg`,
+    imagenLifestyle: `${ASSETS}/Kan-Kan-01.jpg`,
     altLifestyle:
       "Golden Retriever sonriendo junto a un costal Kan Kan naranja en la sala",
     galeria: [
       {
-        src: "/productos/lifestyle/kan-kan-01.jpg",
+        src: `${ASSETS}/Kan-Kan-01.jpg`,
         alt: "Golden Retriever sonriendo junto a un costal Kan Kan naranja en la sala",
       },
       {
-        src: "/productos/lifestyle/kan-kan-02.jpg",
+        src: `${ASSETS}/Kan-Kan-02.jpg`,
         alt: "Pastor alemán cargando un costal Kan Kan en el jardín al atardecer",
       },
     ],
@@ -168,17 +170,17 @@ export const productos: Producto[] = [
       "Pensado para el desarrollo óptimo de tu mascota",
     ],
     nutricion: nutricionPlaceholder,
-    imagen: "/productos/mi-boob.png",
-    imagenLifestyle: "/productos/lifestyle/mi-boob-01.jpg",
+    imagen: `${ASSETS}/Costales/mi-boob.jpg`,
+    imagenLifestyle: `${ASSETS}/Mi-Boob-01.jpg`,
     altLifestyle:
       "Golden Retriever en la cocina junto a un costal Mi Boob y una croqueta en la mano",
     galeria: [
       {
-        src: "/productos/lifestyle/mi-boob-01.jpg",
+        src: `${ASSETS}/Mi-Boob-01.jpg`,
         alt: "Golden Retriever en la cocina junto a un costal Mi Boob y una croqueta en la mano",
       },
       {
-        src: "/productos/lifestyle/mi-boob-02.jpg",
+        src: `${ASSETS}/Mi-Boob-02.jpg`,
         alt: "Mano sirviendo croquetas Mi Boob en un plato de acero inoxidable",
       },
     ],
@@ -201,21 +203,21 @@ export const productos: Producto[] = [
       "Fibras naturales que ayudan a un adecuado tránsito intestinal",
     ],
     nutricion: nutricionPlaceholder,
-    imagen: "/productos/silver-cat.png",
-    imagenLifestyle: "/productos/lifestyle/silver-cat-02.jpg",
+    imagen: `${ASSETS}/Costales/silver-cat.jpg`,
+    imagenLifestyle: `${ASSETS}/Silver-Cat-02.jpg`,
     altLifestyle:
       "Gato siamés sentado junto a un costal Silver Cat en la sala",
     galeria: [
       {
-        src: "/productos/lifestyle/silver-cat-02.jpg",
+        src: `${ASSETS}/Silver-Cat-02.jpg`,
         alt: "Gato siamés sentado junto a un costal Silver Cat en la sala",
       },
       {
-        src: "/productos/lifestyle/silver-cat-01.jpg",
+        src: `${ASSETS}/Silver-Cat-01.jpg`,
         alt: "Gato siamés asomándose a un costal Silver Cat sobre la barra de la cocina",
       },
       {
-        src: "/productos/lifestyle/silver-cat-03.jpg",
+        src: `${ASSETS}/Silver-Cat-03.jpg`,
         alt: "Mano sirviendo croquetas Silver Cat mientras un gato siamés observa el plato",
       },
     ],
@@ -225,21 +227,23 @@ export const productos: Producto[] = [
 
 /** Imágenes lifestyle para el héroe Home según modo mascota */
 export const heroLifestyle = {
-  perro: "/productos/lifestyle/kan-kan-01.jpg",
-  gato: "/productos/lifestyle/silver-cat-02.jpg",
+  perro: `${ASSETS}/Kan-Kan-01.jpg`,
+  gato: `${ASSETS}/Silver-Cat-02.jpg`,
 } as const;
 
 /** Imágenes para scrollytelling de historia */
 export const historiaImages = [
   {
-    src: "/productos/lifestyle/silver-kan-cachorro-01.jpg",
+    src: `${ASSETS}/Cachorro-01.jpg`,
     alt: "Cachorro descansando junto a Silver Kan Cachorro en casa",
   },
   {
-    src: "/productos/lifestyle/kan-kan-02.jpg",
+    src: `${ASSETS}/Kan-Kan-02.jpg`,
     alt: "Pastor alemán con costal Kan Kan en el jardín",
   },
 ] as const;
+
+export const logo19Hermanos = `${ASSETS}/logo-19-hermanos.png`;
 
 export function getProductoBySlug(slug: string): Producto | undefined {
   return productos.find((p) => p.slug === slug);

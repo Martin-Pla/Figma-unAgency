@@ -4,6 +4,7 @@ import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import FadeIn from "@/components/FadeIn";
 import { historiaImages } from "@/lib/data/productos";
+import { asset } from "@/lib/asset";
 
 const beats = [
   {
@@ -46,7 +47,7 @@ export default function Historia() {
                 className="relative aspect-[4/5] min-h-[280px] w-full min-w-0 overflow-hidden rounded-sm shadow-md sm:aspect-[4/3] sm:min-h-[320px]"
               >
                 <Image
-                  src={beat.image.src}
+                  src={asset(beat.image.src)}
                   alt={beat.image.alt}
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"

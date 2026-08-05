@@ -1,6 +1,7 @@
 import Image from "next/image";
 import type { Producto } from "@/lib/data/productos";
 import { getProductoVisual } from "@/lib/data/productos";
+import { asset } from "@/lib/asset";
 
 type ProductImageProps = {
   producto: Producto;
@@ -17,9 +18,10 @@ export default function ProductImage({
   priority = false,
 }: ProductImageProps) {
   const isBag = variant === "bag";
-  const src = isBag
+  const rawSrc = isBag
     ? producto.imagen
     : getProductoVisual(producto) || producto.imagen;
+  const src = rawSrc ? asset(rawSrc) : undefined;
   const useCover = !isBag && Boolean(producto.imagenLifestyle);
 
   const accentBg =

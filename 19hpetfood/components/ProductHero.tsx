@@ -3,6 +3,7 @@ import Image from "next/image";
 import type { Producto } from "@/lib/data/productos";
 import FadeIn from "@/components/FadeIn";
 import ProductImage from "@/components/ProductImage";
+import { asset } from "@/lib/asset";
 
 type ProductHeroProps = {
   producto: Producto;
@@ -39,7 +40,7 @@ export default function ProductHero({ producto }: ProductHeroProps) {
             <div className="grid grid-cols-2 gap-3">
               <div className="relative aspect-[3/4] overflow-hidden rounded-sm bg-black">
                 <Image
-                  src={producto.imagen}
+                  src={asset(producto.imagen)}
                   alt={`Costal de alimento ${producto.nombre}`}
                   fill
                   sizes="25vw"
@@ -49,7 +50,7 @@ export default function ProductHero({ producto }: ProductHeroProps) {
               {secondaryLifestyle && (
                 <div className="relative aspect-[3/4] overflow-hidden rounded-sm bg-[#1a1214]">
                   <Image
-                    src={secondaryLifestyle.src}
+                    src={asset(secondaryLifestyle.src)}
                     alt={secondaryLifestyle.alt}
                     fill
                     sizes="25vw"

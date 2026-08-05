@@ -1,6 +1,7 @@
 import Image from "next/image";
 import type { Producto } from "@/lib/data/productos";
 import FadeIn from "@/components/FadeIn";
+import { asset } from "@/lib/asset";
 
 type ProductGalleryProps = {
   producto: Producto;
@@ -45,7 +46,7 @@ export default function ProductGallery({ producto }: ProductGalleryProps) {
             <FadeIn key={item.src} delay={i * 0.06} duration={0.5}>
               <div className="relative aspect-[3/4] min-h-[280px] overflow-hidden rounded-sm bg-[#1a1214] shadow-md sm:min-h-[360px]">
                 <Image
-                  src={item.src}
+                  src={asset(item.src)}
                   alt={item.alt}
                   fill
                   sizes="(max-width: 768px) 100vw, 33vw"
